@@ -1,0 +1,23 @@
+Card/Property IDs will start from 0 in game and 1 in db
+Database Info:
+Community Chest:
+  - ID - Card ID No (internal use)
+  - Name - Name of card
+Chance:
+  - ID - Card ID No (internal use)
+  - Name - Name of card
+Properties:
+  - ID - Card ID No (for match with pos)
+  - Name - Name of card
+  - Type - Type of card (Property, Utility, CC, Chance, Train, Null, Give, Take
+  - Cost - Cost of property
+  - InitRent - Initial Rent
+  - 1Hou - Rent + 1 House
+  - 2Hou - Rent + 2 House
+  - 3Hou - Rent + 3 House
+  - 4Hou - Rent + 4 House
+  - Hotel - Rent + Hotel
+  - Housecost - Cost of buying House
+  - HotelCost - Cost of buying Hotel
+  - Mortgage - Mortgagee value
+  - Unmortgage - Buyback value

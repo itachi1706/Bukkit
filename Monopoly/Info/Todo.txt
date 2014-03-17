@@ -1,0 +1,35 @@
+Create the dice roll logic								-	DONE
+Create movement logic									-	DONE
+Create draw Chance/Community Chest cards logic			-	DONE
+Create after draw card do stuff logic					-	DONE
+Create mortgage/buyback logic							-	DONE
+Create List Player logic								-	DONE
+Create send gold/property to players logic				-	DONE
+Create jail system logic								-	DONE
+Create end game logic									-	DONE
+Create validation check on end turn for buy etc			-	DONE
+Work on the /monopoly jail [player] command				-	DONE
+Create banker command									-	PLANNED
+Create buy property logic								-	DONE
+Create player detect in region logic					-	NOT PLANNED
+Create pay rent logic									-	DONE
+Create region creation logic							-	NOT PLANNED
+Create auto go to jail logic							-	NOT PLANNED
+Create property, chance and CC objects					-	DONE
+Make the databases										-	DONE
+Make the YAMLS											-	DONE
+Make scoreboard											-	DONE
+Create books for instructions and rules					-	DONE
+Give books to players onJoin							-	DONE
+Set up region create system								-	NOT PLANNED
+fill YAMLs and DB with default values					-	DONE
+do game logic											-	DONE
+do commands												-	DONE
+do chat commands										-	DONE
+do validation											-	DONE
+tons of bug fixes										-	IN PROGRESS
+Do the commands shell									-	DONE
+Work on the commands									-	DONE
+Do the chat command shell								-	DONE
+Work on the chat commands								-	IN PROGRESS
+many more...

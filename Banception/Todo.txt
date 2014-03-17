@@ -1,0 +1,25 @@
+1. Implement permban							-	Done
+2. Implement unban								- 	Done
+3. Implement Permmute							-	Done
+4. Implement unmute								-	Done
+5. Implement tempban							-	Done
+6. Implement tempmute							-	Done
+7. Implement autounmute							-	Done
+8. Implement autounban							-	Done
+9. Beautify the stuff							-	Later
+10. Refactor code								-	Later
+11. Implement reload function					-	Done
+12. Implement check if banned					-	Done
+13. Implement check if muted					-	Done
+17. Ability to edit tempban						-	Not Implemented
+18. Ability to edit tempmute					-	Not Implemented
+19. Implement globalmute and unmute				-	Done
+20. Implement bypass of globalmute with perms	-	Done
+21. Logging bans and mutes						-	Done
+22. Implementing logging into plugin			-	Done
+22. Implementing counters						-	Planned
+23. Allow resetting of counters					-	Planned
+24. Implement ability to check if mute/banned   - 	Planned
+25. Implement review of ban history				-	Done
+26. Implement review of mute history			-	Done
+27. Implement announce to all with perms		-	Later

@@ -1,0 +1,31 @@
+/monopoly - Main plugin command
+/monopoly start - Starts (Resume) the game (Config has start = 1, pause = 0)
+/monopoly pause - Pauses the game (Config file has value start = 1, pause = 1)
+/monopoly reset - Resets the game (Set start = 0 in config)
+/monopoly join - Joins the game
+/monopoly leave - Leaves the game
+/monopoly join/leave <player> - Adds or Kicks a player from the game
+/monopoly give <property/gold> <player> <value/amount> - Gives a player a property (based on pos number) or gold
+/monopoly take <property/gold> <player> <value/amount> - Takes a property (based on pos number) or gold from player
+/monopoly reload - Reloads the files (will cause game to reset automatically)
+/monopoly dice - See the current value of the dice (will get and save to config file)
+/monopoly where [player] - Finding out the current location on the gameboard for you/other players
+/monopoly chatcmd - Finds out what chat commands there are
+/monopoly region <id> - Defines a region (0-39)
+/monopoly skip - Skips current player's turn
+/monopoly jail [player] - Jails player
+"roll dice" - Rolls the dice (check if player's turn)
+"buy" - buys property (If possible)
+"dont buy" - Don't buy property and auction (if enabled in config)
+"list property" - List properties you currently own (chat gets cancelled out)
+"list property [player]" - List properties that other players own (chat gets cancelled out)
+"list rent <property name>" - List current rental cost of property (chat gets cancelled out)
+"list cost <property name>" - List current cost of property to buy (chat gets cancelled out)
+"send <player> gold <amount>" - Sends a player gold
+"send <player> property <property name>" - Sends a player a property
+"use jail card" - Uses Get out of jail free card
+"yes" - Sends rent/Confirms action (chat will get cancelled out)
+"no" - Cancels action (chat gets cancelled out)
+"end turn" - Ends your turn
+"mortgage <property name>" - Mortgage a property owned (will have confirm action)
+"buyback <property name>" - Buyback property owned (will have confirm action)

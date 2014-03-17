@@ -1,0 +1,16 @@
+Learn to use TagAPI
+Create ability to nick into other player	-	DONE
+Create ability to unnick					-	DONE
+Create ability to change chat nick			-	DONE
+Create ability to change nick in tablist	-	DONE
+Do the actual nicking						-	DONE
+Complete permission editing of '*' perms	-	DONE
+Add ability to add colors to belowName		-	DONE (based off perm user has)
+Add ability to add colors to tabList		-	DONE (based off perm user has)
+Add reload ability							-	DONE
+Add see real name command					-	DONE
+Lay the groundwork of true disguise			-	DONE
+Able to true disguise (Changing color etc)	-	DONE
+Disguise chat								-	DONE
+Implement custom server leave message		-	DONE
+Implement custom server death message		-	DONE

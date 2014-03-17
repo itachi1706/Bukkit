@@ -1,0 +1,10 @@
+*<> - Compulsory, [] - Optional
+Commands:
+/permban <player> [reason] - Permenantly bans a player
+/tempban <player> [time(s/m/h/d)] [reason] - Temporarily bans a player (Defaults to 15 minutes) (Must provide time for ban reason)
+/unban <player> [reason] - Unbans a player
+/mute <player> [reason] - Mutes a player permenantly
+/tempmute <player> [time(s/m/h/d)] [reason] - Temporarily Mutes a player for specific time
+/unmute <player> [reason]	-	Unmutes a Player
+/bc reload - Reloads Plugin
+/shutup [time] - Mute/Unmute chat (defaults 15 minutes)

@@ -1,0 +1,19 @@
+1. To join the game, do /monopoly join
+
+2. To leave the game, do /monopoly leave
+
+To start the game, host will do /monopoly start
+
+Use /monopoly dice to see what is the current dice row
+
+------Next Page------
+
+To define regions, use /monopoly region <id>. where id = 0-39, with 0 being Go and 39 being final dark blue
+
+use '/monopoly chatcmd' to see what commands there are to play the game
+
+
+------Next Page------
+
+
+Figure out where you are supposed to be with /monopoly where
