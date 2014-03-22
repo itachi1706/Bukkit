@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -150,6 +151,7 @@ public class Main extends JavaPlugin implements Listener{
 	public void die(PlayerDeathEvent e){
 		Player player = e.getEntity();
 		String msgD = e.getDeathMessage();
+		DamageCause dc = e.getEntity().getLastDamageCause().getCause();
 		if (player.getKiller() != null){
 			Player killer = player.getKiller();
 			String weapon = "";
@@ -163,10 +165,29 @@ public class Main extends JavaPlugin implements Listener{
 			for (int i = 1; i < msgS.length; i++){
 				msg = msg + msgS[i] + " ";
 			}
-			if (msgD.contains("lava")){
-				e.setDeathMessage(player.getDisplayName() + ChatColor.WHITE + " walked into lava while fighting " + killer.getDisplayName() + ChatColor.WHITE + " who is armed with " + ChatColor.AQUA + weapon);
-			} else {
-			e.setDeathMessage(player.getDisplayName() + ChatColor.WHITE + " was killed by " + killer.getDisplayName() + " with " + ChatColor.AQUA + weapon);
+			if (dc == DamageCause.LAVA){
+				//Lava Damage
+				e.setDeathMessage(player.getDisplayName() + ChatColor.WHITE + " tried to swim in lava to escape " + killer.getDisplayName() + ChatColor.WHITE + " who is armed with " + ChatColor.AQUA + weapon);
+			} else if (dc == DamageCause.FIRE || dc == DamageCause.FIRE_TICK){
+				//Fire Damage
+				e.setDeathMessage(player.getDisplayName() + ChatColor.WHITE + " was burnt to a crisp whilst fighting " + killer.getDisplayName() + ChatColor.WHITE + " who is armed with " + ChatColor.AQUA + weapon);
+			} else if (dc == DamageCause.CONTACT){
+				//Cactus Damage
+				e.setDeathMessage(player.getDisplayName() + ChatColor.WHITE + " walked into a cactus whilst trying to escape " + killer.getDisplayName() + ChatColor.WHITE + " who is armed with " + ChatColor.AQUA + weapon);
+			} else if (dc == DamageCause.DROWNING){
+				//Drowning Damage
+				e.setDeathMessage(player.getDisplayName() + ChatColor.WHITE + " drowned whilst trying to escape " + killer.getDisplayName() + ChatColor.WHITE + " who is armed with " + ChatColor.AQUA + weapon);
+			} else if (dc == DamageCause.THORNS){
+				//Thorns Enchant Damage
+				e.setDeathMessage(player.getDisplayName() + ChatColor.WHITE + " was killed trying to hurt " + killer.getDisplayName() + ChatColor.WHITE + " who is armed with " + ChatColor.AQUA + weapon);
+			} else if (dc == DamageCause.FALL){
+				//Fall Damage
+				e.setDeathMessage(player.getDisplayName() + ChatColor.WHITE + " was doomed to fall by " + killer.getDisplayName() + ChatColor.WHITE + " who is armed with " + ChatColor.AQUA + weapon);
+			} else if (dc == DamageCause.MAGIC){
+				//Potion Damage
+				e.setDeathMessage(player.getDisplayName() + ChatColor.WHITE + " was killed using magic by " + killer.getDisplayName() + ChatColor.WHITE + " who is armed with " + ChatColor.AQUA + weapon);
+			}else {
+				e.setDeathMessage(player.getDisplayName() + ChatColor.WHITE + " was killed by " + killer.getDisplayName() + " with " + ChatColor.AQUA + weapon);
 			}
 		} else {
 			String[] msgS = msgD.split(" ", 2);

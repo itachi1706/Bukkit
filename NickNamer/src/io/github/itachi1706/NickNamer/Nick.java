@@ -10,7 +10,7 @@ import org.kitteh.tag.TagAPI;
 
 public class Nick implements Listener {
 
-	@EventHandler(priority=EventPriority.HIGH)
+	@EventHandler(priority=EventPriority.NORMAL)
 	public void initNameTag(PlayerReceiveNameTagEvent e){
 		if (e.getNamedPlayer().getName().equals(e.getNamedPlayer().getName())){
 			if (!Main.nick.getBoolean(e.getNamedPlayer().getName() + ".disguised")){

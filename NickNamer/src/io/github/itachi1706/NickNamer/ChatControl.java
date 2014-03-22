@@ -9,7 +9,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatControl implements Listener{
 	
-	@EventHandler(priority=EventPriority.HIGHEST)
+	@EventHandler(priority=EventPriority.NORMAL)
 	public void trueNickChat(AsyncPlayerChatEvent e){
 		Player player = e.getPlayer();
 		if (Main.nick.getBoolean(player.getName() + ".disguised")){

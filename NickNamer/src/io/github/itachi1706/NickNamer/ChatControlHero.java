@@ -12,7 +12,7 @@ import com.dthielke.herochat.Chatter;
 
 public class ChatControlHero implements Listener{
 	
-	@EventHandler(priority=EventPriority.HIGHEST)
+	@EventHandler(priority=EventPriority.HIGH)
 	public void trueNickChat(ChannelChatEvent e){
 		Chatter chat = e.getSender();
 		Channel c = e.getChannel();
