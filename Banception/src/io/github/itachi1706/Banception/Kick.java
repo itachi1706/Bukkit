@@ -42,6 +42,7 @@ public class Kick implements CommandExecutor {
 					target.kickPlayer("You were kicked from the server! Reason: " + ChatColor.DARK_RED + "Kicked by a Staff Member for no reason");
 					sender.sendMessage(ChatColor.RED + target.getDisplayName() + " has been kicked from the server with the reason: " + ChatColor.DARK_RED + "Kicked by a Staff Member for no reason");
 					SQLiteHelper.addKickLog(sql, target.getName(), "Kicked by a Staff Member for no reason", sender.getName());
+					return true;
 				} else {
 					String kickReason = "";
 					for (int i = 1; i < args.length; i++){
@@ -50,6 +51,7 @@ public class Kick implements CommandExecutor {
 						target.kickPlayer("You were kicked from the server! Reason: " + ChatColor.DARK_RED + kickReason);
 						sender.sendMessage(ChatColor.RED + target.getDisplayName() + " has been kicked from the server with the reason: " + ChatColor.DARK_RED + kickReason);
 						SQLiteHelper.addKickLog(sql, target.getName(), kickReason, sender.getName());
+						return true;
 				}
 			}
 		}
