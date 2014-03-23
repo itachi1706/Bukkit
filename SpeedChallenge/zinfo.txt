@@ -1,0 +1,22 @@
+TODO
+-------------------
+* Get pre-game countdown done											-	DONE
+* Get options done														-	PARTIALLY DONE
+* Get Randomizer should nothing be chosen done							-	DONE
+* Get post-game winner calculation done									-	NOT DONE
+* Get reset game done													-	DONE
+* Get while in-game player join info done								-	DONE
+* Get spectator mode done												-	NOT DONE
+* Do a gamemode															-	PLANNED
+* Ensure some invulnurability at the start								-	DONE
+* Heals players at the start											-	DONE
+* Clears players Inventory												-	PARTIALLY DONE
+* Make /spectate work													-	PLANNED
+* Do update running check score											-	PLANNED
+* Prevent non-creative mode players from breaking/interacting pre-game	-	PLANNED
+
+BUGS
+-------------------
+* Figure out why GameIsRunning Timer is showing seconds weirdly (Possible Fixed)
+* Figure out why Time still appears after resetting
+* 

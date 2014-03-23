@@ -3,3 +3,51 @@ main: io.github.itachi1706.SpeedChallenge.Main
 version: 1
 description: A plugin for a speed challenge game
 author: itachi1706
+commands:
+  sc:
+    description: Main Plugin Command
+    usage: /sc
+    permission: sc.debug
+    permission-message: You do not have permission to do this command
+  sc reset:
+    description: Resets Game
+    usage: /sc reset
+    permission: sc.debug
+    permission-message: You do not have permission to do this command
+  scconfig:
+    description: Resets Game
+    usage: /sc reset
+    permission: sc.debug
+    permission-message: You do not have permission to do this command
+  scconfig gamemode:
+    description: Resets Game
+    usage: /sc reset
+    permission: sc.debug
+    permission-message: You do not have permission to do this command
+  scconfig pvp:
+    description: Resets Game
+    usage: /sc reset
+    permission: sc.debug
+    permission-message: You do not have permission to do this command
+  scconfig respawn:
+    description: Resets Game
+    usage: /sc reset
+    permission: sc.debug
+    permission-message: You do not have permission to do this command
+  scconfig list:
+    description: Resets Game
+    usage: /sc reset
+    permission: sc.debug
+    permission-message: You do not have permission to do this command
+  spectate:
+    description: Resets Game
+    usage: /sc reset
+    permission: sc.debug
+    permission-message: You do not have permission to do this command
+permissions:
+  sc.debug:
+    description: Debug
+    default: true
+  sc.override:
+    description: Allows overriding of stuff
+    default: op
