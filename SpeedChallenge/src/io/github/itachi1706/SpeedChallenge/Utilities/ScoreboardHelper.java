@@ -20,6 +20,12 @@ public class ScoreboardHelper {
 	public static ScoreboardManager sm = Bukkit.getServer().getScoreboardManager();
 	public static Scoreboard sb = sm.getNewScoreboard();
 	
+	public static void setScoreOfPlayer(Player p, int score){
+		Objective o = sb.getObjective("game_player");
+		Score pSco = o.getScore(p);
+		pSco.setScore(score);
+	}
+	
 	public static void initPlayersCounter(){
 		sb.registerNewObjective("game_player", "dummy");
 		Objective o = sb.getObjective("game_player");
@@ -31,26 +37,37 @@ public class ScoreboardHelper {
 		score2.setScore(Main.countdown);
 	}
 	
-	//Initial
+	//Initial game running
 	public static void gameStart(){
+		Objective o = sb.getObjective("game_player");
+		//o.unregister();
+		//sb.registerNewObjective("game_player", "dummy");
+		//o = sb.getObjective("game_player");
+		int min = Main.countdown/60;
+		int second = Main.countdown - (min * 60);
+		//Bukkit.getLogger().info("MIN: " + min + " SEC: "+ second);
+		o.setDisplayName(ChatColor.GOLD + "Speed Challenge" + ChatColor.DARK_RED + "  " + min + ":" + second);
+		Score score = o.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD + "Players Scores"));
+		score.setScore(9999);
+		for (int i = 0; i < Main.playerList.size(); i++){
+			Score pSco = o.getScore(Main.playerList.get(i));
+			pSco.setScore(0);
+		}
 		sb.resetScores(Bukkit.getOfflinePlayer(ChatColor.DARK_GREEN + "Time:"));
 		sb.resetScores(Bukkit.getOfflinePlayer(ChatColor.GOLD + "Players:"));
-		Objective o = sb.getObjective("game_player");
-		o.unregister();
-		sb.registerNewObjective("game_player", "dummy");
-		o = sb.getObjective("game_player");
-		int min = Main.countdown/60;
-		int second = (Main.countdown%60)*60 - (min*60);
-		o.setDisplayName(ChatColor.GOLD + "Speed Challenge" + ChatColor.DARK_RED + "  " + min + ":" + second);
+		Bukkit.getLogger().info("Game Start Scoreboard Init!");
 	}
 	
 	//Game Is Running
 	public static void gameStartRunning(){
+		sb.resetScores(Bukkit.getOfflinePlayer(ChatColor.DARK_GREEN + "Time:"));
 		Objective o = sb.getObjective("game_player");
 		int min = Main.countdown/60;
-		int second = (Main.countdown%60)*60 - (min*60);
-		o.setDisplayName(ChatColor.AQUA + "Speed Challenge" + ChatColor.RED + "  " + min + ":" + second);
+		int second = Main.countdown - (min * 60);
+		//Bukkit.getLogger().info("MIN: " + min + " SEC: "+ second);
+		o.setDisplayName(ChatColor.AQUA + "Speed Challenge" + ChatColor.RED + " " + min + ":" + second);
 		//Does check of players score
+		PreGameRunnable.checkPlayerScores();
 	}
 	
 	
@@ -78,22 +95,10 @@ public class ScoreboardHelper {
 		score.setScore(PreGameRunnable.countdown);
 	}
 	
-	public static void setNewHealthObjective(){
-		Objective objective = sb.registerNewObjective("showhealth", "health");
-		objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
-		objective.setDisplayName("/ 20");
-		 
-		for(Player online : Bukkit.getOnlinePlayers()){
-		  online.setScoreboard(sb);
-		  online.setHealth(online.getHealth()); //Update their health
-		}
-	}
-	
-	public static void updateHealth(){
-		for (Player online : Bukkit.getOnlinePlayers()){
-			online.setScoreboard(sb);
-			online.setHealth(online.getHealth());
-		}
+	public static int getFinalScore(Player p){
+		Objective o = sb.getObjective("game_player");
+		Score sc = o.getScore(p);
+		return sc.getScore();
 	}
 	
 	public static void resetScoreboard(){

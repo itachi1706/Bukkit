@@ -1,5 +1,11 @@
 package io.github.itachi1706.SpeedChallenge;
 
+import io.github.itachi1706.SpeedChallenge.Gamemodes.AbbaRules;
+import io.github.itachi1706.SpeedChallenge.Gamemodes.AbbaRulesRetardStyle;
+import io.github.itachi1706.SpeedChallenge.Gamemodes.EthoSpeedChallenge3;
+import io.github.itachi1706.SpeedChallenge.Gamemodes.ModAbbaRules;
+import io.github.itachi1706.SpeedChallenge.Gamemodes.Sample;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -32,12 +38,30 @@ public class ConfigCmd implements CommandExecutor {
 				}
 			}
 			if (args.length == 2){
+				if (Main.initGame){
+					sender.sendMessage(ChatColor.RED + "Game has already started!");
+					return true;
+				}
 				if (sender.hasPermission("sc.override") || Main.playerList.get(0).getName().equals(sender.getName())){
 					//Able to do config
 					if (args[0].equalsIgnoreCase("gamemode")){
 						//Modify gamemode
-						sender.sendMessage(ChatColor.DARK_RED + "COMMAND COMING SOON");
-						return true;
+						try {
+							Main.gamemode = Integer.parseInt(args[1]);
+							if (Integer.parseInt(args[1]) > 0 && Integer.parseInt(args[1]) <= Main.numberOfChallenges){
+								String huh = PreGameRunnable.getTitle();
+								sender.sendMessage(ChatColor.BLUE + "Challenge "+ args[1] + " (" + huh + ") selected!");
+								String pvp = "&b[SpeedChallenge] &4&lChallenge " + args[1] + " (" + huh + ") &a&lselected!";
+								Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', pvp));
+								return true;
+							} else {
+								sender.sendMessage(ChatColor.DARK_RED + "Invalid challenge number!");
+								return true;
+							}
+						} catch (NumberFormatException e){
+							sender.sendMessage(ChatColor.DARK_RED + "Invalid challenge number!");
+							return true;
+						}
 					} 
 					if (args[0].equalsIgnoreCase("pvp")){
 						//Modify PVP option
@@ -64,13 +88,13 @@ public class ConfigCmd implements CommandExecutor {
 							//Enables Respawn
 							Main.respawn = 1;
 							sender.sendMessage(ChatColor.BLUE + "Enabled Respawn On Death!");
-							String respawn = "&b[SpeedChallenge] &4&lRespawn on Death will be &a&lenabled!";
+							String respawn = "&b[SpeedChallenge] &4&lHardcore Mode will be &c&ldisabled!";
 							Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', respawn));
 						} else if (args[1].equalsIgnoreCase("false")){
 							//Disables Respawn
 							Main.respawn = 2;
 							sender.sendMessage(ChatColor.BLUE + "Disabled Respawn On Death!");
-							String respawn = "&b[SpeedChallenge] &4&lRespawn on Death will be &c&ldisabled!";
+							String respawn = "&b[SpeedChallenge] &4&lHardcore Mode will be &a&lenabled!";
 							Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', respawn));
 						} else {
 							sender.sendMessage(ChatColor.RED + "Only true or false is accepted.");
@@ -90,17 +114,21 @@ public class ConfigCmd implements CommandExecutor {
 	
 	public void displayConfigHelp(CommandSender p){
 		String[] msg = {ChatColor.GOLD + "==================================================" ,
-				ChatColor.GREEN + "/scconfig gamemode <#> - " + ChatColor.AQUA + "Chooses a minigame map (replace # with number)",
+				ChatColor.GREEN + "/scconfig gamemode <#> - " + ChatColor.AQUA + "Chooses a challenge (replace # with number)",
 				ChatColor.GREEN + "/scconfig pvp <true/false> - " + ChatColor.AQUA + "Chooses a minigame map",
 				ChatColor.GREEN + "/scconfig respawn <true/false> - " + ChatColor.AQUA + "Chooses a minigame map",
-				ChatColor.GREEN + "/scconfig list - " + ChatColor.AQUA + "List all available gamemodes",
+				ChatColor.GREEN + "/scconfig list - " + ChatColor.AQUA + "List all available challenge",
 				ChatColor.GOLD + "=================================================="};
 		p.sendMessage(msg);
 	}
 	
 	public void listGameModes(CommandSender p){
 		String[] msg = {ChatColor.GOLD + "==================================================" ,
-				ChatColor.RED + "No Gamemodes available",
+				ChatColor.RED + "1) " + ChatColor.BOLD + Sample.getGMTitle(),
+				ChatColor.RED + "2) " + ChatColor.BOLD + EthoSpeedChallenge3.getGMTitle(),
+				ChatColor.RED + "3) " + ChatColor.BOLD + ModAbbaRules.getGMTitle(),
+				ChatColor.RED + "4) " + ChatColor.BOLD + AbbaRules.getGMTitle(),
+				ChatColor.RED + "5) " + ChatColor.BOLD + AbbaRulesRetardStyle.getGMTitle(),
 				ChatColor.GOLD + "=================================================="};
 		p.sendMessage(msg);
 	}

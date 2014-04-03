@@ -1,6 +1,6 @@
 name: SpeedChallenge
 main: io.github.itachi1706.SpeedChallenge.Main
-version: 1
+version: 1.1
 description: A plugin for a speed challenge game
 author: itachi1706
 commands:
@@ -44,6 +44,16 @@ commands:
     usage: /sc reset
     permission: sc.debug
     permission-message: You do not have permission to do this command
+  listobjectives:
+    description: List objectives
+    usage: /listobjectives
+    permission: sc.debug
+    permission-message: You have perms no matter what :D
+  reequip:
+    description: Reequips with item
+    usage: /reequip
+    permission: sc.debug
+    permission-message: You have perms no matter what :D
 permissions:
   sc.debug:
     description: Debug

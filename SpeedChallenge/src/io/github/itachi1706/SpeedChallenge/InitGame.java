@@ -7,6 +7,7 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.WorldType;
@@ -26,30 +27,43 @@ public class InitGame implements Runnable {
 	
 	public void run() {
 		if (Main.countdown == 60){
-			String finalCountDown2 = "&b[SpeedChallenge] &6&lGame starts in " + "1" + " minute!";
+			String finalCountDown2 = "&b[SpeedChallenge] &6&lGame starts in 1 minute!";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', finalCountDown2));
 		}
-		if (Main.countdown == 45){
+		if (Main.countdown == 31){
 			//Generate new overworld
-			String worldgen = "&b[SpeedChallenge] &2New Overworld world is currently being generated... Expect lag...";
+			String worldgen = "&b[SpeedChallenge] &6Generating new world maps with a random seed";
+			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', worldgen));
+			}
+		if (Main.countdown == 30){
+			//Generate new overworld
+			String worldgen = "&b[SpeedChallenge] &2Generating new Overworld";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', worldgen));
 			generateOverworld();
 			}
-		if (Main.countdown == 30){
+		if (Main.countdown == 29){
 			//Generate nether
-			String nethergen = "&b[SpeedChallenge] &2New Nether world is currently being generated... Expect lag...";
+			String nethergen = "&b[SpeedChallenge] &4Generating new Nether";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', nethergen));
 			generateNether();
 		}
-		if (Main.countdown == 15){
+		if (Main.countdown == 28){
 			//Generate The End
-			String endgen = "&b[SpeedChallenge] &2New End World is currently being generated... Expect lag...";
+			String endgen = "&b[SpeedChallenge] &eGenerating new End";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', endgen));
 			generateEnd();
 		}
+		if (Main.countdown == 27){
+			//Generate new overworld
+			String worldgen = "&b[SpeedChallenge] &6Worlds generated. Seed used: &b" + randomInt;
+			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', worldgen));
+			}
 		if (Main.countdown <= 10){
 			//Start counting down
 			String finalCountDown = "&b[SpeedChallenge] &6&lGame begins in " + Main.countdown + " second(s)!";
+			for (Player p : Bukkit.getServer().getOnlinePlayers()){
+				p.playSound(p.getLocation(), Sound.CLICK, 1, 10);
+			}
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', finalCountDown));
 		}
 		if (Main.countdown <= 0){
@@ -77,26 +91,26 @@ public class InitGame implements Runnable {
 		randomInt = randomGenerator.nextInt();
 		MultiverseCore mc = (MultiverseCore) Bukkit.getServer().getPluginManager().getPlugin("Multiverse-Core");
 		mc.getMVWorldManager().addWorld("SC", Environment.NORMAL, randomInt + "", WorldType.NORMAL, true, null, true);
-		String worldgen = "&b[SpeedChallenge] &2Overworld has been randomly generated! Seed used: &b" + randomInt;
-		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', worldgen));
+		//String worldgen = "&b[SpeedChallenge] &2Overworld has been randomly generated! Seed used: &b" + randomInt;
+		//Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', worldgen));
 	}
 	
 	public void generateNether(){
 		MultiverseCore mc = (MultiverseCore) Bukkit.getServer().getPluginManager().getPlugin("Multiverse-Core");
 		mc.getMVWorldManager().addWorld("SC_nether", Environment.NETHER, randomInt + "", WorldType.NORMAL, true, null, true);
-		String nethergen = "&b[SpeedChallenge] &2Nether has been randomly generated! Seed used: &b" + randomInt;
-		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', nethergen));
+		//String nethergen = "&b[SpeedChallenge] &4Nether has been randomly generated! Seed used: &b" + randomInt;
+		//Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', nethergen));
 	}
 	
 	public void generateEnd(){
 		MultiverseCore mc = (MultiverseCore) Bukkit.getServer().getPluginManager().getPlugin("Multiverse-Core");
 		mc.getMVWorldManager().addWorld("SC_the_end", Environment.THE_END, randomInt + "", WorldType.NORMAL, true, null, true);
-		String endgen = "&b[SpeedChallenge] &2The End has been randomly generated! Seed used: &b" + randomInt;
-		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', endgen));
+		//String endgen = "&b[SpeedChallenge] &eThe End has been randomly generated! Seed used: &b" + randomInt;
+		//Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', endgen));
 	}
 	
 	public void optionSelected(){
-		String troll = "&b[SpeedChallenge] &4&lGamemode Selected: &b&l" + Main.gamemode;
+		String troll = "&b[SpeedChallenge] &4&lChallenge Selected: &b&l" + Main.gamemode + " (" + PreGameRunnable.getTitle() + ")";
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', troll));
 		String duration = "&b[SpeedChallenge] &4&lGame Duration: &b&l30 Minutes";
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', duration));
@@ -109,11 +123,11 @@ public class InitGame implements Runnable {
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', pvp));
 		}
 		if (Main.respawn == 1){
-			String respawn = "&b[SpeedChallenge] &4&lRespawn on Death will be &a&lenabled!";
+			String respawn = "&b[SpeedChallenge] &4&lHardcore Mode will be &c&ldisabled!";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', respawn));
 		}
 		if (Main.respawn == 2){
-			String respawn = "&b[SpeedChallenge] &4&lRespawn on Death will be &c&ldisabled!";
+			String respawn = "&b[SpeedChallenge] &4&lHardcore Mode will be &a&lenabled!";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', respawn));
 		}
 		Main.countDownTimer2 = Bukkit.getScheduler().scheduleSyncRepeatingTask(this.plugin, new PreGameRunnable(this.plugin), 20L, 20L);
@@ -146,14 +160,14 @@ public class InitGame implements Runnable {
 	
 	//Randomizes Gamemode
 	public void randomizeGM(){
-		String randomizer = "&b[SpeedChallenge] &6As your gamemode was not selected, a random gamemode will be assigned!";
+		String randomizer = "&b[SpeedChallenge] &6As your challenge was not selected, a random challenge will be assigned!";
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', randomizer));
 		Random rn = new Random();
-		Main.gamemode = rn.nextInt(2) + 1;
-		Bukkit.getLogger().info("Gamemode: " + Main.gamemode);
-		if (Main.gamemode <= 0 || Main.gamemode > 2){
-			Main.gamemode = rn.nextInt(2) + 1;
-			Bukkit.getLogger().info("[ERROR] Gamemode: " + Main.gamemode);
+		Main.gamemode = rn.nextInt(Main.numberOfChallenges) + 1;
+		Bukkit.getLogger().info("Challenge: " + Main.gamemode);
+		if (Main.gamemode <= 0 || Main.gamemode > 3){
+			Main.gamemode = rn.nextInt(3) + 1;
+			Bukkit.getLogger().info("[ERROR] Challenge: " + Main.gamemode);
 		}
 	}
 	

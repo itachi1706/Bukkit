@@ -1,11 +1,9 @@
 package io.github.itachi1706.SpeedChallenge;
 
+import io.github.itachi1706.SpeedChallenge.Utilities.ConfigTabCompleter;
 import io.github.itachi1706.SpeedChallenge.Utilities.ScoreboardHelper;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -30,7 +28,18 @@ import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class Main extends JavaPlugin implements Listener{
+
+	/*
+	 * Modify PreGameRunnable's 4 switch case modules and the variable in the main class when
+	 * adding new gamemodes.
+	 * Modify ReequipCmd if needed and listGamemode method in ConfigCmd
+	 * Edit ConfigTabCompleter to add in the extra challenge numbers
+	 */
 	
+	//User editable variables
+	public static int numberOfChallenges = 5;
+	
+	//Plugin variables (DO NOT TOUCH)
 	public static int players = 0;	//Number of players
 	public static boolean gameStart = false;	//Whether game started alr
 	public static boolean initGame = false;		//Whether game initialization is done
@@ -40,10 +49,14 @@ public class Main extends JavaPlugin implements Listener{
 	public static int countdown = 90;	//Countdown timer
 	public static ArrayList<Player> playerList = new ArrayList<Player>();			//Players
 	public static ArrayList<Player> spectators = new ArrayList<Player>();		//Spectators
+	public static boolean invulnerable = true;		//Invulnerable
 	
+	
+	//Countdown timers
 	public static int countDownTimer = 1;
 	public static int countDownTimer2 = 2;
 	public static int countDownTimer3 = 3;
+	public static int countDownTimer4 = 4;
 	
 	@Override
 	public void onEnable(){
@@ -52,7 +65,12 @@ public class Main extends JavaPlugin implements Listener{
 		this.saveDefaultConfig(); 
 		getCommand("scconfig").setExecutor(new ConfigCmd(this));
 		getCommand("spectate").setExecutor(new SpecCmd(this));
+		getCommand("listobjectives").setExecutor(new ListObjectives(this));
+		getCommand("reequip").setExecutor(new ReequipCmd(this));
+		getCommand("scconfig").setTabCompleter(new ConfigTabCompleter());
 		Bukkit.getServer().getPluginManager().registerEvents(new PreGameListener(), this);
+		getLogger().info("Deleting previous stats of player in case its not deleted");
+		deletePlayerStats();
 		
 	}
 	
@@ -78,8 +96,8 @@ public class Main extends JavaPlugin implements Listener{
 	}
 	
 	public void displayHelp(CommandSender s){
-		s.sendMessage(ChatColor.GOLD + "-----------CheesecakeMinigameLobby Commands-----------");
-    	s.sendMessage(ChatColor.GOLD + "/sc reset: " + ChatColor.WHITE +  "Check current plugin version");
+		s.sendMessage(ChatColor.GOLD + "-----------SpeedChallenge Commands-----------");
+    	s.sendMessage(ChatColor.GOLD + "/sc reset: " + ChatColor.WHITE +  "Resets game");
 	}
 	
 	@Override
@@ -109,7 +127,7 @@ public class Main extends JavaPlugin implements Listener{
 		}
 	}
 	
-	public void resetGame(){
+	public static void resetGame(){
 		Player[] p = Bukkit.getServer().getOnlinePlayers();
 		World w = Bukkit.getWorld("world");
 		Location l = new Location(Bukkit.getServer().getWorld("world"), Bukkit.getServer().getWorld("world").getSpawnLocation().getX(), Bukkit.getServer().getWorld("world").getSpawnLocation().getY(), Bukkit.getServer().getWorld("world").getSpawnLocation().getZ());
@@ -135,16 +153,23 @@ public class Main extends JavaPlugin implements Listener{
 			}
 		}
 		if (initGame == false){
-			getLogger().info("Resetting countdown timer!");
+			Bukkit.getLogger().info("Resetting countdown timer!");
 			Bukkit.getServer().getScheduler().cancelTask(countDownTimer);
 		}
 		if (gameStart == false && initGame == true){
-			getLogger().info("Resetting countdown timer 2!");
+			Bukkit.getLogger().info("Resetting countdown timer 2!");
 			Bukkit.getServer().getScheduler().cancelTask(countDownTimer2);
 		}
 		if (gameStart == true){
-			getLogger().info("Resetting countdown timer 3!");
+			Bukkit.getLogger().info("Resetting countdown timer 3!");
 			Bukkit.getServer().getScheduler().cancelTask(countDownTimer3);
+		}
+		
+		for (int i = 0; i < spectators.size(); i++){
+			Player spec = spectators.get(i);
+			spec.setFlying(false);
+			spec.setCanPickupItems(true);
+			
 		}
 		
 		players = 0;
@@ -160,28 +185,15 @@ public class Main extends JavaPlugin implements Listener{
 		Bukkit.getServer().broadcastMessage("WORLDS DELETED!");
 		ScoreboardHelper.resetScoreboard();
 		for (int i = 0; i < p.length; i++){
-			p[i].kickPlayer("Game is resetting");
-		}
-	}
-	
-	@SuppressWarnings("unused")
-	private void copy(InputStream in, File file){
-		try{
-			OutputStream out = new FileOutputStream(file);
-			byte[] buf = new byte[1024];
-			int len;
-			while ((len=in.read(buf))>0){
-				out.write(buf,0,len);
-			}
-			out.close();
-			in.close();
-		} catch (Exception e){
-			e.printStackTrace();
+			p[i].kickPlayer("Game is restarting");
 		}
 	}
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e){
+		for (Player players : Bukkit.getOnlinePlayers()){
+			players.showPlayer(e.getPlayer());
+		}
 		String prefix = "";
 		if (Bukkit.getServer().getPluginManager().getPlugin("PermissionsEx") != null) {
 			PermissionManager pex = PermissionsEx.getPermissionManager();
@@ -198,10 +210,14 @@ public class Main extends JavaPlugin implements Listener{
 		Bukkit.getServer().broadcastMessage(prefix + " " + e.getPlayer().getDisplayName() + " joined the game!");
 		if (!initGame){
 			String[] welMsg = {ChatColor.GOLD + "==================================================" ,
+					ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "                 Speed Challenge" ,
+					ChatColor.GOLD + "==================================================" ,
 					ChatColor.DARK_GREEN + "Select a gamemode with " + ChatColor.GOLD + "/scconfig gamemode <number>",
 					ChatColor.DARK_GREEN + "Then change the other configuration (respawn, pvp, spreadplayers) with" + ChatColor.GOLD + " /scconfig <config> <true/false>",
 					ChatColor.DARK_GREEN + "Do " + ChatColor.GOLD + "/scconfig" + ChatColor.DARK_GREEN + " for more details",
-					ChatColor.GOLD + "==================================================" ,};
+					ChatColor.GOLD + "==================================================" ,
+					ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "Do /hub to return back to the lobby!" ,
+					ChatColor.GOLD + "=================================================="};
 			e.getPlayer().sendMessage(welMsg);
 			e.getPlayer().setScoreboard(ScoreboardHelper.sb);
 			players++;
@@ -217,7 +233,7 @@ public class Main extends JavaPlugin implements Listener{
 		} else {
 			String[] welMsg = {ChatColor.GOLD + "==================================================" ,
 					ChatColor.DARK_GREEN + "Unfortunately, the game has already started. You can spectate the match if you want with" +
-					ChatColor.GOLD + "/spectate",
+					ChatColor.GOLD + " /spectate",ChatColor.DARK_GREEN + "You can also teleport to current players with " + ChatColor.GOLD + "/spectate <name of player>",
 					ChatColor.GOLD + "==================================================" ,};
 			e.getPlayer().sendMessage(welMsg);
 		}
@@ -245,9 +261,32 @@ public class Main extends JavaPlugin implements Listener{
 		if (players <= 0){
 			getLogger().info("Last Player Left. Resetting game...");
 			resetGame();
+			getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
+				public void run(){
+					File dir = new File("world/stats");
+					if (dir.isDirectory()){
+						for (String pStats : dir.list()){
+							File statFile = new File(dir, pStats);
+							statFile.delete();
+						}
+					}
+					getLogger().info("Files deleted");
+				}
+			}, 200L);
 		} else {
 			ScoreboardHelper.updatePlayers();
 		}
+	}
+	
+	public void deletePlayerStats(){
+		File dir = new File("world/stats");
+		if (dir.isDirectory()){
+			for (String pStats : dir.list()){
+				File statFile = new File(dir, pStats);
+				statFile.delete();
+			}
+		}
+		getLogger().info("Files deleted");
 	}
 
 }

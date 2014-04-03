@@ -1,22 +1,24 @@
 TODO
 -------------------
 * Get pre-game countdown done											-	DONE
-* Get options done														-	PARTIALLY DONE
+* Get options done														-	DONE
 * Get Randomizer should nothing be chosen done							-	DONE
-* Get post-game winner calculation done									-	NOT DONE
+* Get post-game winner calculation done									-	DONE
 * Get reset game done													-	DONE
 * Get while in-game player join info done								-	DONE
-* Get spectator mode done												-	NOT DONE
-* Do a gamemode															-	PLANNED
+* Get spectator mode done												-	DONE
+* Do a gamemode															-	DONE
 * Ensure some invulnurability at the start								-	DONE
 * Heals players at the start											-	DONE
-* Clears players Inventory												-	PARTIALLY DONE
-* Make /spectate work													-	PLANNED
-* Do update running check score											-	PLANNED
-* Prevent non-creative mode players from breaking/interacting pre-game	-	PLANNED
+* Clears players Inventory												-	DONE
+* Make /spectate work													-	DONE
+* Do update running check score											-	DONE
+* Prevent non-creative mode players from breaking/interacting pre-game	-	DONE
+* Check Player Scores and updated accordingly							-	DONE
+* Check game info command												-	DONE
+* Gamemode info command after initgame (/listobjectives)				-	DONE
+* Command to view list of gamemodes and title							-	DONE PARTIALLY
 
 BUGS
 -------------------
-* Figure out why GameIsRunning Timer is showing seconds weirdly (Possible Fixed)
-* Figure out why Time still appears after resetting
-* 
+* ConfigTabCompleter is a little derpy
