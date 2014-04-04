@@ -216,7 +216,7 @@ public class Main extends JavaPlugin implements Listener{
 					ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "                 Speed Challenge" ,
 					ChatColor.GOLD + "==================================================" ,
 					ChatColor.DARK_GREEN + "Select a gamemode with " + ChatColor.GOLD + "/scconfig gamemode <number>",
-					ChatColor.DARK_GREEN + "Then change the other configuration (respawn, pvp, spreadplayers) with" + ChatColor.GOLD + " /scconfig <config> <true/false>",
+					ChatColor.DARK_GREEN + "Then change the other configuration (respawn, pvp) with" + ChatColor.GOLD + " /scconfig <config> <true/false>",
 					ChatColor.DARK_GREEN + "Do " + ChatColor.GOLD + "/scconfig" + ChatColor.DARK_GREEN + " for more details",
 					ChatColor.GOLD + "==================================================" ,
 					ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "Do /hub to return back to the lobby!" ,

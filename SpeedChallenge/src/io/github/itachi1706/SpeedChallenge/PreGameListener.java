@@ -4,7 +4,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,7 +17,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class PreGameListener implements Listener{
 	
@@ -153,7 +151,7 @@ public class PreGameListener implements Listener{
 			Player p = Main.spectators.get(i);
 			if (p.equals(e.getPlayer())){
 				try {
-					if (e.getItem().equals(new ItemStack(Material.COMPASS))){
+					if (e.getItem().equals(Spec.getCompass())){
 						//Check Nearest Spectator and distance away from the player
 						Spec.spectatorMsg(p);
 					} else if (e.getClickedBlock().isEmpty()){

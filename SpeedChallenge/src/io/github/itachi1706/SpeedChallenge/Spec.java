@@ -17,6 +17,16 @@ public class Spec {
 		p.setHealth(p.getMaxHealth());
 		p.setFoodLevel(20);
 		p.setSaturation(20);
+		p.getInventory().clear();
+		p.getInventory().setHelmet(new ItemStack(Material.AIR));
+		p.getInventory().setBoots(new ItemStack(Material.AIR));
+		p.getInventory().setChestplate(new ItemStack(Material.AIR));
+		p.getInventory().setLeggings(new ItemStack(Material.AIR));
+		p.getInventory().setItem(0, getCompass());
+		p.setCompassTarget(getNearestPlayer(p).getLocation());
+	}
+	
+	public static ItemStack getCompass(){
 		ItemStack is = new ItemStack(Material.COMPASS);
 		ItemMeta im = is.getItemMeta();
 		im.setDisplayName("Nearest Player");
@@ -25,13 +35,7 @@ public class Spec {
 		lol.add("location of nearest player!");
 		im.setLore(lol);
 		is.setItemMeta(im);
-		p.getInventory().clear();
-		p.getInventory().setHelmet(new ItemStack(Material.AIR));
-		p.getInventory().setBoots(new ItemStack(Material.AIR));
-		p.getInventory().setChestplate(new ItemStack(Material.AIR));
-		p.getInventory().setLeggings(new ItemStack(Material.AIR));
-		p.getInventory().setItem(0, is);
-		p.setCompassTarget(getNearestPlayer(p).getLocation());
+		return is;
 	}
 	
 	//Get Nearest Player
@@ -65,8 +69,9 @@ public class Spec {
 		Player nearest = getNearestPlayer(p);
 		//String msg = ChatColor.DARK_RED + "FEATURE COMING SOON!";
 		String[] msg = {"&b[SpeedChallenge] &aNearest Player: &6" + nearest.getDisplayName(), 
-				"&b[SpeedChallenge] &aDistance Away: &c" + p.getLocation().distance(nearest.getLocation()) + " block(s)",
-				"&b[SpeedChallenge] &a Location: &5X:&c " + p.getLocation().getX() + " &5Y:&c " + p.getLocation().getY() + " &5Z:&c " + p.getLocation().getZ()};
+				"&b[SpeedChallenge] &aDistance Away: &c" + (Math.round(p.getLocation().distance(nearest.getLocation())*100.0)/100.0) + " block(s)",
+				"&b[SpeedChallenge] &aLocation: &5X:&c " + (Math.round(nearest.getLocation().getX()*100.0)/100.0) + " &5Y:&c " + (Math.round(nearest.getLocation().getY()*100.0)/100.0) + " &5Z:&c " + (Math.round(nearest.getLocation().getZ()*100.0)/100.0),
+				"&b[SpeedChallenge] &aDo &6/spectate <playername> &ato teleport to a ingame player"};
 		for (String msges : msg){
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', msges));
 		}
