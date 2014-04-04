@@ -73,9 +73,31 @@ public class SpecCmd implements CommandExecutor {
 					for (int i = 0; i < Main.playerList.size(); i++){
 						Player pla = Main.playerList.get(i);
 						if (pla.getName().equals(online.getName())){
-							sender.sendMessage(ChatColor.LIGHT_PURPLE + "Teleported to " + online.getDisplayName());
-							((Player)sender).teleport(online.getLocation());
-							return true;
+							Player starter = (Player) sender;
+							if (starter.getWorld().equals(online.getWorld())){
+								if (checkPlayerInGame(starter)){
+									if (!starter.hasPermission("sc.override")){
+										starter.sendMessage(ChatColor.RED + "You are currently a player ingame and cannot use this command");
+										return true;
+									} else {
+										starter.sendMessage(ChatColor.GOLD + "OVERRIDING INABILITY TO TELEPORT - " + ChatColor.DARK_RED + "CURRENTLY IN GAME");
+										starter.sendMessage(ChatColor.GOLD + "You are a player ingame but can teleport due to being a player with permission. Do not abuse it");
+									}
+									sender.sendMessage(ChatColor.LIGHT_PURPLE + "Teleported to " + online.getDisplayName());
+									((Player)sender).teleport(online.getLocation());
+									return true;
+								}
+							} else {
+								if (starter.hasPermission("sc.override")){
+									starter.sendMessage(ChatColor.GOLD + "OVERRIDING INABILITY TO TELEPORT - " + ChatColor.DARK_RED + "DIFFERENT WORLD");
+									starter.sendMessage(ChatColor.GOLD + "You are not in the same world as " + online.getDisplayName() + ChatColor.GOLD + ". If you just joined, do /spectate or you will not be hidden");
+									sender.sendMessage(ChatColor.LIGHT_PURPLE + "Teleported to " + online.getDisplayName());
+									((Player)sender).teleport(online.getLocation());
+									return true;
+								}
+								starter.sendMessage(ChatColor.RED + "You are not in the same world as the player. Please do /spectate to join the game world first");
+								return true;
+							}
 						}
 					}
 					//Has a player and teleports to player
@@ -85,6 +107,16 @@ public class SpecCmd implements CommandExecutor {
 			}
 			sender.sendMessage(ChatColor.RED + "Unable to find player by that name");
 			return true;
+		}
+		return false;
+	}
+	
+	public boolean checkPlayerInGame(Player p){
+		for (int i = 0; i < Main.playerList.size(); i++){
+			Player game = Main.playerList.get(i);
+			if (p.getName().equals(game.getName())){
+				return true;
+			}
 		}
 		return false;
 	}

@@ -46,7 +46,18 @@ public class ScoreboardHelper {
 		int min = Main.countdown/60;
 		int second = Main.countdown - (min * 60);
 		//Bukkit.getLogger().info("MIN: " + min + " SEC: "+ second);
-		o.setDisplayName(ChatColor.GOLD + "Speed Challenge" + ChatColor.DARK_RED + "  " + min + ":" + second);
+		String display = ChatColor.AQUA + "Speed Challenge" + ChatColor.RED;
+		if (min < 10){
+			display = display + " 0" + min;
+		} else {
+			display = display + " " + min;
+		}
+		if (second < 10){
+			display = display + ":0" + second;
+		} else {
+			display = display + ":" + second;
+		}
+		o.setDisplayName(display);
 		Score score = o.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD + "Players Scores"));
 		score.setScore(9999);
 		for (int i = 0; i < Main.playerList.size(); i++){
@@ -65,11 +76,21 @@ public class ScoreboardHelper {
 		int min = Main.countdown/60;
 		int second = Main.countdown - (min * 60);
 		//Bukkit.getLogger().info("MIN: " + min + " SEC: "+ second);
-		o.setDisplayName(ChatColor.AQUA + "Speed Challenge" + ChatColor.RED + " " + min + ":" + second);
+		String display = ChatColor.AQUA + "Speed Challenge" + ChatColor.RED;
+		if (min < 10){
+			display = display + " 0" + min;
+		} else {
+			display = display + " " + min;
+		}
+		if (second < 10){
+			display = display + ":0" + second;
+		} else {
+			display = display + ":" + second;
+		}
+		o.setDisplayName(display);
 		//Does check of players score
 		PreGameRunnable.checkPlayerScores();
 	}
-	
 	
 	public static void updatePlayers(){
 		Objective o = sb.getObjective("game_player");

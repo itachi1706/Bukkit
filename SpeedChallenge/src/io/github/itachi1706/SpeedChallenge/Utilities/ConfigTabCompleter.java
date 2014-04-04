@@ -44,7 +44,8 @@ public class ConfigTabCompleter implements TabCompleter{
                         // Since the player has already typed something in,
                         // we ant to complete the word for them so we check startsWith().
                         if (!s.toLowerCase().startsWith(args[0].toLowerCase())){
-                            list.remove(s);
+                        	list.remove(i);
+                        	i = 0;
                         }
                     }
                     Collections.sort(list);
@@ -60,7 +61,8 @@ public class ConfigTabCompleter implements TabCompleter{
                         // Since the player has already typed something in,
                         // we ant to complete the word for them so we check startsWith().
                         if (!s.toLowerCase().startsWith(args[1].toLowerCase())){
-                            list.remove(s);
+                        	list.remove(i);
+                        	i = 0;
                         }
                     }
                     Collections.sort(list);
@@ -73,7 +75,8 @@ public class ConfigTabCompleter implements TabCompleter{
                         // Since the player has already typed something in,
                         // we ant to complete the word for them so we check startsWith().
                         if (!s.toLowerCase().startsWith(args[1].toLowerCase())){
-                            list.remove(s);
+                        	list.remove(i);
+                        	i = 0;
                         }
                     }
                     Collections.sort(list);
@@ -86,7 +89,8 @@ public class ConfigTabCompleter implements TabCompleter{
                         // Since the player has already typed something in,
                         // we ant to complete the word for them so we check startsWith().
                         if (!s.toLowerCase().startsWith(args[1].toLowerCase())){
-                            list.remove(s);
+                        	list.remove(i);
+                        	i = 0;
                         }
                     }
                     Collections.sort(list);

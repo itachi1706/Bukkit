@@ -2,7 +2,6 @@ package io.github.itachi1706.SpeedChallenge;
 
 import java.util.ArrayList;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -37,13 +36,21 @@ public class Spec {
 	
 	//Get Nearest Player
 	public static Player getNearestPlayer (Player player){
-        Player nearest = null;
-        for (Player onlinePlayer : Bukkit.getOnlinePlayers()){
-            if (!player.getWorld().equals(onlinePlayer.getWorld())) continue; // Check only players in player's world
-            if ((nearest!=null)&&
-       (player.getLocation().distance(nearest.getLocation())<player.getLocation().distance(onlinePlayer.getLocation()))) continue;
-            nearest = onlinePlayer;
+        Player nearest = Main.playerList.get(0);
+        double dist = player.getLocation().distance(nearest.getLocation());
+        for (int i = 0; i < Main.playerList.size(); i++){
+        	Player inGamePlayer = Main.playerList.get(i);
+        	if (!player.getWorld().equals(inGamePlayer.getWorld())) continue;
+        	if (player.getLocation().distance(inGamePlayer.getLocation()) < dist){
+        		nearest = inGamePlayer;
+        		dist = player.getLocation().distance(inGamePlayer.getLocation());
+        	}
         }
+        /*for (Player onlinePlayer : Bukkit.getOnlinePlayers()){
+            if (!player.getWorld().equals(onlinePlayer.getWorld())) continue; // Check only players in player's world
+            if ((nearest!=null)&&(player.getLocation().distance(nearest.getLocation())<player.getLocation().distance(onlinePlayer.getLocation()))) continue;
+            nearest = onlinePlayer;
+        }*/
         return nearest;
     }
 	
@@ -55,12 +62,14 @@ public class Spec {
 	}
 	
 	public static void spectatorMsg(Player p){
-		//Player nearest = getNearestPlayer(p);
-		String msg = ChatColor.DARK_RED + "FEATURE COMING SOON!";
-		/*String[] msg = {"&b[SpeedChallenge] &aNearest Player: &6" + nearest.getDisplayName(), 
+		Player nearest = getNearestPlayer(p);
+		//String msg = ChatColor.DARK_RED + "FEATURE COMING SOON!";
+		String[] msg = {"&b[SpeedChallenge] &aNearest Player: &6" + nearest.getDisplayName(), 
 				"&b[SpeedChallenge] &aDistance Away: &c" + p.getLocation().distance(nearest.getLocation()) + " block(s)",
-				"&b[SpeedChallenge] &a Location: &5X:&c " + p.getLocation().getX() + " &5Y:&c " + p.getLocation().getY() + " &5Z:&c " + p.getLocation().getZ()};*/
-		p.sendMessage(msg);
+				"&b[SpeedChallenge] &a Location: &5X:&c " + p.getLocation().getX() + " &5Y:&c " + p.getLocation().getY() + " &5Z:&c " + p.getLocation().getZ()};
+		for (String msges : msg){
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&', msges));
+		}
 	}
 
 }

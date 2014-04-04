@@ -50,6 +50,7 @@ public class Main extends JavaPlugin implements Listener{
 	public static ArrayList<Player> playerList = new ArrayList<Player>();			//Players
 	public static ArrayList<Player> spectators = new ArrayList<Player>();		//Spectators
 	public static boolean invulnerable = true;		//Invulnerable
+	public static boolean serverstarted = false;	//Server has started or not
 	
 	
 	//Countdown timers
@@ -71,6 +72,7 @@ public class Main extends JavaPlugin implements Listener{
 		Bukkit.getServer().getPluginManager().registerEvents(new PreGameListener(), this);
 		getLogger().info("Deleting previous stats of player in case its not deleted");
 		deletePlayerStats();
+		serverstarted = false;
 		
 	}
 	
@@ -181,6 +183,7 @@ public class Main extends JavaPlugin implements Listener{
 		respawn = 0;
 		playerList.clear();
 		spectators.clear();
+		serverstarted = false;
 		
 		Bukkit.getServer().broadcastMessage("WORLDS DELETED!");
 		ScoreboardHelper.resetScoreboard();
@@ -226,7 +229,8 @@ public class Main extends JavaPlugin implements Listener{
 			if (players == 1){
 				ScoreboardHelper.initPlayersCounter();
 			}
-			if (countdown == 90){
+			if (countdown == 90 && !serverstarted){
+				serverstarted = true;
 				startCountDown();
 			}
 			ScoreboardHelper.updatePlayers();
