@@ -9,6 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -156,8 +157,14 @@ public class GameListeners implements Listener{
 			if (p.equals(e.getPlayer())){
 				try {
 					if (e.getPlayer().getItemInHand().isSimilar(Spec.getCompass())){
-						//Check Nearest Spectator and distance away from the player
-						Spec.spectatorMsg(p);
+						if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
+							//Check Nearest Spectator and distance away from the player
+							Spec.spectatorMsg(p);
+						} else if (e.getAction().equals(Action.LEFT_CLICK_AIR) || e.getAction().equals(Action.LEFT_CLICK_BLOCK)){
+							Spec.updateSpectatorList();
+							e.getPlayer().openInventory(Spec.spectatePlayerList);
+							e.setCancelled(true);
+						}
 					} else if (e.getClickedBlock().isEmpty()){
 					} else {
 						e.getPlayer().sendMessage(ChatColor.DARK_RED + "As a spectator, you are not allowed to interact with blocks/players!");
@@ -235,6 +242,10 @@ public class GameListeners implements Listener{
 	}
 	else if (inventory.getName().equals(InventoriesPreGame.pvpInventory.getName())){
 		InventoriesPreGame.selectPVPMode(player, clickSlot);
+		event.getWhoClicked().closeInventory();
+		event.setCancelled(true);
+	} else if (inventory.getName().equals(Spec.spectatePlayerList.getName())){
+		Spec.selectPlayer(player, clickSlot);
 		event.getWhoClicked().closeInventory();
 		event.setCancelled(true);
 	}
