@@ -18,6 +18,8 @@ TODO
 * Check game info command												-	DONE
 * Gamemode info command after initgame (/listobjectives)				-	DONE
 * Command to view list of gamemodes and title							-	DONE PARTIALLY
+* Convert to voting system												-	PLANNED
+* Convert to Inventory Objects											-	PLANNED
 
 BUGS
 -------------------

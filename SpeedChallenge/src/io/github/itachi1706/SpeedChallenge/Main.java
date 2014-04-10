@@ -1,6 +1,7 @@
 package io.github.itachi1706.SpeedChallenge;
 
 import io.github.itachi1706.SpeedChallenge.Utilities.ConfigTabCompleter;
+import io.github.itachi1706.SpeedChallenge.Utilities.InventoriesPreGame;
 import io.github.itachi1706.SpeedChallenge.Utilities.ScoreboardHelper;
 
 import java.io.File;
@@ -34,6 +35,7 @@ public class Main extends JavaPlugin implements Listener{
 	 * adding new gamemodes.
 	 * Modify ReequipCmd if needed and listGamemode method in ConfigCmd
 	 * Edit ConfigTabCompleter to add in the extra challenge numbers
+	 * Edit InventoriesPreGame too to include the stuff
 	 */
 	
 	//User editable variables
@@ -69,9 +71,10 @@ public class Main extends JavaPlugin implements Listener{
 		getCommand("listobjectives").setExecutor(new ListObjectives(this));
 		getCommand("reequip").setExecutor(new ReequipCmd(this));
 		getCommand("scconfig").setTabCompleter(new ConfigTabCompleter());
-		Bukkit.getServer().getPluginManager().registerEvents(new PreGameListener(), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new GameListeners(), this);
 		getLogger().info("Deleting previous stats of player in case its not deleted");
 		deletePlayerStats();
+		InventoriesPreGame.initSelectionStuff();
 		serverstarted = false;
 		
 	}
@@ -198,6 +201,7 @@ public class Main extends JavaPlugin implements Listener{
 			players.showPlayer(e.getPlayer());
 		}
 		String prefix = "";
+		InventoriesPreGame.giveItemToPlayer(e.getPlayer());
 		if (Bukkit.getServer().getPluginManager().getPlugin("PermissionsEx") != null) {
 			PermissionManager pex = PermissionsEx.getPermissionManager();
 			PermissionUser target = pex.getUser(e.getPlayer());
@@ -212,21 +216,36 @@ public class Main extends JavaPlugin implements Listener{
 		}
 		Bukkit.getServer().broadcastMessage(prefix + " " + e.getPlayer().getDisplayName() + " joined the game!");
 		if (!initGame){
+			/*ChatColor.DARK_GREEN + "Select a gamemode with " + ChatColor.GOLD + "/scconfig gamemode <number>",
+			ChatColor.DARK_GREEN + "Then change the other configuration (respawn, pvp) with" + ChatColor.GOLD + " /scconfig <config> <true/false>",
+			ChatColor.DARK_GREEN + "Do " + ChatColor.GOLD + "/scconfig" + ChatColor.DARK_GREEN + " for more details",
 			String[] welMsg = {ChatColor.GOLD + "==================================================" ,
 					ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "                 Speed Challenge" ,
 					ChatColor.GOLD + "==================================================" ,
-					ChatColor.DARK_GREEN + "Select a gamemode with " + ChatColor.GOLD + "/scconfig gamemode <number>",
-					ChatColor.DARK_GREEN + "Then change the other configuration (respawn, pvp) with" + ChatColor.GOLD + " /scconfig <config> <true/false>",
-					ChatColor.DARK_GREEN + "Do " + ChatColor.GOLD + "/scconfig" + ChatColor.DARK_GREEN + " for more details",
+					ChatColor.DARK_GREEN + "Use the items in your first 3 slots of your inventory to configure this game!",
 					ChatColor.GOLD + "==================================================" ,
 					ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "Do /hub to return back to the lobby!" ,
-					ChatColor.GOLD + "=================================================="};
-			e.getPlayer().sendMessage(welMsg);
+					ChatColor.GOLD + "=================================================="};*/
+			e.getPlayer().sendMessage(ChatColor.GOLD + "==================================================");
+			e.getPlayer().sendMessage(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "                 Speed Challenge");
+			e.getPlayer().sendMessage(ChatColor.GOLD + "==================================================");
+			if (playerList.size() == 0){
+				e.getPlayer().sendMessage(ChatColor.DARK_GREEN + "Use the items in your first 3 slots of your inventory to configure this game!");
+			} else {
+				e.getPlayer().sendMessage(ChatColor.DARK_GREEN + "Wait for the game to start!");
+				if (e.getPlayer().hasPermission("sc.override")){
+					e.getPlayer().sendMessage(ChatColor.DARK_RED + "You are able to configure this game as well due to your Staff status");
+					e.getPlayer().sendMessage(ChatColor.DARK_GREEN + "Use the items in your first 3 slots of your inventory to configure");
+				}
+			}
+			e.getPlayer().sendMessage(ChatColor.GOLD + "==================================================");
+			e.getPlayer().sendMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "Do /hub to return back to the lobby!");
+			e.getPlayer().sendMessage(ChatColor.GOLD + "==================================================");
 			e.getPlayer().setScoreboard(ScoreboardHelper.sb);
 			players++;
 			playerList.add(e.getPlayer());
 			getLogger().info(players + " player(s)");
-			if (players == 1){
+			if (players == 1 && !gameStart){
 				ScoreboardHelper.initPlayersCounter();
 			}
 			if (countdown == 90 && !serverstarted){
@@ -238,7 +257,9 @@ public class Main extends JavaPlugin implements Listener{
 			String[] welMsg = {ChatColor.GOLD + "==================================================" ,
 					ChatColor.DARK_GREEN + "Unfortunately, the game has already started. You can spectate the match if you want with" +
 					ChatColor.GOLD + " /spectate",ChatColor.DARK_GREEN + "You can also teleport to current players with " + ChatColor.GOLD + "/spectate <name of player>",
-					ChatColor.GOLD + "==================================================" ,};
+					ChatColor.GOLD + "==================================================" ,
+					ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "Do /hub to return back to the lobby!" ,
+					ChatColor.GOLD + "=================================================="};
 			e.getPlayer().sendMessage(welMsg);
 		}
 	}

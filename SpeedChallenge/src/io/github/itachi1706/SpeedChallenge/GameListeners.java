@@ -1,5 +1,7 @@
 package io.github.itachi1706.SpeedChallenge;
 
+import io.github.itachi1706.SpeedChallenge.Utilities.InventoriesPreGame;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -12,13 +14,15 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.Inventory;
 
-public class PreGameListener implements Listener{
+public class GameListeners implements Listener{
 	
 	@EventHandler
 	public void freezePlayer(PlayerMoveEvent e){
@@ -151,7 +155,7 @@ public class PreGameListener implements Listener{
 			Player p = Main.spectators.get(i);
 			if (p.equals(e.getPlayer())){
 				try {
-					if (e.getItem().equals(Spec.getCompass())){
+					if (e.getPlayer().getItemInHand().isSimilar(Spec.getCompass())){
 						//Check Nearest Spectator and distance away from the player
 						Spec.spectatorMsg(p);
 					} else if (e.getClickedBlock().isEmpty()){
@@ -165,8 +169,37 @@ public class PreGameListener implements Listener{
 				}
 			}
 		}
-		
+		if (!Main.gameStart){
+			if (e.getPlayer().getItemInHand().isSimilar(InventoriesPreGame.gmSelector)){
+				if (e.getPlayer().hasPermission("sc.override") || Main.playerList.get(0).getName().equals(e.getPlayer().getName())){
+					e.getPlayer().openInventory(InventoriesPreGame.gamemodeInventory);
+					e.setCancelled(true);
+				} else {
+					e.getPlayer().sendMessage(ChatColor.DARK_RED + "You do not have the ability to modify the config of this game!");
+					e.setCancelled(true);
+				}
+			} else if (e.getPlayer().getItemInHand().isSimilar(InventoriesPreGame.hcSelector)){
+				if (e.getPlayer().hasPermission("sc.override") || Main.playerList.get(0).getName().equals(e.getPlayer().getName())){
+					e.getPlayer().openInventory(InventoriesPreGame.hardcoreInventory);
+					e.setCancelled(true);
+				} else {
+					e.getPlayer().sendMessage(ChatColor.DARK_RED + "You do not have the ability to modify the config of this game!");
+					e.setCancelled(true);
+				}
+				
+			} else if (e.getPlayer().getItemInHand().isSimilar(InventoriesPreGame.pvpSelector)){
+				if (e.getPlayer().hasPermission("sc.override") || Main.playerList.get(0).getName().equals(e.getPlayer().getName())){
+					e.getPlayer().openInventory(InventoriesPreGame.pvpInventory);
+					e.setCancelled(true);
+				} else {
+					e.getPlayer().sendMessage(ChatColor.DARK_RED + "You do not have the ability to modify the config of this game!");
+					e.setCancelled(true);
+				}
+			}
+				
+		}
 	}
+		
 	
 	@EventHandler
 	public void specCannotDrop(PlayerDropItemEvent e){
@@ -181,6 +214,30 @@ public class PreGameListener implements Listener{
 		if (checkSpectator(e.getPlayer()) && !e.getPlayer().getGameMode().equals(GameMode.CREATIVE)){
 			e.setCancelled(true);
 		}
+	}
+	
+	@EventHandler
+	public void onInventoryClick(InventoryClickEvent event) {
+	Player player = (Player) event.getWhoClicked(); // The player that clicked the item
+	//ItemStack clicked = event.getCurrentItem(); // The item that was clicked
+	int clickSlot = event.getSlot(); //The slot number that was clicked
+	Inventory inventory = event.getInventory(); // The inventory that was clicked in
+	if (inventory.getName().equals(InventoriesPreGame.gamemodeInventory.getName())) {
+		//Gamemode Clicks
+		InventoriesPreGame.selectGamemode(player, clickSlot);
+		event.getWhoClicked().closeInventory();
+		event.setCancelled(true);
+	}
+	else if (inventory.getName().equals(InventoriesPreGame.hardcoreInventory.getName())){
+		InventoriesPreGame.selectHCMode(player, clickSlot);
+		event.getWhoClicked().closeInventory();
+		event.setCancelled(true);
+	}
+	else if (inventory.getName().equals(InventoriesPreGame.pvpInventory.getName())){
+		InventoriesPreGame.selectPVPMode(player, clickSlot);
+		event.getWhoClicked().closeInventory();
+		event.setCancelled(true);
+	}
 	}
 	
 	public static boolean checkSpectator(Player p){

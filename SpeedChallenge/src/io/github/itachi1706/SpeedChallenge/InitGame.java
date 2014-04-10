@@ -1,5 +1,6 @@
 package io.github.itachi1706.SpeedChallenge;
 
+import io.github.itachi1706.SpeedChallenge.Utilities.InventoriesPreGame;
 import io.github.itachi1706.SpeedChallenge.Utilities.ScoreboardHelper;
 
 import java.util.Random;
@@ -71,6 +72,7 @@ public class InitGame implements Runnable {
 			for (Player online : Bukkit.getOnlinePlayers()){
 				online.setLevel(0);
 				online.setExp(0);
+				InventoriesPreGame.removeItemFromPlayer(online);
 			}
 			String finalCountDown3 = "&b[SpeedChallenge] &6&lGame Will Start NOW!";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', finalCountDown3));

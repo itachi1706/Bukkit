@@ -1,6 +1,6 @@
 name: SpeedChallenge
 main: io.github.itachi1706.SpeedChallenge.Main
-version: 1.1
+version: 1.2
 description: A plugin for a speed challenge game
 author: itachi1706
 commands:

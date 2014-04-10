@@ -80,7 +80,7 @@ public class GameIsRunning implements Runnable{
 		{
 			for (int i = 0; i < Main.spectators.size(); i++){
 				Player p = Main.spectators.get(i);
-				if (PreGameListener.checkSpectator(p)){
+				if (GameListeners.checkSpectator(p)){
 					players.hidePlayer(p);
 				}
 			}

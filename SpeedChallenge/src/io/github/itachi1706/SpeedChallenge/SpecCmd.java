@@ -45,12 +45,12 @@ public class SpecCmd implements CommandExecutor {
 								break;
 							}
 						}
-						Spec.addSpectator(p);
 						World w = Bukkit.getWorld("SC");
 						if (!p.getWorld().equals(w)){
 							Location l = new Location(Bukkit.getServer().getWorld("SC"), Bukkit.getServer().getWorld("SC").getSpawnLocation().getX(), Bukkit.getServer().getWorld("SC").getSpawnLocation().getY(), Bukkit.getServer().getWorld("SC").getSpawnLocation().getZ());
 							p.teleport(l);
 						}
+						Spec.addSpectator(p);
 						sender.sendMessage(ChatColor.GOLD + "You are now a spectator!");
 						
 					} else {
@@ -83,10 +83,10 @@ public class SpecCmd implements CommandExecutor {
 										starter.sendMessage(ChatColor.GOLD + "OVERRIDING INABILITY TO TELEPORT - " + ChatColor.DARK_RED + "CURRENTLY IN GAME");
 										starter.sendMessage(ChatColor.GOLD + "You are a player ingame but can teleport due to being a player with permission. Do not abuse it");
 									}
-									sender.sendMessage(ChatColor.LIGHT_PURPLE + "Teleported to " + online.getDisplayName());
-									((Player)sender).teleport(online.getLocation());
-									return true;
 								}
+								sender.sendMessage(ChatColor.LIGHT_PURPLE + "Teleported to " + online.getDisplayName());
+								((Player)sender).teleport(online.getLocation());
+								return true;
 							} else {
 								if (starter.hasPermission("sc.override")){
 									starter.sendMessage(ChatColor.GOLD + "OVERRIDING INABILITY TO TELEPORT - " + ChatColor.DARK_RED + "DIFFERENT WORLD");
