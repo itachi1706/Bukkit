@@ -51,6 +51,8 @@ public class Main extends JavaPlugin implements Listener{
 		getServer().getPluginManager().registerEvents(this, this);
 		getCommand("staffonline").setExecutor(new ListOnlineStaff(this));
 		getCommand("stafflist").setExecutor(new ListStaff(this));
+		getCommand("mojang").setExecutor(new MojangStatus(this));
+		getCommand("mojang").setTabCompleter(new CmdTabComplete());
 		getLogger().info("Loaded!");
 	}
 	
