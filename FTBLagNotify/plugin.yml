@@ -1,6 +1,6 @@
 name: FTBLagNotify
 main: io.github.itachi1706.FTBLagNotify.Main
-version: 1.1
+version: 1.2
 description: An internal plugin for checking and informing members about lag
 author: itachi1706
 commands:
@@ -11,32 +11,7 @@ commands:
     permission-message: You do not have permission to do this command
   warnlag:
     description: Activate/Deactivate Lag warnings (defaults to msg 1)
-    usage: /warnlag [1/2/reload/list]
-    permission: lagnotify.warn
-    permission-message: You do not have permission to do this command
-  warnlag reload:
-    description: Reloads plugin
-    usage: /warnlag reload
-    permission: lagnotify.warn
-    permission-message: You do not have permission to do this command
-  warnlag list:
-    description: List warn messages
-    usage: /warnlag list
-    permission: lagnotify.warn
-    permission-message: You do not have permission to do this command
-  warnlag status:
-    description: Display plugin status
-    usage: /warnlag status
-    permission: lagnotify.warn
-    permission-message: You do not have permission to do this command
-  warnlag hourly:
-    description: Activate/Deactivate display of TPS Hourly
-    usage: /warnlag hourly
-    permission: lagnotify.warn
-    permission-message: You do not have permission to do this command
-  warnlag lowtpsmsg:
-    description: Activate/Deactivate Low TPS messages to users
-    usage: /warnlag lowtpsmsg
+    usage: /warnlag [1/2/reload/list/status/hourly/lowtpsmsg]
     permission: lagnotify.warn
     permission-message: You do not have permission to do this command
   gettps:

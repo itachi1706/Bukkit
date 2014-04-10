@@ -36,6 +36,7 @@ public class Main extends JavaPlugin{
 			updateConfig();
 		}
 		
+		getCommand("warnlag").setTabCompleter(new CmdTabComplete());
 		this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Lag(), 100L, 1L);	//Get TPS
 		
 		//Warning notify
