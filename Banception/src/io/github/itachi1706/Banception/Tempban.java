@@ -142,7 +142,7 @@ public class Tempban implements CommandExecutor{
 				}
 				String durationMsg = TimeCalc.calcTimeMsg(start, end);
 				victim.kickPlayer("You have been temporarily banned from the server! "  + ChatColor.AQUA + "Duration: " + ChatColor.DARK_AQUA + durationMsg + ChatColor.WHITE + " Reason: "  + ChatColor.DARK_RED + banReason);
-				sender.sendMessage(ChatColor.RED + victim.getName() + " is temporarily banned. " + ChatColor.AQUA + "Duration: " + ChatColor.DARK_AQUA + durationMsg + ChatColor.BLUE + " Reason: " + ChatColor.DARK_RED + "No reason");
+				sender.sendMessage(ChatColor.RED + victim.getName() + " is temporarily banned. " + ChatColor.AQUA + "Duration: " + ChatColor.DARK_AQUA + durationMsg + ChatColor.BLUE + " Reason: " + ChatColor.DARK_RED + banReason);
 				Main.ban.set(victim.getName() + ".ban", true);
 				Main.ban.set(victim.getName() + ".timeleft", durationMsg);
 				Main.ban.set(victim.getName() + ".time", end - start);
