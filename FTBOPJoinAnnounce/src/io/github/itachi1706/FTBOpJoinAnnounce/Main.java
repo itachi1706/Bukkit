@@ -1,5 +1,7 @@
 package io.github.itachi1706.FTBOpJoinAnnounce;
 
+import io.github.itachi1706.FTBOpJoinAnnounce.MojangStatusChecker.Status;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -75,6 +77,31 @@ public class Main extends JavaPlugin implements Listener{
     			return true;
     		}
 		}
+    	
+    	//Check Mojang Servers
+    	if (cmd.getName().equals("mojang")){
+    		if (args.length < 1 || args.length > 1){
+    			displayHelp(sender);
+    			return true;
+    		}
+    		if (args[0].equalsIgnoreCase("status")){
+    			//Does /mojang status
+    			sender.sendMessage(ChatColor.GOLD + "==================================================");
+    			sender.sendMessage(ChatColor.BLUE + "                Mojang Server Status");
+    			sender.sendMessage(ChatColor.GOLD + "==================================================");
+    			for (MojangStatusChecker statusChecker : MojangStatusChecker.values()) {
+    			    String service = statusChecker.getName();
+    			    Status status = statusChecker.getStatus(false);
+    			 
+    			    sender.sendMessage(service + ": " + status.getColor() + status.getStatus() + " - " + status.getDescription());
+    			}
+    			sender.sendMessage(ChatColor.GOLD + "==================================================");
+    			return true;
+    		} else {
+    			displayHelp(sender);
+    			return true;
+    		}
+    	}
 		
 		//Enable/Disable OP Announce on join/leave
     	if (cmd.getName().equalsIgnoreCase("joinannounce")){
@@ -160,6 +187,7 @@ public class Main extends JavaPlugin implements Listener{
 		s.sendMessage(ChatColor.GOLD + "/joinannounce op: " + ChatColor.WHITE + "Enables/Disables OP/Ranks (" + opPrefix1 + "," + modPrefix1 + "," + regPrefix1 + ChatColor.WHITE + ") Join Announcement");
     	s.sendMessage(ChatColor.GOLD + "/joinannounce dev: " + ChatColor.WHITE + "Enables/Disables Dev Join Announcement");
     	s.sendMessage(ChatColor.GOLD + "/joinannounce status: " + ChatColor.WHITE +  "Check current status of join announcements");
+    	s.sendMessage(ChatColor.GOLD + "/mojang status: " + ChatColor.WHITE + "Gets the status of all Mojang Servers");
 	}
     
     @Override

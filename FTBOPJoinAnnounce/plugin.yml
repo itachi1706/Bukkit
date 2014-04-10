@@ -1,6 +1,6 @@
 name: FTBOpJoinAnnounce
 main: io.github.itachi1706.FTBOpJoinAnnounce.Main
-version: 1.1
+version: 1.3
 description: An internal plugin for announcing ops and devs join
 author: itachi1706
 commands:
@@ -9,29 +9,14 @@ commands:
     usage: /opjoin
     permission: opjoinannounce.default
     permission-message: You do not have permission to do this command
-  opjoin reload:
-    description: Reloads plugin config
-    usage: /opjoin reload
-    permission: opjoinannounce.edit
-    permission-message: You do not have permission to do this command
-  joinannounce op:
-    description: Enables/Disables OP/Misc Join Announcement
-    usage: /joinannounce op
-    permission: opjoinannounce.edit
-    permission-message: You do not have permission to do this command
-  joinannounce dev:
-    description: Enables/Disables Dev Join Announcement
-    usage: /joinannounce dev
-    permission: opjoinannounce.edit
-    permission-message: You do not have permission to do this command
-  joinannounce status:
-    description: Check current status of join announcements
-    usage: /joinannounce status
-    permission: opjoinannounce.default
-    permission-message: You do not have permission to do this command
   joinannounce:
     description: Sub Plugin Command
     usage: /joinannounce [dev/status/op]
+    permission: opjoinannounce.default
+    permission-message: You do not have permission to do this command
+  mojang:
+    description: Mojang Servers
+    usage: /mojang status
     permission: opjoinannounce.default
     permission-message: You do not have permission to do this command
 permissions:

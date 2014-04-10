@@ -14,10 +14,11 @@ public class ScoreboardHelper {
 	static Team mod = board.getTeam("Moderators");
 	
 	public static void ensureTeamsAvailable(){
-		if (!board.getTeams().equals("Moderators")){
+		if (board.getTeam("Moderators") == null){
 			board.registerNewTeam("Moderators");
 		}
-		if (!board.getTeams().equals("Regulars")){
+		
+		if (board.getTeam("Regulars") == null){
 			board.registerNewTeam("Regulars");
 		}
 	}
