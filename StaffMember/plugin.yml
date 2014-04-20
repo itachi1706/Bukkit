@@ -1,6 +1,6 @@
 name: StaffMember
 main: io.github.itachi1706.StaffMember.Main
-version: 1.2
+version: 1.3
 description: A plugin for listing staff members and staff tools
 author: itachi1706
 commands:
@@ -25,9 +25,22 @@ commands:
     usage: /mojang status
     permission: staffmember.default
     permission-message: You do not have permission to do this command
+  serverproperties:
+    description: List the current server properties
+    usage: /serverproperties
+    permission: staffmember.default
+    permission-message: You do not have permission to do this command
+  getuuid:
+    description: Gets the UUID of a player
+    usage: /getuuid [player]
+    permission: staffmember.getuuid
+    permission-message: You do not have permission to do this command
 permissions:
   staffmember.isstaff:
     description: If user is a staff member
+    default: op
+  staffmember.getuuid:
+    description: Get UUID
     default: op
   staffmember.isop:
     description: If user is an OP

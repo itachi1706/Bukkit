@@ -52,7 +52,9 @@ public class Main extends JavaPlugin implements Listener{
 		getCommand("staffonline").setExecutor(new ListOnlineStaff(this));
 		getCommand("stafflist").setExecutor(new ListStaff(this));
 		getCommand("mojang").setExecutor(new MojangStatus(this));
+		getCommand("serverproperties").setExecutor(new ServerStatsCommand(this));
 		getCommand("mojang").setTabCompleter(new CmdTabComplete());
+		getCommand("getuuid").setExecutor(new GetPlayerUUIDCmd(this));
 		getLogger().info("Loaded!");
 	}
 	

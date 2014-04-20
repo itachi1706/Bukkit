@@ -39,7 +39,9 @@ public class ListOnlineStaff implements CommandExecutor{
 		s.sendMessage(ChatColor.GOLD + "/staffmember reload: " + ChatColor.WHITE + "Reloads plugin");
 		s.sendMessage(ChatColor.GOLD + "/staffmember: " + ChatColor.WHITE + "Main plugin command");
 		s.sendMessage(ChatColor.GOLD + "/stafflist: " + ChatColor.WHITE + "List all staff (online/offline)");
+		s.sendMessage(ChatColor.GOLD + "/getuuid: " + ChatColor.WHITE + "Gets the UUID of an online player");
 		s.sendMessage(ChatColor.GOLD + "/mojang status: " + ChatColor.WHITE + "List the current status of Mojang Servers");
+		s.sendMessage(ChatColor.GOLD + "/serverproperties: " + ChatColor.WHITE + "List the current server properties");
 	}
 	
 	public void getOnlineStaff(CommandSender s){
