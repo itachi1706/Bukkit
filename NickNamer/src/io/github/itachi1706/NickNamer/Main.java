@@ -151,7 +151,13 @@ public class Main extends JavaPlugin implements Listener{
 	public void die(PlayerDeathEvent e){
 		Player player = e.getEntity();
 		String msgD = e.getDeathMessage();
-		DamageCause dc = e.getEntity().getLastDamageCause().getCause();
+		DamageCause dc;
+		if (player.getLastDamageCause() != null){
+			dc = player.getLastDamageCause().getCause();
+		}
+		else {
+			dc = DamageCause.CUSTOM;
+		}
 		if (player.getKiller() != null){
 			Player killer = player.getKiller();
 			String weapon = "";
@@ -186,7 +192,9 @@ public class Main extends JavaPlugin implements Listener{
 			} else if (dc == DamageCause.MAGIC){
 				//Potion Damage
 				e.setDeathMessage(player.getDisplayName() + ChatColor.WHITE + " was killed using magic by " + killer.getDisplayName() + ChatColor.WHITE + " who is armed with " + ChatColor.AQUA + weapon);
-			}else {
+			} else if (dc == DamageCause.CUSTOM){
+				e.setDeathMessage(player.getDisplayName() + ChatColor.WHITE + " was killed with unknown means by " + killer.getDisplayName() + ChatColor.WHITE + " who is armed with " + ChatColor.AQUA + weapon);
+			} else {
 				e.setDeathMessage(player.getDisplayName() + ChatColor.WHITE + " was killed by " + killer.getDisplayName() + " with " + ChatColor.AQUA + weapon);
 			}
 		} else {

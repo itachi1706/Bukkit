@@ -16,6 +16,7 @@ public class NickCmd implements CommandExecutor{
 		this.plugin = plugin;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		if (cmd.getName().equalsIgnoreCase("nick")){	//Start of Nick
