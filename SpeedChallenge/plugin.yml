@@ -6,35 +6,10 @@ author: itachi1706
 commands:
   sc:
     description: Main Plugin Command
-    usage: /sc
-    permission: sc.debug
-    permission-message: You do not have permission to do this command
-  sc reset:
-    description: Resets Game
     usage: /sc reset
     permission: sc.debug
     permission-message: You do not have permission to do this command
   scconfig:
-    description: Resets Game
-    usage: /sc reset
-    permission: sc.debug
-    permission-message: You do not have permission to do this command
-  scconfig gamemode:
-    description: Resets Game
-    usage: /sc reset
-    permission: sc.debug
-    permission-message: You do not have permission to do this command
-  scconfig pvp:
-    description: Resets Game
-    usage: /sc reset
-    permission: sc.debug
-    permission-message: You do not have permission to do this command
-  scconfig respawn:
-    description: Resets Game
-    usage: /sc reset
-    permission: sc.debug
-    permission-message: You do not have permission to do this command
-  scconfig list:
     description: Resets Game
     usage: /sc reset
     permission: sc.debug
@@ -54,6 +29,11 @@ commands:
     usage: /reequip
     permission: sc.debug
     permission-message: You have perms no matter what :D
+  scadmin:
+    description: Force Starts Game
+    usage: /scadmin forcestart/endgame
+    permission: sc.override
+    permission-message: You do not have permission to do this command
 permissions:
   sc.debug:
     description: Debug

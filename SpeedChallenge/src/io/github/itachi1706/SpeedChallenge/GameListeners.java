@@ -150,6 +150,7 @@ public class GameListeners implements Listener{
 		}
 	}
 	
+	
 	@EventHandler
 	public void specInteract(PlayerInteractEvent e){
 		for (int i = 0; i < Main.spectators.size(); i++){

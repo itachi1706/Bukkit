@@ -27,6 +27,8 @@ public class PreGameRunnable implements Runnable{
 	@Override
 	public void run() {
 		if (countdown == 30){
+			Bukkit.getServer().getScheduler().cancelTask(Main.countDownTimer);
+			Bukkit.getLogger().info("Stopped Init Game Countdown");
 			String nethergen = "&b[SpeedChallenge] &6&lGame begins in " + countdown + " second(s)!";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', nethergen));
 		}
@@ -42,7 +44,7 @@ public class PreGameRunnable implements Runnable{
 			}
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', finalCountDown));
 		}
-		if (countdown <= 0){
+		if (countdown == 0){
 			Main.initGame = true;
 			String finalCountDown3 = "&b[SpeedChallenge] &6&lGame Starts NOW!";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', finalCountDown3));
@@ -64,13 +66,16 @@ public class PreGameRunnable implements Runnable{
 			ScoreboardHelper.gameStart();
 			Main.countDownTimer3 = Bukkit.getScheduler().scheduleSyncRepeatingTask(this.plugin, new GameIsRunning(this.plugin), 20L, 20L);
 			Bukkit.getServer().getScheduler().cancelTask(Main.countDownTimer2);
-			
+			countdown = -1;
+			Bukkit.getLogger().info("Stopped pregame countdown");
 		}
-		countdown--;
-		ScoreboardHelper.updatePreGameTime();
-		for (Player online : Bukkit.getOnlinePlayers()){
-			online.setLevel(countdown);
-			online.setExp(((float) countdown/30) + 0.01F);
+		if (countdown > 0){
+			countdown--;
+			ScoreboardHelper.updatePreGameTime();
+			for (Player online : Bukkit.getOnlinePlayers()){
+				online.setLevel(countdown);
+				online.setExp(((float) countdown/30) + 0.01F);
+			}
 		}
 		
 	}

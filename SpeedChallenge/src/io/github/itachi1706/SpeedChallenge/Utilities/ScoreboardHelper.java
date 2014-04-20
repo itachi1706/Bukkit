@@ -26,6 +26,7 @@ public class ScoreboardHelper {
 		pSco.setScore(score);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void initPlayersCounter(){
 		sb.registerNewObjective("game_player", "dummy");
 		Objective o = sb.getObjective("game_player");
@@ -38,6 +39,7 @@ public class ScoreboardHelper {
 	}
 	
 	//Initial game running
+	@SuppressWarnings("deprecation")
 	public static void gameStart(){
 		Objective o = sb.getObjective("game_player");
 		//o.unregister();
@@ -70,6 +72,7 @@ public class ScoreboardHelper {
 	}
 	
 	//Game Is Running
+	@SuppressWarnings("deprecation")
 	public static void gameStartRunning(){
 		sb.resetScores(Bukkit.getOfflinePlayer(ChatColor.DARK_GREEN + "Time:"));
 		Objective o = sb.getObjective("game_player");
@@ -92,6 +95,7 @@ public class ScoreboardHelper {
 		PreGameRunnable.checkPlayerScores();
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void updatePlayers(){
 		Objective o = sb.getObjective("game_player");
 		o.setDisplayName("Players");
@@ -100,6 +104,7 @@ public class ScoreboardHelper {
 		score.setScore(Main.players);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void updateInitTime(){
 		Objective o = sb.getObjective("game_player");
 		o.setDisplayName("Players");
@@ -108,6 +113,7 @@ public class ScoreboardHelper {
 		score.setScore(Main.countdown);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void updatePreGameTime(){
 		Objective o = sb.getObjective("game_player");
 		o.setDisplayName("Speed Challenge");

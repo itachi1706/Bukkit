@@ -70,6 +70,7 @@ public class Main extends JavaPlugin implements Listener{
 		getCommand("spectate").setExecutor(new SpecCmd(this));
 		getCommand("listobjectives").setExecutor(new ListObjectives(this));
 		getCommand("reequip").setExecutor(new ReequipCmd(this));
+		getCommand("scadmin").setExecutor(new AdminCmd(this));
 		getCommand("scconfig").setTabCompleter(new ConfigTabCompleter());
 		Bukkit.getServer().getPluginManager().registerEvents(new GameListeners(), this);
 		getLogger().info("Deleting previous stats of player in case its not deleted");
@@ -299,7 +300,9 @@ public class Main extends JavaPlugin implements Listener{
 				}
 			}, 200L);
 		} else {
-			ScoreboardHelper.updatePlayers();
+			if (!gameStart){
+				ScoreboardHelper.updatePlayers();
+			}
 		}
 	}
 	

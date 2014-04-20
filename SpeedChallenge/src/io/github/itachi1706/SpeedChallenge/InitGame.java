@@ -67,7 +67,7 @@ public class InitGame implements Runnable {
 			}
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', finalCountDown));
 		}
-		if (Main.countdown <= 0){
+		if (Main.countdown == 0){
 			Main.initGame = true;
 			for (Player online : Bukkit.getOnlinePlayers()){
 				online.setLevel(0);
@@ -77,14 +77,14 @@ public class InitGame implements Runnable {
 			String finalCountDown3 = "&b[SpeedChallenge] &6&lGame Will Start NOW!";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', finalCountDown3));
 			checkOptionSelected();
-			Bukkit.getServer().getScheduler().cancelTask(Main.countDownTimer);
-			
 		}
-		Main.countdown--;
-		ScoreboardHelper.updateInitTime();
-		for (Player online : Bukkit.getOnlinePlayers()){
-			online.setLevel(Main.countdown);
-			online.setExp(((float) Main.countdown/90) + 0.01F);
+		if (Main.countdown > 0){
+			Main.countdown--;
+			ScoreboardHelper.updateInitTime();
+			for (Player online : Bukkit.getOnlinePlayers()){
+				online.setLevel(Main.countdown);
+				online.setExp(((float) Main.countdown/90) + 0.01F);
+			}
 		}
 	}
 	
@@ -132,8 +132,9 @@ public class InitGame implements Runnable {
 			String respawn = "&b[SpeedChallenge] &4&lHardcore Mode will be &a&lenabled!";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', respawn));
 		}
-		Main.countDownTimer2 = Bukkit.getScheduler().scheduleSyncRepeatingTask(this.plugin, new PreGameRunnable(this.plugin), 20L, 20L);
 		teleportPlayers();
+		Main.countDownTimer2 = Bukkit.getScheduler().scheduleSyncRepeatingTask(this.plugin, new PreGameRunnable(this.plugin), 20L, 20L);
+		Main.countdown = -1;
 	}
 	
 	public void teleportPlayers(){

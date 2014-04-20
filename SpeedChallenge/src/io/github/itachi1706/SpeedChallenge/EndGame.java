@@ -36,9 +36,11 @@ public class EndGame implements Runnable {
 			}, 200L);
 			Main.resetGame();
 			Bukkit.getServer().getScheduler().cancelTask(Main.countDownTimer4);
+			timer = -1;
 		}
-		timer--;
-		
+		if (timer > 0){
+			timer--;
+		}
 	}
 	
 	public static void getWinner(){
