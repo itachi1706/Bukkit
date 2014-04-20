@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 
 public class SendingItems {
 
+	@SuppressWarnings("deprecation")
 	public static void sendGold(Player p, String[] args){
 		Player target = Bukkit.getServer().getPlayer(args[1]);
 		if (target == null){
@@ -31,6 +32,7 @@ public class SendingItems {
 	}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void sendProperty(Player p, String[] args){
 		Player target = Bukkit.getServer().getPlayer(args[1]);
 		if (target == null){

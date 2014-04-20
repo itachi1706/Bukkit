@@ -136,6 +136,7 @@ public class MainGameLogic {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static boolean checkEndGame(){
 		if (players.size() == 0){
 			return true;

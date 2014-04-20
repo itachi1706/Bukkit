@@ -11,6 +11,7 @@ public class Jailing {
 	
 	private static int diceRoll = 0;
 	
+	@SuppressWarnings("deprecation")
 	public static void goToJail(Player p, String args){
 		Player target = Bukkit.getServer().getPlayer(args);
 		if (target == null){

@@ -15,6 +15,7 @@ public class Unmute implements CommandExecutor{
 		this.plugin = plugin;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		//Commands
@@ -63,6 +64,7 @@ public class Unmute implements CommandExecutor{
 		return false;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void unmute(OfflinePlayer player){
 		player.setBanned(false);
 		Main.mute.set(player.getName() + ".mute", false);

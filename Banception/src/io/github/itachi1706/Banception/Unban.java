@@ -17,6 +17,7 @@ public class Unban implements CommandExecutor{
 	}
 
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		//Commands
@@ -69,6 +70,7 @@ public class Unban implements CommandExecutor{
 		return false;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void unbanned(OfflinePlayer player){
 		player.setBanned(false);
 		Main.ban.set(player.getName() + ".ban", false);

@@ -16,6 +16,7 @@ public class CheckIfBanMute implements CommandExecutor {
 		this.plugin = plugin;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		//Commands

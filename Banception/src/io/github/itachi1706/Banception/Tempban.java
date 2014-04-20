@@ -76,6 +76,7 @@ public class Tempban implements CommandExecutor{
 		return false;		
 	}
 	
+	@SuppressWarnings("deprecation")
 	public boolean executeBan(CommandSender sender, String[] args, int start, int end){
 		Player target = (Bukkit.getServer().getPlayer(args[0]));
 		Database sql = Main.sql;

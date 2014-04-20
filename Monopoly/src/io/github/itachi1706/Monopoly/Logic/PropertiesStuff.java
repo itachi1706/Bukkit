@@ -54,6 +54,7 @@ public class PropertiesStuff {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void payPropertyRent(Player p, GameProperties gp){
 		String tmp = Monopoly.playerProperties.getString(gp.getName() + ".Owned");
 		Player target = Bukkit.getServer().getPlayer(tmp);
@@ -178,6 +179,7 @@ public class PropertiesStuff {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void payTrainRent(Player p, GameProperties gp){
 		String tmp = Monopoly.playerProperties.getString(gp.getName() + ".Owned");
 		Player target = Bukkit.getServer().getPlayer(tmp);
@@ -277,6 +279,7 @@ public class PropertiesStuff {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void payUtilityRent(Player p, GameProperties gp){
 		String tmp = Monopoly.playerProperties.getString(gp.getName() + ".Owned");
 		Player target = Bukkit.getServer().getPlayer(tmp);

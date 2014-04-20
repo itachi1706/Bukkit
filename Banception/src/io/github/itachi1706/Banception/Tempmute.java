@@ -74,6 +74,8 @@ public class Tempmute implements CommandExecutor{
 		}
 		return false;
 	}
+	
+		@SuppressWarnings("deprecation")
 		public boolean executeMute(CommandSender sender, String[] args, int start, int end){
 			Player target = (Bukkit.getServer().getPlayer(args[0]));
 			Database sql = Main.sql;
