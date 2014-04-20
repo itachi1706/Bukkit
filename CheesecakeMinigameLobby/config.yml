@@ -1,0 +1,41 @@
+#File config version number (Do not touch)
+version: 1
+
+#Mode in which the plugin will act in (lobby, adv)
+mode: lobby
+
+#lobby mode
+#%prefix% - displays User Prefix
+#%playername% - Display player name
+lobbymsg:
+  - '&6====================================================='
+  - '&2Welcome %prefix% %playername% &2to the &6Cheesecake Network!'
+  - '&2Use the compass to go to other servers!'
+  - '&2The book in your inventory will have more information!'
+  - '&2To hide players, use the Eye Of Ender!'
+  - '&6====================================================='
+  
+#Adventure mode
+#%prefix% - displays User Prefix
+#%playername% - Display player name
+#%mapauthor% - Current Map Author
+#%mapname% - Current Map Name
+mapname: 'NIL'
+mapauthor: 'NIL'
+advmsg:
+  - '&6====================================================='
+  - '&2                        Adventure Server'
+  - '&6====================================================='
+  - '&2Welcome %prefix% %playername%&2 to &4%mapname%'
+  - '&2This map is made by &1%mapauthor%'
+  - '&2Please obey all map rules'
+  - '&2To return to the main lobby, do &6/hub'
+  - '&6====================================================='
+  
+modules:
+  fly: true
+  speed: true
+  smite: true
+  zeus: true
+  fling: true
+  burn: true

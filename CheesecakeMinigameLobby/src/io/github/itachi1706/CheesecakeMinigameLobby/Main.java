@@ -1,67 +1,95 @@
 package io.github.itachi1706.CheesecakeMinigameLobby;
 
+import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.BurnCmd;
+import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.FlingCmd;
+import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.FlyCmd;
+import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.SmiteCmd;
+import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.SpeedCmd;
+import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.ZeusWrathCmd;
+import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.ZeusWrathListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BookMeta;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import ru.tehkode.permissions.PermissionManager;
-import ru.tehkode.permissions.PermissionUser;
-import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class Main extends JavaPlugin implements Listener{
 	
-	static double pluginVersion = 1.1;
-	static String pluginPrefix = ChatColor.DARK_RED + "[" + ChatColor.GOLD + "Cheesecake Minigame Lobby" + ChatColor.DARK_RED + "] " + ChatColor.WHITE;
+	static double pluginVersion = 1.2;
+	public static String pluginPrefix = ChatColor.DARK_RED + "[" + ChatColor.GOLD + "Cheesecake Minigame Lobby" + ChatColor.DARK_RED + "] " + ChatColor.WHITE;
+	
+	public static List<String> lobbymsg = new ArrayList<String>();
+	public static List<String> advmsg = new ArrayList<String>();
+	public static String pluginMode;
+	public static String advMapName;
+	public static String advMapAuthor;
+	
+	//Modules Command
+	public static boolean commandFly, commandSpeed, commandSmite, commandZeus, commandFling, commandBurn;
+	
 	@Override
 	public void onEnable(){
 		//Logic when plugin gets enabled
 		getLogger().info("Enabling Plugin...");
+		this.getConfig().options().copyDefaults(true);
+		this.saveDefaultConfig();
+		this.saveConfig();
+		initializeConfig();
 		getLogger().info("Enabling Plugin listeners...");
-		if (getServer().getPluginManager().getPlugin("PermissionsEx") != null) {
-		    getLogger().info("Detected PermissionsEx! Enabling prefix welcome message!");
-		    
-		}
-		getServer().getPluginManager().registerEvents(this, this);
+		loadListeners();
+		getCommand("fly").setExecutor(new FlyCmd(this));
+		getCommand("speed").setExecutor(new SpeedCmd(this));
+		getCommand("cmla").setExecutor(new ModulesCmd(this));
+		getCommand("zeus").setExecutor(new ZeusWrathCmd(this));
+		getCommand("smite").setExecutor(new SmiteCmd(this));
+		getCommand("burn").setExecutor(new BurnCmd(this));
+		getCommand("fling").setExecutor(new FlingCmd(this));
 	}
 	
 	@Override
 	public void onDisable(){
 		//Logic when plugin gets disabled
 		getLogger().info("Disabling Plugin...");
+		this.saveConfig();
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		//Main Command
-    	if(cmd.getName().equalsIgnoreCase("cheesecakeminigamelobby")){
+    	if(cmd.getName().equalsIgnoreCase("cml")){
     		if (args.length < 1 || args.length > 1){
     			displayHelp(sender);
 				return true;
     		}
+    		if (!sender.hasPermission("cheesecakeminigamelobby.staff")){
+    			sender.sendMessage(ChatColor.DARK_RED + "You do not have permission to use this command");
+    			return true;
+    		}
     		if (args[0].equalsIgnoreCase("version")){
-    			//Reloads Plugin
+    			//Show Plugin Version
     			sender.sendMessage(pluginPrefix + ChatColor.GOLD + "======================================");
 				sender.sendMessage(pluginPrefix + ChatColor.BLUE + "Cheesecake Minigame Lobby Plugin");
 				sender.sendMessage(pluginPrefix + ChatColor.GOLD + "======================================");
 				sender.sendMessage(pluginPrefix + "Version: " + ChatColor.AQUA + pluginVersion);
+    			return true;
+    		} else if (args[0].equalsIgnoreCase("reload")){
+    			//Reload Plugin
+    			reloadCommand(this);
+    			sender.sendMessage(pluginPrefix + ChatColor.GREEN + "Configuration reloaded");
+    			return true;
+    		} else if (args[0].equalsIgnoreCase("stats")){
+    			//Show statistics
+    			showStats(sender);
+    			return true;
+    		} else if (args[0].equalsIgnoreCase("module")){
+    			listModules(sender);
     			return true;
     		} else {
     			//Error
@@ -74,209 +102,135 @@ public class Main extends JavaPlugin implements Listener{
     	
 	public void displayHelp(CommandSender s){
 		s.sendMessage(ChatColor.GOLD + "-----------CheesecakeMinigameLobby Commands-----------");
-    	s.sendMessage(ChatColor.GOLD + "/cheesecakeminigamelobby version: " + ChatColor.WHITE +  "Check current plugin version");
+    	s.sendMessage(ChatColor.GOLD + "/cml version: " + ChatColor.WHITE +  "Check current plugin version");
+    	s.sendMessage(ChatColor.GOLD + "/cml reload: " + ChatColor.WHITE +  "Reload Config");
+    	s.sendMessage(ChatColor.GOLD + "/cml stats: " + ChatColor.WHITE +  "Display Current Config stats");
+    	s.sendMessage(ChatColor.GOLD + "/cml module: " + ChatColor.WHITE +  "Display Current Modules");
+    	s.sendMessage(ChatColor.GOLD + "/cmla <module>: " + ChatColor.WHITE +  "Administration Command");
+    	if (commandFly){
+    		s.sendMessage(ChatColor.GOLD + "/fly [player]: " + ChatColor.WHITE +  "Allows a player to fly");
+    	}
+    	if (commandSpeed){
+    		s.sendMessage(ChatColor.GOLD + "/speed fly/walk check/reset/<speed> [player]: " + ChatColor.WHITE +  "Display Current Config stats");
+    	}
+    	if (commandSmite){
+    		s.sendMessage(ChatColor.GOLD + "/smite [player]: " + ChatColor.WHITE +  "Smites a player with lightning!");
+    	}
+    	if (commandZeus){
+    		s.sendMessage(ChatColor.GOLD + "/zeus [player]: " + ChatColor.WHITE +  "Kills a player with the wrath of Zeus");
+    	}
+    	if (commandFling){
+    		s.sendMessage(ChatColor.GOLD + "/fling [player]: " + ChatColor.WHITE +  "Flings a player into the air!");
+    	}
+    	if (commandBurn){
+    		s.sendMessage(ChatColor.GOLD + "/burn [player]: " + ChatColor.WHITE +  "Burns the player!");
+    	}
 	}
 	
-	@EventHandler
-	public void checkObjects(PlayerJoinEvent e){
-		Player p = e.getPlayer();
-		p.getInventory().clear();
-		p.getInventory().setHeldItemSlot(0);
-		giveCompass(p);
-		giveClock(p);
-		giveBook(p);
-		welcomeMessage(p);
-		showPlayersJoin(p);
-		hidePlayersJoin(p);
+	private void initializeConfig(){
+		lobbymsg = this.getConfig().getStringList("lobbymsg");
+		advmsg = this.getConfig().getStringList("advmsg");
+		advMapName = this.getConfig().getString("mapname");
+		advMapAuthor = this.getConfig().getString("mapauthor");
+		pluginMode = this.getConfig().getString("mode");
+		commandFly = this.getConfig().getBoolean("modules.fly");
+		commandSpeed = this.getConfig().getBoolean("modules.speed");
+		commandSmite = this.getConfig().getBoolean("modules.smite");
+		commandZeus = this.getConfig().getBoolean("modules.zeus");
+		commandFling = this.getConfig().getBoolean("modules.fling");
+		commandBurn = this.getConfig().getBoolean("modules.burn");
 	}
 	
-	@EventHandler
-	public void changeWorld(PlayerChangedWorldEvent e){
-		Player p = e.getPlayer();
-		World w = Bukkit.getServer().getWorld("world");
-		if (!p.getWorld().equals(w)){
-			showPlayersJoin(p);
+	private void reloadCommand(Plugin plugin){
+		this.reloadConfig();
+		initializeConfig();
+		HandlerList.unregisterAll(plugin);
+		loadListeners();
+	}
+	
+	private void loadListeners(){
+		if (getServer().getPluginManager().getPlugin("PermissionsEx") != null) {
+		    getLogger().info("Detected PermissionsEx! Enabling prefix welcome message!");
+		}
+		getServer().getPluginManager().registerEvents(this, this);
+		if (pluginMode.equalsIgnoreCase("lobby")){
+			getServer().getPluginManager().registerEvents(new HubActions(), this);
+		} else if (pluginMode.equalsIgnoreCase("adv")){
+			getServer().getPluginManager().registerEvents(new AdvMapActions(), this);
+		}
+		if (commandZeus){
+			getServer().getPluginManager().registerEvents(new ZeusWrathListener(), this);
 		}
 	}
 	
-	@EventHandler
-	public void leaveServer(PlayerQuitEvent e){
-		Player target = e.getPlayer();
-		Player[] onlinePlayers = Bukkit.getServer().getOnlinePlayers();
-		for (int i = 0; i < onlinePlayers.length; i++){
-			Player p = onlinePlayers[i];
-			if (!p.canSee(target)){
-				//hide players
-				p.showPlayer(target);
-			}
-		}
+	private void showStats(CommandSender s){
+		s.sendMessage(ChatColor.GOLD + "-----------CheesecakeMinigameLobby Stats-----------");
+    	s.sendMessage(ChatColor.GOLD + "Plugin Mode: " + ChatColor.WHITE + pluginMode);
+    	s.sendMessage(ChatColor.GOLD + "Lobby Message Format: ");
+    	for (int i = 0; i < lobbymsg.size(); i++){
+    		s.sendMessage(ChatColor.translateAlternateColorCodes('&', lobbymsg.get(i)));
+    	}
+    	s.sendMessage(ChatColor.GOLD + "Adventure Map Name: " + ChatColor.WHITE + advMapName);
+    	s.sendMessage(ChatColor.GOLD + "Adventure Map Author: " + ChatColor.WHITE + advMapAuthor);
+    	s.sendMessage(ChatColor.GOLD + "Adventure Message Format: ");
+    	for (int i = 0; i < advmsg.size(); i++){
+    		s.sendMessage(ChatColor.translateAlternateColorCodes('&', advmsg.get(i)));
+    	}
 	}
 	
-	@EventHandler
-	public void toggleClock(PlayerInteractEvent e){
-		Player p = e.getPlayer();
-		if (e.getItem().getType().equals(Material.EYE_OF_ENDER)){
-			//Hide Players
-			hidePlayers(p);
-			giveHiddenClock(p);
-			e.setCancelled(true);
-		} else if (e.getItem().getType().equals(Material.ENDER_PEARL)){
-			//Show Players
-			showPlayers(p);
-			giveClock(p);
-			e.setCancelled(true);
-		}
+	private void listModules(CommandSender s){
+		s.sendMessage(ChatColor.GOLD + "-----------CheesecakeMinigameLobby Modules-----------");
+		s.sendMessage(ChatColor.GOLD + "Fly: " + ChatColor.WHITE + commandFly);
+		s.sendMessage(ChatColor.GOLD + "Modify Speed: " + ChatColor.WHITE + commandSpeed);
+		s.sendMessage(ChatColor.GOLD + "Zeus Wrath: " + ChatColor.WHITE + commandZeus);
+		s.sendMessage(ChatColor.GOLD + "Smite: " + ChatColor.WHITE + commandSmite);
+		s.sendMessage(ChatColor.GOLD + "Fling player: " + ChatColor.WHITE + commandFling);
+		s.sendMessage(ChatColor.GOLD + "Burn: " + ChatColor.WHITE + commandBurn);
 	}
 	
-	public void giveBook(Player p){
-		ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-		BookMeta bm = (BookMeta) book.getItemMeta();
-		String lol = ChatColor.DARK_GREEN + "===================\n" + ChatColor.DARK_GREEN + "Welcome to the" + ChatColor.GOLD + " Cheesecake Network!\n" + ChatColor.DARK_GREEN + "===================\n" +
-		ChatColor.DARK_RED + "\nUse the compass to go to other servers!\nUse the eye of ender to hide players!\n\nObey all " + ChatColor.DARK_RED + "server rules" + ChatColor.DARK_RED + ", accessible with " + ChatColor.GOLD +
-		"/rules\n" + ChatColor.DARK_GREEN + "HAVE FUN ON THE SERVER!!!";
-		String lore = "The server's Welcome Message and Info book!";
-		ArrayList<String> lored = new ArrayList<String>();
-		lored.add(lore);
-		bm.addPage(lol);
-		bm.setAuthor(ChatColor.GOLD + "Cheesecake Network");
-		bm.setDisplayName(ChatColor.GREEN + "Welcome!");
-		bm.setTitle(ChatColor.GREEN + "Welcome!");
-		bm.setLore(lored);
-		book.setItemMeta(bm);
-		p.getInventory().clear(8);
-		p.getInventory().setItem(8, book);
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+		List<String> list = new ArrayList<String>();
+		 // Now, it's just like any other command.
+        // Check if the sender is a player.
+        if (sender instanceof Player) {
+        	// Check if the command is "something."
+            if (cmd.getName().equalsIgnoreCase("cml")){
+            	// If the player has not typed anything in
+                if (args.length == 0) {
+                	// Add a list of words that you'd like to show up
+                    // when the player presses tab.
+                	list.add("module");
+                	list.add("reload");
+                    list.add("stats");
+                    list.add("version");
+                    // Sort them alphabetically.
+                    Collections.sort(list);
+                    // return the list.
+                    return list;
+                // If player has typed one word in.
+                // This > "/command hello " does not count as one
+                // argument because of the space after the hello.
+                } else if (args.length == 1) {
+                	list.add("module");
+                	list.add("reload");
+                    list.add("stats");
+                    list.add("version");
+                    for (int i = 0; i < list.size(); i++){
+                    	String s = list.get(i);
+                        // Since the player has already typed something in,
+                        // we ant to complete the word for them so we check startsWith().
+                        if (!s.toLowerCase().startsWith(args[0].toLowerCase())){
+                        	list.remove(i);
+                        	i = 0;
+                        }
+                    }
+                    Collections.sort(list);
+                    return list;
+                }
+            }
+        }
+		return null;
 	}
-	
-	public void giveCompass(Player p){
-		ItemStack item = new ItemStack(Material.COMPASS);
-		ItemMeta im = item.getItemMeta();
-		String lore1 = "Right-click to travel to other servers!";
-		ArrayList<String> lore = new ArrayList<String>();
-		lore.add(lore1);
-		im.setDisplayName(ChatColor.GREEN + "Quick Travel!");
-		im.setLore(lore);
-		item.setItemMeta(im);
-		p.getInventory().clear(0);
-		p.getInventory().setItem(0, item);
-	}
-	
-	public void giveClock(Player p){
-		ItemStack item = new ItemStack(Material.EYE_OF_ENDER);
-		ItemMeta im = item.getItemMeta();
-		String lore1 = ChatColor.DARK_RED + "" + ChatColor.ITALIC + "Right-click to hide players!";
-		ArrayList<String> lore = new ArrayList<String>();
-		lore.add(lore1);
-		im.setDisplayName(ChatColor.GOLD + "Hide Player Status: " + ChatColor.GREEN + "Shown");
-		im.setLore(lore);
-		item.setItemMeta(im);
-		p.getInventory().clear(1);
-		p.getInventory().setItem(1, item);
-	}
-	
-	@EventHandler
-	public void onItemDrop(PlayerDropItemEvent e){
-		World w = Bukkit.getServer().getWorld("world");
-		if (e.getPlayer().getWorld().equals(w)){
-			e.setCancelled(true);
-		}
-	}
-	
-	@EventHandler
-	public void InventoryMove(InventoryClickEvent e){
-		World w = Bukkit.getServer().getWorld("world");
-		if (e.getWhoClicked().getWorld().equals(w)){
-			int clicked = e.getSlot();
-			if (clicked == 1 || clicked == 0 || clicked == 8){
-				e.setCancelled(true);
-			}
-			int click = e.getHotbarButton();
-			if (click == 1 || click == 0 || click == 8){
-				e.setCancelled(true);
-			}
-		}
-	}
-	
-	public void giveHiddenClock(Player p){
-		ItemStack item = new ItemStack(Material.ENDER_PEARL);
-		ItemMeta im = item.getItemMeta();
-		String lore1 = ChatColor.DARK_GREEN + "" + ChatColor.ITALIC + "Right-click to show players!";
-		ArrayList<String> lore = new ArrayList<String>();
-		lore.add(lore1);
-		im.setDisplayName(ChatColor.GOLD + "Hide Player Status: " + ChatColor.RED + "Hidden");
-		im.setLore(lore);
-		item.setItemMeta(im);
-		p.getInventory().clear(1);
-		p.getInventory().setItem(1, item);
-	}
-	
-	public void hidePlayers(Player p){
-		Player[] onlinePlayers = Bukkit.getServer().getOnlinePlayers();
-		for (int i = 0; i < onlinePlayers.length; i++){
-			Player target = onlinePlayers[i];
-			if (!target.hasPermission("cheesecakeminigamelobby.exempt")){
-				//hide players
-				p.hidePlayer(target);
-			}
-		}
-		p.sendMessage(ChatColor.GOLD + "Hide Player Status: " + ChatColor.RED + "Hidden");
-	}
-	
-	public void hidePlayersJoin(Player p){
-		Player[] onlinePlayers = Bukkit.getServer().getOnlinePlayers();
-		if (!p.hasPermission("cheesecakeminigamelobby.exempt")) {
-			for (int i = 0; i < onlinePlayers.length; i++){
-				Player target = onlinePlayers[i];
-				if (target.getInventory().contains(Material.ENDER_PEARL)){
-					//hide players
-					target.hidePlayer(p);
-				}
-			}
-		}
-	}
-	
-	public void showPlayers(Player p){
-		Player[] onlinePlayers = Bukkit.getServer().getOnlinePlayers();
-		for (int i = 0; i < onlinePlayers.length; i++){
-			Player target = onlinePlayers[i];
-			if (!p.canSee(target)){
-				//hide players
-				p.showPlayer(target);
-			}
-		}
-		p.sendMessage(ChatColor.GOLD + "Hide Player Status: " + ChatColor.GREEN + "Shown");
-	}
-	
-	public void showPlayersJoin(Player p){
-		Player[] onlinePlayers = Bukkit.getServer().getOnlinePlayers();
-		for (int i = 0; i < onlinePlayers.length; i++){
-			Player target = onlinePlayers[i];
-			if (!p.canSee(target)){
-				//hide players
-				p.showPlayer(target);
-			}
-		}
-	}
-	
-	public void welcomeMessage(Player p){
-		String prefix = "";
-		if (Bukkit.getServer().getPluginManager().getPlugin("PermissionsEx") != null) {
-			//Use name
-			PermissionManager pex = PermissionsEx.getPermissionManager();
-			PermissionUser target = pex.getUser(p);
-			if (target == null){
-				getLogger().info("Player not found in PEX File, reverting down to fallback...");
-			} else {
-				String result = target.getPrefix();
-				prefix = ChatColor.translateAlternateColorCodes('&', result);
-			}
-		}
-		String[] welMsg = {ChatColor.GOLD + "==================================================" ,
-				ChatColor.DARK_GREEN + "Welcome " + prefix + " " + p.getDisplayName() + ChatColor.DARK_GREEN + " to the " + ChatColor.GOLD + "Cheesecake Network!",
-				ChatColor.DARK_GREEN + "Use the compass to go to other servers!",
-				ChatColor.DARK_GREEN + "The book in your inventory will have more information!", 
-				ChatColor.DARK_GREEN + "To hide players, use the Eye Of Ender!", 
-				ChatColor.GOLD + "==================================================" ,};
-		p.sendMessage(welMsg);
-		}
 
 }
