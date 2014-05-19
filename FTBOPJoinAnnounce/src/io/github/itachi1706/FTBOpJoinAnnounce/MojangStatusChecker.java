@@ -13,9 +13,9 @@ import org.json.simple.parser.ParseException;
 public enum MojangStatusChecker {
 
 	ACCOUNTS("Accounts Service", "account.mojang.com"),
-    AUTHENTICATION("Authentication Service", "auth.mojang.com"),
-    AUTHENTICATION_SERVER("Authentication Server", "authserver.mojang.com"),
-    LOGIN("Login Service", "login.minecraft.net"),
+    AUTHENTICATION("Yggdrasil Authentication Server", "auth.mojang.com"),
+    AUTHENTICATION_SERVER("Game Authentication Service", "authserver.mojang.com"),
+    LOGIN("Login Service (Legacy)", "login.minecraft.net"),
     SESSION_MINECRAFT("Minecraft Session Server (Legacy)", "session.minecraft.net"),
     SESSION_MOJANG("Minecraft Session Server", "sessionserver.mojang.com"),
     SKINS("Skin Server", "skins.minecraft.net"),
