@@ -1,0 +1,68 @@
+name: WynncraftExperience
+main: io.github.itachi1706.WynncraftExperience.Main
+version: 1.1
+description: A plugin for wynncraft experience server
+author: itachi1706
+commands:
+  wynncraft:
+    description: Default command
+    usage: /wynncraft version/reload
+    permission: wynncraft.admin
+    permission-message: You do not have permission to do this command
+  wynncraftadmin:
+    description: Default command
+    usage: /wynncraftadmin <module>
+    permission: wynncraft.admin
+    permission-message: You do not have permission to do this command
+  help:
+    description: Displays Help
+    usage: /help
+    permission: wynncraft.default
+    permission-message: You do not have permission to do this command
+  tpto:
+    description: Teleports to a town
+    usage: /tpto <townname>
+    permission: wynncraft.default
+    permission-message: You do not have permission to do this command
+  tplist:
+    description: List all places you can teleport to
+    usage: /tplist
+    permission: wynncraft.default
+    permission-message: You do not have permission to do this command
+  speedmode:
+    description: Go speedy!
+    usage: /speedmode
+    permission: wynncraft.default
+    permission-message: You do not have permission to do this command
+  addtp:
+    description: Adds a TP point
+    usage: /addtp <name>
+    permission: wynncraft.admin
+    permission-message: You do not have permission to do this command
+  resetpitch:
+    description: Resets your Pitch (Facing)
+    usage: /resetpitch [name]
+    permission: wynncraft.admin
+    permission-message: You do not have permission to do this command
+  resetyaw:
+    description: Resets your Yaw (Direction)
+    usage: /resetyaw [name]
+    permission: wynncraft.admin
+    permission-message: You do not have permission to do this command
+  settype:
+    description: Resets your Yaw (Direction)
+    usage: /settype <location> <town/dungeon/misc/reset>
+    permission: wynncraft.admin
+    permission-message: You do not have permission to do this command
+  deltp:
+    description: Deletes a TP point
+    usage: /deltp <name>
+    permission: wynncraft.admin
+    permission-message: You do not have permission to do this command
+permissions:
+  wynncraft.default:
+    description: Default command
+    default: true
+  wynncraft.admin:
+    description: Admin command
+    default: op
