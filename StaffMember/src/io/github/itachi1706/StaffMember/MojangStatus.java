@@ -19,31 +19,39 @@ public class MojangStatus implements CommandExecutor{
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("mojang")) {
-			if (args.length > 1 || args.length < 1){
-				displayMenu(sender);
+			if (args.length > 2 || args.length < 1){
+				displayHelp(sender);
 				return true;
 			}
-			if (args[0].equalsIgnoreCase("status")){
-				getMojangStatus(sender);
-				return true;
+			if (args.length == 1){
+				if (args[0].equalsIgnoreCase("status")){
+					getMojangStatus(sender);
+					return true;
+				} else {
+					displayHelp(sender);
+					return true;
+				}
 			} else {
-				displayMenu(sender);
-				return true;
+				if (args[0].equalsIgnoreCase("premium")){
+					//URL = minecraft.net/haspaid.jsp?user=
+					getPremium(sender, args[1]);
+					return true;
+				} else {
+					displayHelp(sender);
+					return true;
+				}
 			}
 		}
 		return false;
 	}
 	
-	public void displayMenu(CommandSender s){
-		s.sendMessage(ChatColor.GOLD + "-----------StaffMember Commands-----------");
-		s.sendMessage(ChatColor.GOLD + "/staffonline: " + ChatColor.WHITE + "List all staff currently online");
-		s.sendMessage(ChatColor.GOLD + "/staffmember commands: " + ChatColor.WHITE + "List all plugin commands");
-		s.sendMessage(ChatColor.GOLD + "/staffmember reload: " + ChatColor.WHITE + "Reloads plugin");
-		s.sendMessage(ChatColor.GOLD + "/staffmember: " + ChatColor.WHITE + "Main plugin command");
-		s.sendMessage(ChatColor.GOLD + "/stafflist: " + ChatColor.WHITE + "List all staff (online/offline)");
-		s.sendMessage(ChatColor.GOLD + "/getuuid: " + ChatColor.WHITE + "Gets the UUID of an online player");
-		s.sendMessage(ChatColor.GOLD + "/mojang status: " + ChatColor.WHITE + "List the current status of Mojang Servers");
-		s.sendMessage(ChatColor.GOLD + "/serverproperties: " + ChatColor.WHITE + "List the current server properties");
+	public void displayHelp(CommandSender sender){
+		sender.sendMessage(ChatColor.RED + "Usage: /mojang status or /mojang premium <player>");
+		if (sender.hasPermission("staffmember.admin")){
+			sender.sendMessage(ChatColor.GREEN + "Do /staffmember help to see all the commands");
+		} else {
+			sender.sendMessage(ChatColor.GREEN + "Do /staffmember commands to see all the commands");
+		}
 	}
 	
 	public void getMojangStatus(CommandSender sender){
@@ -58,6 +66,17 @@ public class MojangStatus implements CommandExecutor{
 		    sender.sendMessage(service + ": " + status.getColor() + status.getStatus() + " - " + status.getDescription());
 		}
 		sender.sendMessage(ChatColor.GOLD + "==================================================");
+	}
+	
+	public void getPremium(CommandSender sender, String name){
+		int returnCode = MojangPremiumPlayer.isPremium(name);
+		if (returnCode == 1){
+			sender.sendMessage(ChatColor.GOLD + name + ChatColor.DARK_PURPLE + " is a " + ChatColor.GREEN + "premium" + ChatColor.DARK_PURPLE + " status player!"); 
+		} else if (returnCode == 0){
+			sender.sendMessage(ChatColor.GOLD + name + ChatColor.DARK_PURPLE + " is a " + ChatColor.RED + "non-premium" + ChatColor.DARK_PURPLE + " status player!");
+		} else if (returnCode == 2){
+			sender.sendMessage(ChatColor.RED + "An error had occured. Check the console for details!");
+		}
 	}
 
 }

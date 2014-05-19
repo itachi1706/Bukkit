@@ -24,6 +24,7 @@ public class CmdTabComplete implements TabCompleter{
                 	// Add a list of words that you'd like to show up
                     // when the player presses tab.
                     list.add("status");
+                    list.add("premium");
                     // Sort them alphabetically.
                     Collections.sort(list);
                     // return the list.
@@ -33,6 +34,7 @@ public class CmdTabComplete implements TabCompleter{
                 // argument because of the space after the hello.
                 } else if (args.length == 1) {
                     list.add("status");
+                    list.add("premium");
                     for (int i = 0; i < list.size(); i++){
                     	String s = list.get(i);
                         // Since the player has already typed something in,

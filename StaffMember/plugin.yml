@@ -11,9 +11,8 @@ commands:
     permission-message: You do not have permission to do this command
   staffmember:
     description:  Main StaffMember commands
-    usage: /staffmember reload
-           /staffmember commands
-    permission: staffmember.isadmin
+    usage: /staffmember help/reload/commands
+    permission: staffmember.admin
     permission-message: You do not have permission to do this command.
   stafflist:
     description:  List all the staff members
@@ -57,6 +56,9 @@ permissions:
   staffmember.default:
     description: Given to all
     default: true
+  staffmember.admin:
+    description: Administrative command
+    default: op
   staffmember.isowner:
     description: If user is Owner
     default: false

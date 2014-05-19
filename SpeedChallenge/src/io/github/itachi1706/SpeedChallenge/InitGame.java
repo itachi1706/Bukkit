@@ -59,7 +59,7 @@ public class InitGame implements Runnable {
 			String worldgen = "&b[SpeedChallenge] &6Worlds generated. Seed used: &b" + randomInt;
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', worldgen));
 			}
-		if (Main.countdown <= 10){
+		if (Main.countdown <= 10 && Main.countdown > 0){
 			//Start counting down
 			String finalCountDown = "&b[SpeedChallenge] &6&lGame begins in " + Main.countdown + " second(s)!";
 			for (Player p : Bukkit.getServer().getOnlinePlayers()){
@@ -77,6 +77,13 @@ public class InitGame implements Runnable {
 			String finalCountDown3 = "&b[SpeedChallenge] &6&lGame Will Start NOW!";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', finalCountDown3));
 			checkOptionSelected();
+			teleportPlayers();
+			Main.countDownTimer2 = Bukkit.getScheduler().scheduleSyncRepeatingTask(this.plugin, new PreGameRunnable(this.plugin), 20L, 20L);
+			Main.countdown = -1;
+		}
+		if (Main.countdown == -1){
+			Main.initGame = true;
+			Bukkit.getLogger().info("An error might have occured trying to start the game. Please reboot server if true");
 		}
 		if (Main.countdown > 0){
 			Main.countdown--;
@@ -132,16 +139,12 @@ public class InitGame implements Runnable {
 			String respawn = "&b[SpeedChallenge] &4&lHardcore Mode will be &a&lenabled!";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', respawn));
 		}
-		teleportPlayers();
-		Main.countDownTimer2 = Bukkit.getScheduler().scheduleSyncRepeatingTask(this.plugin, new PreGameRunnable(this.plugin), 20L, 20L);
-		Main.countdown = -1;
 	}
 	
 	public void teleportPlayers(){
 		Player[] p = Bukkit.getServer().getOnlinePlayers();
 		World w = Bukkit.getWorld("SC");
 		Location l = new Location(Bukkit.getServer().getWorld("SC"), Bukkit.getServer().getWorld("SC").getSpawnLocation().getX(), Bukkit.getServer().getWorld("SC").getSpawnLocation().getY(), Bukkit.getServer().getWorld("SC").getSpawnLocation().getZ());
-		//Dont spread players
 		for (int i = 0; i < p.length; i++){
 			if (!p[i].getWorld().equals(w))
 				p[i].teleport(l);

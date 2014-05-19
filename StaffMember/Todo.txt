@@ -1,4 +1,4 @@
-List all online staff								-	IN PROGRESS
+List all online staff								-	DONE
 Reloads plugin										-	NOT IMPLEMENTED
 View all commands									-	NOT IMPLEMENTED
 Staff chat											-	NOT IMPLEMENTED

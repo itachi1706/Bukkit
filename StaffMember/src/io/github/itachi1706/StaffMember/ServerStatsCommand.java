@@ -19,7 +19,7 @@ public class ServerStatsCommand implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("serverproperties")) {
 			if (args.length > 0){
-				displayMenu(sender);
+				displayHelp(sender);
 				return true;
 			}
 			getServerStats(sender);
@@ -28,16 +28,13 @@ public class ServerStatsCommand implements CommandExecutor{
 		return false;
 	}
 	
-	public void displayMenu(CommandSender s){
-		s.sendMessage(ChatColor.GOLD + "-----------StaffMember Commands-----------");
-		s.sendMessage(ChatColor.GOLD + "/staffonline: " + ChatColor.WHITE + "List all staff currently online");
-		s.sendMessage(ChatColor.GOLD + "/staffmember commands: " + ChatColor.WHITE + "List all plugin commands");
-		s.sendMessage(ChatColor.GOLD + "/staffmember reload: " + ChatColor.WHITE + "Reloads plugin");
-		s.sendMessage(ChatColor.GOLD + "/staffmember: " + ChatColor.WHITE + "Main plugin command");
-		s.sendMessage(ChatColor.GOLD + "/stafflist: " + ChatColor.WHITE + "List all staff (online/offline)");
-		s.sendMessage(ChatColor.GOLD + "/getuuid: " + ChatColor.WHITE + "Gets the UUID of an online player");
-		s.sendMessage(ChatColor.GOLD + "/mojang status: " + ChatColor.WHITE + "List the current status of Mojang Servers");
-		s.sendMessage(ChatColor.GOLD + "/serverproperties: " + ChatColor.WHITE + "List the current server properties");
+	public void displayHelp(CommandSender s){
+		s.sendMessage(ChatColor.RED + "Usage: /serverproperties");
+		if (s.hasPermission("staffmember.admin")){
+			s.sendMessage(ChatColor.GREEN + "Do /staffmember help to see all the commands");
+		} else {
+			s.sendMessage(ChatColor.GREEN + "Do /staffmember commands to see all the commands");
+		}
 	}
 	
 	public void getServerStats(CommandSender sender){

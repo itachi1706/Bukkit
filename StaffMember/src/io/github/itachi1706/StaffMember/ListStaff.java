@@ -1,5 +1,9 @@
 package io.github.itachi1706.StaffMember;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -23,7 +27,7 @@ public class ListStaff implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("stafflist")) {
 			if (args.length >= 1){
-				displayMenu(sender);
+				displayHelp(sender);
 				return true;
 			}
 			if (Bukkit.getServer().getPluginManager().getPlugin("PermissionsEx") != null) {
@@ -39,40 +43,52 @@ public class ListStaff implements CommandExecutor{
 	}
 	
 	public void getStaff(CommandSender s, PermissionManager pex){
-		PermissionUser[] mod = pex.getUsers("Mod");
-		PermissionUser[] admin = pex.getUsers("Admin");
-		PermissionUser[] op = pex.getUsers("gameOP");
-		PermissionUser[] owner = pex.getUsers("Owner");
-		PermissionUser[] host = pex.getUsers("Host");
-		PermissionUser[] yt = pex.getUsers("YouTuber");
+		Set<PermissionUser> modd = pex.getUsers("Mod");
+		Set<PermissionUser> admind = pex.getUsers("Admin");
+		Set<PermissionUser> opd = pex.getUsers("gameOP");
+		Set<PermissionUser> ownerd = pex.getUsers("Owner");
+		Set<PermissionUser> hostd = pex.getUsers("Host");
+		Set<PermissionUser> ytd = pex.getUsers("YouTuber");
+		List<PermissionUser> mod = new ArrayList<PermissionUser>(modd);
+		List<PermissionUser> admin = new ArrayList<PermissionUser>(admind);
+		List<PermissionUser> op = new ArrayList<PermissionUser>(opd);
+		List<PermissionUser> owner = new ArrayList<PermissionUser>(ownerd);
+		List<PermissionUser> host = new ArrayList<PermissionUser>(hostd);
+		List<PermissionUser> yt = new ArrayList<PermissionUser>(ytd);
 		String admins = "";
 		String ops = "";
 		String owners = "";
 		String mods = "";
 		String yts = "";
 		String hosts = "";
-		for (int i = 0; i < mod.length; i++){
-			String name = mod[i].getName();
+		for (int i = 0; i < mod.size(); i++){
+			PermissionUser se = mod.get(i);
+			String name = se.getName();
 			mods = mods + name + " ";
 		}
-		for (int i = 0; i < admin.length; i++){
-			String name = admin[i].getName();
+		for (int i = 0; i < admin.size(); i++){
+			PermissionUser se = admin.get(i);
+			String name = se.getName();
 			admins = admins + name + " ";
 		}
-		for (int i = 0; i < op.length; i++){
-			String name = op[i].getName();
+		for (int i = 0; i < op.size(); i++){
+			PermissionUser se = op.get(i);
+			String name = se.getName();
 			ops = ops + name + " ";
 		}
-		for (int i = 0; i < owner.length; i++){
-			String name = owner[i].getName();
+		for (int i = 0; i < owner.size(); i++){
+			PermissionUser se = owner.get(i);
+			String name = se.getName();
 			owners = owners + name + " ";
 		}
-		for (int i = 0; i < host.length; i++){
-			String name = host[i].getName();
+		for (int i = 0; i < host.size(); i++){
+			PermissionUser se = host.get(i);
+			String name = se.getName();
 			hosts = hosts + name + " ";
 		}
-		for (int i = 0; i < yt.length; i++){
-			String name = yt[i].getName();
+		for (int i = 0; i < yt.size(); i++){
+			PermissionUser se = yt.get(i);
+			String name = se.getName();
 			yts = yts + name + " ";
 		}
 		if (admins.length() == 0){
@@ -102,16 +118,12 @@ public class ListStaff implements CommandExecutor{
 		s.sendMessage(ChatColor.DARK_AQUA + "Hosts: " + hosts);
 	}
 	
-	public void displayMenu(CommandSender s){
-		s.sendMessage(ChatColor.GOLD + "-----------StaffMember Commands-----------");
-		s.sendMessage(ChatColor.GOLD + "/staffonline: " + ChatColor.WHITE + "List all staff currently online");
-		s.sendMessage(ChatColor.GOLD + "/staffmember commands: " + ChatColor.WHITE + "List all plugin commands");
-		s.sendMessage(ChatColor.GOLD + "/staffmember reload: " + ChatColor.WHITE + "Reloads plugin");
-		s.sendMessage(ChatColor.GOLD + "/staffmember: " + ChatColor.WHITE + "Main plugin command");
-		s.sendMessage(ChatColor.GOLD + "/stafflist: " + ChatColor.WHITE + "List all staff (online/offline)");
-		s.sendMessage(ChatColor.GOLD + "/getuuid: " + ChatColor.WHITE + "Gets the UUID of an online player");
-		s.sendMessage(ChatColor.GOLD + "/mojang status: " + ChatColor.WHITE + "List the current status of Mojang Servers");
-		s.sendMessage(ChatColor.GOLD + "/serverproperties: " + ChatColor.WHITE + "List the current server properties");
-		
+	public void displayHelp(CommandSender s){
+		s.sendMessage(ChatColor.RED + "Usage: /stafflist");
+		if (s.hasPermission("staffmember.admin")){
+			s.sendMessage(ChatColor.GREEN + "Do /staffmember help to see all the commands");
+		} else {
+			s.sendMessage(ChatColor.GREEN + "Do /staffmember commands to see all the commands");
+		}
 	}
 }

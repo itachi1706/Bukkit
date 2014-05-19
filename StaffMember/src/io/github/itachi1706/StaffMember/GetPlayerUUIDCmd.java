@@ -22,6 +22,7 @@ public class GetPlayerUUIDCmd implements CommandExecutor{
 		if (cmd.getName().equalsIgnoreCase("getuuid")){
 			if (args.length > 1){
 				sender.sendMessage(ChatColor.RED + "Usage: /getuuid [player]");
+				displayHelp(sender);
 				return true;
 			}
 			if (!sender.hasPermission("staffmember.getuuid")){
@@ -50,6 +51,14 @@ public class GetPlayerUUIDCmd implements CommandExecutor{
 			}
 		}
 		return false;
+	}
+	
+	public void displayHelp(CommandSender s){
+		if (s.hasPermission("staffmember.admin")){
+			s.sendMessage(ChatColor.GREEN + "Do /staffmember help to see all the commands");
+		} else {
+			s.sendMessage(ChatColor.GREEN + "Do /staffmember commands to see all the commands");
+		}
 	}
 
 }
