@@ -22,16 +22,15 @@ public class SQLiteHelper {
 				e.printStackTrace();
 			}
 		}
-		
-		/*if (sqlite.checkTable("MUTE")){
+		if (sqlite.checkTable("LOGINS")){
 		} else {
 			try {
-				sqlite.query("CREATE TABLE MUTE (id INT PRIMARY KEY, NAME VARCHAR(30) NOT NULL, TIME TEXT NOT NULL, REASON TEXT NOT NULL, BANNER VARCHAR(30) NOT NULL);");
+				sqlite.query("DROP TABLE IF EXIST LOGINS;");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}*/
+		}
 	}
 	
 	public static void addBanLog(Database sqlite, String n, String t, String r, String b){

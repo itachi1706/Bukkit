@@ -16,7 +16,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
 import lib.PatPeter.SQLibrary.Database;
 import lib.PatPeter.SQLibrary.SQLite;
 
@@ -42,7 +41,8 @@ public final class Main extends JavaPlugin implements Listener {
 		banFile = new File(getDataFolder(), "ban.yml");
 		muteFile = new File(getDataFolder(), "mute.yml");
 		gmFile = new File(getDataFolder(), "gm.yml");
-		getLogger().info("Setting up database file...");;
+		getLogger().info("Setting up database file...");
+		setHandler();
 		sql = new SQLite(getLogger(), "[Banception] " , this.getDataFolder().getAbsolutePath(), "banception", ".sqlite");
 		if (!sql.isOpen()) {
 		    sql.open();
@@ -79,6 +79,7 @@ public final class Main extends JavaPlugin implements Listener {
 		//Plugin Manager
 		getLogger().info("Enabling Event Listners...");
 		getServer().getPluginManager().registerEvents(this, this);
+		getLogger().info("Enabling Handler...");
 		getLogger().info("Plugin loaded!");
 	}
 	
@@ -108,6 +109,10 @@ public final class Main extends JavaPlugin implements Listener {
 			gm.set("isMutedBy", "");
 			gm.set("timeleft", "");
 		}
+	}
+	
+	private void setHandler(){
+		
 	}
 	
 	private void copy(InputStream in, File file){
@@ -269,5 +274,6 @@ public final class Main extends JavaPlugin implements Listener {
 		Main.saveYamls();
 		}
 		}
-	}
+	
+}
 	
