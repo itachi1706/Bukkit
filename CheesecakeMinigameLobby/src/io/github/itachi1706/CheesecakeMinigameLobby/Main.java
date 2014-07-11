@@ -5,6 +5,7 @@ import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.FlingCmd;
 import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.FlyCmd;
 import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.SmiteCmd;
 import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.SpeedCmd;
+import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.WowCmd;
 import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.ZeusWrathCmd;
 import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.ZeusWrathListener;
 
@@ -28,12 +29,15 @@ public class Main extends JavaPlugin implements Listener{
 	
 	public static List<String> lobbymsg = new ArrayList<String>();
 	public static List<String> advmsg = new ArrayList<String>();
+	public static List<String> survmsg = new ArrayList<String>();
 	public static String pluginMode;
 	public static String advMapName;
 	public static String advMapAuthor;
+	public static String hubworld;
+	public static String playerlistformat;
 	
 	//Modules Command
-	public static boolean commandFly, commandSpeed, commandSmite, commandZeus, commandFling, commandBurn;
+	public static boolean commandFly, commandSpeed, commandSmite, commandZeus, commandFling, commandBurn, commandWow;
 	
 	@Override
 	public void onEnable(){
@@ -46,6 +50,7 @@ public class Main extends JavaPlugin implements Listener{
 		getLogger().info("Enabling Plugin listeners...");
 		loadListeners();
 		getCommand("fly").setExecutor(new FlyCmd(this));
+		getCommand("wow").setExecutor(new WowCmd(this));
 		getCommand("speed").setExecutor(new SpeedCmd(this));
 		getCommand("cmla").setExecutor(new ModulesCmd(this));
 		getCommand("zeus").setExecutor(new ZeusWrathCmd(this));
@@ -123,13 +128,17 @@ public class Main extends JavaPlugin implements Listener{
     		s.sendMessage(ChatColor.GOLD + "/fling [player]: " + ChatColor.WHITE +  "Flings a player into the air!");
     	}
     	if (commandBurn){
-    		s.sendMessage(ChatColor.GOLD + "/burn [player]: " + ChatColor.WHITE +  "Burns the player!");
+    		s.sendMessage(ChatColor.GOLD + "/burn [player]: " + ChatColor.WHITE +  "Burns a player!");
+    	}
+    	if (commandWow){
+    		s.sendMessage(ChatColor.GOLD + "/wow [player]: " + ChatColor.WHITE +  "Doges a player!");
     	}
 	}
 	
 	private void initializeConfig(){
 		lobbymsg = this.getConfig().getStringList("lobbymsg");
 		advmsg = this.getConfig().getStringList("advmsg");
+		survmsg = this.getConfig().getStringList("survmsg");
 		advMapName = this.getConfig().getString("mapname");
 		advMapAuthor = this.getConfig().getString("mapauthor");
 		pluginMode = this.getConfig().getString("mode");
@@ -139,6 +148,9 @@ public class Main extends JavaPlugin implements Listener{
 		commandZeus = this.getConfig().getBoolean("modules.zeus");
 		commandFling = this.getConfig().getBoolean("modules.fling");
 		commandBurn = this.getConfig().getBoolean("modules.burn");
+		commandWow = this.getConfig().getBoolean("modules.wow");
+		hubworld = this.getConfig().getString("hubworld");
+		playerlistformat = this.getConfig().getString("playerlistformat");
 	}
 	
 	private void reloadCommand(Plugin plugin){
@@ -157,6 +169,8 @@ public class Main extends JavaPlugin implements Listener{
 			getServer().getPluginManager().registerEvents(new HubActions(), this);
 		} else if (pluginMode.equalsIgnoreCase("adv")){
 			getServer().getPluginManager().registerEvents(new AdvMapActions(), this);
+		} else if (pluginMode.equalsIgnoreCase("surv")){
+			getServer().getPluginManager().registerEvents(new SurvMapActions(), this);
 		}
 		if (commandZeus){
 			getServer().getPluginManager().registerEvents(new ZeusWrathListener(), this);
@@ -170,12 +184,18 @@ public class Main extends JavaPlugin implements Listener{
     	for (int i = 0; i < lobbymsg.size(); i++){
     		s.sendMessage(ChatColor.translateAlternateColorCodes('&', lobbymsg.get(i)));
     	}
+    	s.sendMessage(ChatColor.GOLD + "Hub World: " + ChatColor.WHITE + hubworld);
     	s.sendMessage(ChatColor.GOLD + "Adventure Map Name: " + ChatColor.WHITE + advMapName);
     	s.sendMessage(ChatColor.GOLD + "Adventure Map Author: " + ChatColor.WHITE + advMapAuthor);
     	s.sendMessage(ChatColor.GOLD + "Adventure Message Format: ");
     	for (int i = 0; i < advmsg.size(); i++){
     		s.sendMessage(ChatColor.translateAlternateColorCodes('&', advmsg.get(i)));
     	}
+    	s.sendMessage(ChatColor.GOLD + "Survival Message Format: ");
+    	for (int i = 0; i < survmsg.size(); i++){
+    		s.sendMessage(ChatColor.translateAlternateColorCodes('&', survmsg.get(i)));
+    	}
+    	s.sendMessage(ChatColor.GOLD + "Player List Format: " + ChatColor.WHITE + playerlistformat);
 	}
 	
 	private void listModules(CommandSender s){
@@ -186,6 +206,7 @@ public class Main extends JavaPlugin implements Listener{
 		s.sendMessage(ChatColor.GOLD + "Smite: " + ChatColor.WHITE + commandSmite);
 		s.sendMessage(ChatColor.GOLD + "Fling player: " + ChatColor.WHITE + commandFling);
 		s.sendMessage(ChatColor.GOLD + "Burn: " + ChatColor.WHITE + commandBurn);
+		s.sendMessage(ChatColor.GOLD + "Wow: " + ChatColor.WHITE + commandWow);
 	}
 	
 	@Override

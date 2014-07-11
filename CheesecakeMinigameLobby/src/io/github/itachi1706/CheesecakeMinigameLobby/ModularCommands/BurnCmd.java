@@ -30,14 +30,14 @@ public class BurnCmd implements CommandExecutor{
 				sender.sendMessage("You must be a player in-game to use this command");
 				return true;
 			}
-			if (args.length > 1){
-				sender.sendMessage(ChatColor.RED + "Usage: /burn [player]");
-				return true;
-    		}
 			if (!sender.hasPermission("cheesecakeminigamelobby.abilities.burn")){
 				sender.sendMessage(ChatColor.DARK_RED + "You do not have the permission to use this command");
 				return true;
 			}
+			if (args.length > 1){
+				sender.sendMessage(ChatColor.RED + "Usage: /burn [player]");
+				return true;
+    		}
 			Player p = (Player) sender;
 			if (args.length == 0){
 				//Burns yourself

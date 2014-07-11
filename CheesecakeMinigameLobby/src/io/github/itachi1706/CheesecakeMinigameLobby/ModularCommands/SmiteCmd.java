@@ -31,14 +31,14 @@ public class SmiteCmd implements CommandExecutor{
 				sender.sendMessage("You must be a player in-game to use this command");
 				return true;
 			}
-			if (args.length > 1){
-				sender.sendMessage(ChatColor.RED + "Usage: /smite [player]");
-				return true;
-    		}
 			if (!sender.hasPermission("cheesecakeminigamelobby.abilities.smite")){
 				sender.sendMessage(ChatColor.DARK_RED + "You do not have the permission to use this command");
 				return true;
 			}
+			if (args.length > 1){
+				sender.sendMessage(ChatColor.RED + "Usage: /smite [player]");
+				return true;
+    		}
 			Player p = (Player) sender;
 			if (args.length == 0){
 				//Smites yourself

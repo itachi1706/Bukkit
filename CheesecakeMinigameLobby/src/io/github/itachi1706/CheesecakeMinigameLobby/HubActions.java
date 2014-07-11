@@ -28,11 +28,18 @@ public class HubActions implements Listener{
 	@EventHandler
 	private void checkObjects(PlayerJoinEvent e){
 		Player p = e.getPlayer();
-		p.getInventory().clear();
-		p.getInventory().setHeldItemSlot(0);
-		giveCompass(p);
-		giveClock(p);
-		giveBook(p);
+		World w = Bukkit.getServer().getWorld(Main.hubworld);
+		if (w == null && p.hasPermission("cheesecakeminigamelobby.staff")){
+			p.sendMessage(ChatColor.DARK_RED + "[SEVERE] An error occured (World not found). Unable to give hub items. Please contact a dev for help!");
+		}
+		if (p.getWorld().equals(w)){
+			p.getInventory().clear();
+			p.getInventory().setHeldItemSlot(0);
+			giveCompass(p);
+			giveHidePlayerItem(p);
+			giveBook(p);
+			giveClock(p);
+		}
 		welcomeMessage(p);
 		showPlayersJoin(p);
 		hidePlayersJoin(p);
@@ -61,17 +68,17 @@ public class HubActions implements Listener{
 	}
 	
 	@EventHandler
-	private void toggleClock(PlayerInteractEvent e){
+	private void toggleHidePlayer(PlayerInteractEvent e){
 		Player p = e.getPlayer();
 		if (e.getItem().getType().equals(Material.EYE_OF_ENDER)){
 			//Hide Players
 			hidePlayers(p);
-			giveHiddenClock(p);
+			giveUnhidePlayerItem(p);
 			e.setCancelled(true);
 		} else if (e.getItem().getType().equals(Material.ENDER_PEARL)){
 			//Show Players
 			showPlayers(p);
-			giveClock(p);
+			giveHidePlayerItem(p);
 			e.setCancelled(true);
 		}
 	}
@@ -109,6 +116,19 @@ public class HubActions implements Listener{
 	}
 	
 	private void giveClock(Player p){
+		ItemStack item = new ItemStack(Material.WATCH);
+		ItemMeta im = item.getItemMeta();
+		String lore1 = "Right-click to teleport to other areas in this server!";
+		ArrayList<String> lore = new ArrayList<String>();
+		lore.add(lore1);
+		im.setDisplayName(ChatColor.GOLD + "Teleport to other areas in this server!");
+		im.setLore(lore);
+		item.setItemMeta(im);
+		p.getInventory().clear(2);
+		p.getInventory().setItem(2, item);
+	}
+	
+	private void giveHidePlayerItem(Player p){
 		ItemStack item = new ItemStack(Material.EYE_OF_ENDER);
 		ItemMeta im = item.getItemMeta();
 		String lore1 = ChatColor.DARK_RED + "" + ChatColor.ITALIC + "Right-click to hide players!";
@@ -134,17 +154,17 @@ public class HubActions implements Listener{
 		World w = Bukkit.getServer().getWorld("world");
 		if (e.getWhoClicked().getWorld().equals(w)){
 			int clicked = e.getSlot();
-			if (clicked == 1 || clicked == 0 || clicked == 8){
+			if (clicked == 1 || clicked == 0 || clicked == 8 || clicked == 2){
 				e.setCancelled(true);
 			}
 			int click = e.getHotbarButton();
-			if (click == 1 || click == 0 || click == 8){
+			if (click == 1 || click == 0 || click == 8 || clicked == 2){
 				e.setCancelled(true);
 			}
 		}
 	}
 	
-	private void giveHiddenClock(Player p){
+	private void giveUnhidePlayerItem(Player p){
 		ItemStack item = new ItemStack(Material.ENDER_PEARL);
 		ItemMeta im = item.getItemMeta();
 		String lore1 = ChatColor.DARK_GREEN + "" + ChatColor.ITALIC + "Right-click to show players!";
@@ -218,12 +238,6 @@ public class HubActions implements Listener{
 				prefix = ChatColor.translateAlternateColorCodes('&', result);
 			}
 		}
-		/*String[] welMsg = {ChatColor.GOLD + "==================================================" ,
-				ChatColor.DARK_GREEN + "Welcome " + prefix + " " + p.getDisplayName() + ChatColor.DARK_GREEN + " to the " + ChatColor.GOLD + "Cheesecake Network!",
-				ChatColor.DARK_GREEN + "Use the compass to go to other servers!",
-				ChatColor.DARK_GREEN + "The book in your inventory will have more information!", 
-				ChatColor.DARK_GREEN + "To hide players, use the Eye Of Ender!", 
-				ChatColor.GOLD + "==================================================" ,};*/
 		for (int i = 0; i < Main.lobbymsg.size(); i++){
 			String welMsg = Main.lobbymsg.get(i);
 			welMsg = welMsg.replaceAll("%prefix%", prefix);

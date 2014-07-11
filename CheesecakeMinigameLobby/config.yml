@@ -1,7 +1,7 @@
 #File config version number (Do not touch)
 version: 1
 
-#Mode in which the plugin will act in (lobby, adv)
+#Mode in which the plugin will act in (lobby, adv, survival)
 mode: lobby
 
 #lobby mode
@@ -13,7 +13,10 @@ lobbymsg:
   - '&2Use the compass to go to other servers!'
   - '&2The book in your inventory will have more information!'
   - '&2To hide players, use the Eye Of Ender!'
+  - '&2Teleport to other areas of the map with the Clock!'
   - '&6====================================================='
+  
+hubworld: world
   
 #Adventure mode
 #%prefix% - displays User Prefix
@@ -39,3 +42,25 @@ modules:
   zeus: true
   fling: true
   burn: true
+  wow: true
+
+#Survival mode
+#%prefix% - displays User Prefix
+#%playername% - Display player name
+#%time% - Current time of the server
+#%world% - Current world of the player
+#%online% - Number of Online Players
+#%players% - List of players
+survmsg:
+  - '&6====================================================='
+  - '&2                         Survival World'
+  - '&6====================================================='
+  - '&2Hello, %prefix% %playername%&2!'
+  - '&2The time is &9%time%&2 and you are in the world &9%world%&2.'
+  - '&2Number of players currently online: &a%online%'
+  - '&2Players online: %players%'
+  - '&2Make sure to obey all &4Server Rules&2.'
+  - '&2They can be found by doing &6/rules'
+  - '&2Do &6/hub&2 to return to the lobby!'
+  - '&6====================================================='
+playerlistformat: '%prefix% %playername%'

@@ -31,14 +31,14 @@ public class SpeedCmd implements CommandExecutor{
 				sender.sendMessage("You must be a player in-game to use this command");
 				return true;
 			}
-			if (args.length < 2 || args.length > 3){
-    			displayHelp(sender);
-				return true;
-    		}
 			if (!sender.hasPermission("cheesecakeminigamelobby.abilities.speed")){
 				sender.sendMessage(ChatColor.DARK_RED + "You do not have the permission to use this command");
 				return true;
 			}
+			if (args.length < 2 || args.length > 3){
+    			displayHelp(sender);
+				return true;
+    		}
 			Player p = (Player) sender;
 			if (args.length == 2){
 				//Adjust own speed

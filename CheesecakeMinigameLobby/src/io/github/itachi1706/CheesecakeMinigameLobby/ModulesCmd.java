@@ -91,6 +91,17 @@ public class ModulesCmd implements CommandExecutor{
 				plugin.saveConfig();
 				Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "cml reload");
 				return true;
+			} else if (args[0].equalsIgnoreCase("wow")){
+				if (Main.commandWow){
+					plugin.getConfig().set("modules.wow", false);
+					sender.sendMessage(ChatColor.RED + "Wow module has been disabled!");
+				} else {
+					plugin.getConfig().set("modules.wow", true);
+					sender.sendMessage(ChatColor.GREEN + "Wow module has been enabled!");
+				}
+				plugin.saveConfig();
+				Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "cml reload");
+				return true;
 			} else {
 				displayHelp(sender);
 				return true;
@@ -101,7 +112,7 @@ public class ModulesCmd implements CommandExecutor{
 	
 	private void displayHelp(CommandSender s){
 		s.sendMessage(ChatColor.RED + "Usage: /cmla <module> to enable/disable modular commands");
-		s.sendMessage(ChatColor.RED + "Available modules: fly, speed, smite, zeus, fling");
+		s.sendMessage(ChatColor.RED + "Available modules: fly, speed, smite, zeus, fling, wow");
 	}
 
 }

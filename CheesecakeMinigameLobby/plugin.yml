@@ -1,6 +1,6 @@
 name: CheesecakeMinigameLobby
 main: io.github.itachi1706.CheesecakeMinigameLobby.Main
-version: 1.2
+version: 1.6
 description: An internal plugin for minigame server
 author: itachi1706
 commands:
@@ -46,6 +46,12 @@ commands:
     usage: /burn [player]
     permission: cheesecakeminigamelobby.abilities.burn
     permission-message: You do not have permission to do this command
+  wow:
+    description: Doges a player
+    usage: /wow [player]
+    permission: cheesecakeminigamelobby.abilities.wow
+    permission-message: You do not have permission to do this command
+    aliases: [doge]
 permissions:
   cheesecakeminigamelobby.default:
     description: Default command
@@ -67,6 +73,9 @@ permissions:
     default: op
   cheesecakeminigamelobby.abilities.burn:
     description: Burn Command
+    default: op
+  cheesecakeminigamelobby.abilities.wow:
+    description: Wow Command
     default: op
   cheesecakeminigamelobby.staff:
     description: Staff command
