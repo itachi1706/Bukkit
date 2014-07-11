@@ -1,0 +1,31 @@
+name: NBPHelper
+main: io.github.itachi1706.NBPHelper.Main
+version: 1.2
+description: A helper plugin for NoteBlock Player
+author: itachi1706
+commands:
+  rescan:
+    description: Rescans the folder
+    usage: 
+      /rescan
+    permission: nbphelper.admin
+    permission-message: You do not have permission to do this command.
+  songlist:
+    description: List all songs
+    usage:
+      /songlist <#>
+    permission: nbphelper.default
+    permission-message: You do not have permission to do this command.
+  songplay:
+    description: Plays a song
+    usage:
+      /songplay <#>
+    permission: nbphelper.default
+    permission-message: You do not have permission to do this command.
+permissions:
+  nbphelper.default:
+    description: Default
+    default: true
+  nbphelper.admin:
+    description: Admin
+    default: op
