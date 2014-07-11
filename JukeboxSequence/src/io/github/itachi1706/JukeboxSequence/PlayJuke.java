@@ -27,25 +27,27 @@ private Main plugin;
 		if (time < prevTime){
 			//If time not up ignore
 			for (int i = 0; i < Main.jukeboxLocation.size(); i++){
-				Material m = getCurrentDisc();
-				Location jbLoc = Main.jukeboxLocation.get(i).getLocation();
-				Chunk c = jbLoc.getChunk();
-				if (!c.isLoaded()){
-					c.load();
-				}
-				Block b = jbLoc.getBlock();
-				if (b.getType().equals(Material.JUKEBOX)){
-					if (playersNearby(b) && Main.jukeboxLocation.get(i).getIsPlaying() == false){
-						Jukebox j = (Jukebox) b.getState();
-						j.setPlaying(m);
-						Main.jukeboxLocation.get(i).setIsPlaying(true);
+				if (Main.jukeboxLocation.get(i).getIsPlaying() == false){
+					Material m = getCurrentDisc();
+					Location jbLoc = Main.jukeboxLocation.get(i).getLocation();
+					Chunk c = jbLoc.getChunk();
+					if (!c.isLoaded()){
+						c.load();
 					}
-				} else {
-					if (b.isEmpty()){
-						b.setType(Material.JUKEBOX);
-						Main.sendAdminMsg(ChatColor.translateAlternateColorCodes('&', "&7&o[NOTICE]: Placed Jukebox at " + jbLoc.getX() + " " + jbLoc.getY() + " " + jbLoc.getZ() + "]"));
+					Block b = jbLoc.getBlock();
+					if (b.getType().equals(Material.JUKEBOX)){
+						if (playersNearby(b)){
+							Jukebox j = (Jukebox) b.getState();
+							j.setPlaying(m);
+							Main.jukeboxLocation.get(i).setIsPlaying(true);
+						}
 					} else {
-						Main.sendAdminMsg(ChatColor.translateAlternateColorCodes('&', "&7&o[SEVERE]: Invalid Jukebox at " + jbLoc.getX() + " " + jbLoc.getY() + " " + jbLoc.getZ() + "]"));
+						if (b.isEmpty()){
+							b.setType(Material.JUKEBOX);
+							Main.sendAdminMsg(ChatColor.translateAlternateColorCodes('&', "&7&o[NOTICE]: Placed Jukebox at " + jbLoc.getX() + " " + jbLoc.getY() + " " + jbLoc.getZ() + "]"));
+						} else {
+							Main.sendAdminMsg(ChatColor.translateAlternateColorCodes('&', "&7&o[SEVERE]: Invalid Jukebox at " + jbLoc.getX() + " " + jbLoc.getY() + " " + jbLoc.getZ() + "]"));
+						}
 					}
 				}
 				
