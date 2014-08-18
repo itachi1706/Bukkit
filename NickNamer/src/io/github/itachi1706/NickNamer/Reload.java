@@ -1,5 +1,8 @@
 package io.github.itachi1706.NickNamer;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -30,9 +33,10 @@ public class Reload implements CommandExecutor{
 			}
 			if (args[0].equalsIgnoreCase("reload")){
 				Main.loadYamls();
-				Player[] playerList = Bukkit.getServer().getOnlinePlayers();
-				for (int i=0; i < playerList.length; i++){
-					Nick.refreshNameTag(playerList[i]);
+				Collection<? extends Player> playerList = Bukkit.getServer().getOnlinePlayers();
+				Iterator<? extends Player> i = playerList.iterator();
+				while (i.hasNext()){
+					Nick.refreshNameTag(i.next());
 				}
 				sender.sendMessage(ChatColor.GREEN + "Plugin nicks reloaded from file.");
 				return true;

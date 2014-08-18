@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Collection;
+import java.util.Iterator;
 
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
@@ -64,9 +66,10 @@ public class Main extends JavaPlugin implements Listener{
 		getCommand("nn").setExecutor(new Reload(this));
 		getCommand("realname").setExecutor(new RealName(this));
 		getCommand("togglenick").setExecutor(new ToggleNick(this));
-		Player[] playerList = Bukkit.getServer().getOnlinePlayers();
-		for (int i=0; i < playerList.length; i++){
-			Nick.refreshNameTag(playerList[i]);
+		Collection<? extends Player> playerList = Bukkit.getServer().getOnlinePlayers();
+		Iterator<? extends Player> i = playerList.iterator();
+		while(i.hasNext()){
+			Nick.refreshNameTag(i.next());
 			
 		}
 		/*this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {

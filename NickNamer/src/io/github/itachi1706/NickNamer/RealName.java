@@ -1,5 +1,8 @@
 package io.github.itachi1706.NickNamer;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -28,20 +31,22 @@ public class RealName implements CommandExecutor{
 				return true;
 			}
 			String target = args[0];
-			Player[] playerList = Bukkit.getServer().getOnlinePlayers();
-			int tar = -1;
-			for (int i = 0; i < playerList.length; i++){
-				String ds = Main.nick.getString(playerList[i].getName() + ".nick");
+			Collection<? extends Player> playerList = Bukkit.getServer().getOnlinePlayers();
+			Iterator<? extends Player> i = playerList.iterator();
+			Player targeted = null;
+			while (i.hasNext()){
+				Player p = i.next();
+				String ds = Main.nick.getString(p.getName() + ".nick");
 				if (ds.equalsIgnoreCase(target)){
-					tar = i;
+					targeted = p;
 					break;
 				}
 			}
-			if (tar == -1){
+			if (targeted == null){
 				sender.sendMessage(ChatColor.GOLD + args[0] + ChatColor.BLUE + " is not a valid nick of a player online!");
 				return true;
 			} else {
-				sender.sendMessage(ChatColor.GOLD + args[0] + ChatColor.RED + " is the nickname of " + ChatColor.AQUA + playerList[tar].getName());
+				sender.sendMessage(ChatColor.GOLD + args[0] + ChatColor.RED + " is the nickname of " + ChatColor.AQUA + targeted.getName());
 				return true;
 			}
 		}

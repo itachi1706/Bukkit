@@ -1,5 +1,8 @@
 package io.github.itachi1706.NickNamer;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -39,10 +42,11 @@ public class NickCmd implements CommandExecutor{
 				if (sender instanceof Player) {
 			           Player player = (Player) sender;
 			           // do something
-			           Player[] checker = Bukkit.getServer().getOnlinePlayers();
+			           Collection<? extends Player> checker = Bukkit.getServer().getOnlinePlayers();
+			           Iterator<? extends Player> i = checker.iterator();
 			           boolean notACheck = true;
-			           for (int i = 0; i < checker.length; i++){
-			        	   if (Main.nick.getString(checker[i].getName()  + ".nick").equals(args[0])){
+			           while (i.hasNext()){
+			        	   if (Main.nick.getString(i.next().getName()  + ".nick").equals(args[0])){
 			        		   notACheck = false;
 			        	   }
 			           }
@@ -74,10 +78,11 @@ public class NickCmd implements CommandExecutor{
 	        	   sender.sendMessage(ChatColor.BLUE + args[0] + " is not online!");
 	           } else {
 	           // do something
-	        	   Player[] checker = Bukkit.getServer().getOnlinePlayers();
+	        	   Collection<? extends Player> checker = Bukkit.getServer().getOnlinePlayers();
+		           Iterator<? extends Player> i = checker.iterator();
 		           boolean notACheck = true;
-		           for (int i = 0; i < checker.length; i++){
-		        	   if (Main.nick.getString(checker[i].getName()  + ".nick").equals(args[1])){
+		           while (i.hasNext()){
+		        	   if (Main.nick.getString(i.next().getName()  + ".nick").equals(args[1])){
 		        		   notACheck = false;
 		        	   }
 		           }
