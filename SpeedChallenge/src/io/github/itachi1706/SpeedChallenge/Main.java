@@ -7,6 +7,7 @@ import io.github.itachi1706.SpeedChallenge.Utilities.ScoreboardHelper;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -134,20 +135,22 @@ public class Main extends JavaPlugin implements Listener{
 	}
 	
 	public static void resetGame(){
-		Player[] p = Bukkit.getServer().getOnlinePlayers();
+		Collection<? extends Player> playerList = Bukkit.getServer().getOnlinePlayers();
+		Iterator<? extends Player> i = playerList.iterator();
 		World w = Bukkit.getWorld("world");
 		Location l = new Location(Bukkit.getServer().getWorld("world"), Bukkit.getServer().getWorld("world").getSpawnLocation().getX(), Bukkit.getServer().getWorld("world").getSpawnLocation().getY(), Bukkit.getServer().getWorld("world").getSpawnLocation().getZ());
-		for (int i = 0; i < p.length; i++){
-			if (!p[i].getWorld().equals(w)){
-				p[i].teleport(l);
-				p[i].sendMessage("You were teleported back to the main world!");
+		while (i.hasNext()){
+			Player p = i.next();
+			if (!p.getWorld().equals(w)){
+				p.teleport(l);
+				p.sendMessage("You were teleported back to the main world!");
 			}
 		}
 		MultiverseCore mc = (MultiverseCore) Bukkit.getServer().getPluginManager().getPlugin("Multiverse-Core");
 		Collection<MultiverseWorld> collate = mc.getMVWorldManager().getMVWorlds();
 		ArrayList<MultiverseWorld> obj = new ArrayList<MultiverseWorld>(collate);
-		for (int i = 0; i < obj.size(); i++){
-			MultiverseWorld world = obj.get(i);
+		for (int j = 0; j < obj.size(); j++){
+			MultiverseWorld world = obj.get(j);
 			if (world.getName().equals("SC")){
 				mc.getMVWorldManager().deleteWorld("SC");
 			}
@@ -171,8 +174,8 @@ public class Main extends JavaPlugin implements Listener{
 			Bukkit.getServer().getScheduler().cancelTask(countDownTimer3);
 		}
 		
-		for (int i = 0; i < spectators.size(); i++){
-			Player spec = spectators.get(i);
+		for (int j = 0; j < spectators.size(); j++){
+			Player spec = spectators.get(j);
 			spec.setFlying(false);
 			spec.setCanPickupItems(true);
 			
@@ -191,8 +194,9 @@ public class Main extends JavaPlugin implements Listener{
 		
 		Bukkit.getServer().broadcastMessage("WORLDS DELETED!");
 		ScoreboardHelper.resetScoreboard();
-		for (int i = 0; i < p.length; i++){
-			p[i].kickPlayer("Game is restarting");
+		i = playerList.iterator();
+		while (i.hasNext()){
+			i.next().kickPlayer("Game is restarting");
 		}
 	}
 	

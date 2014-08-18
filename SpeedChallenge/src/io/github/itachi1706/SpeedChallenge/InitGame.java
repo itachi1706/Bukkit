@@ -3,6 +3,8 @@ package io.github.itachi1706.SpeedChallenge;
 import io.github.itachi1706.SpeedChallenge.Utilities.InventoriesPreGame;
 import io.github.itachi1706.SpeedChallenge.Utilities.ScoreboardHelper;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
@@ -142,12 +144,14 @@ public class InitGame implements Runnable {
 	}
 	
 	public void teleportPlayers(){
-		Player[] p = Bukkit.getServer().getOnlinePlayers();
+		Collection<? extends Player> playerList = Bukkit.getServer().getOnlinePlayers();
+		Iterator<? extends Player> i = playerList.iterator();
 		World w = Bukkit.getWorld("SC");
 		Location l = new Location(Bukkit.getServer().getWorld("SC"), Bukkit.getServer().getWorld("SC").getSpawnLocation().getX(), Bukkit.getServer().getWorld("SC").getSpawnLocation().getY(), Bukkit.getServer().getWorld("SC").getSpawnLocation().getZ());
-		for (int i = 0; i < p.length; i++){
-			if (!p[i].getWorld().equals(w))
-				p[i].teleport(l);
+		while (i.hasNext()){
+			Player p = i.next();
+			if (!p.getWorld().equals(w))
+				p.teleport(l);
 		}
 	}
 	

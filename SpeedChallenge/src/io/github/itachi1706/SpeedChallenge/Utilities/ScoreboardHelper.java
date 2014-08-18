@@ -22,24 +22,22 @@ public class ScoreboardHelper {
 	
 	public static void setScoreOfPlayer(Player p, int score){
 		Objective o = sb.getObjective("game_player");
-		Score pSco = o.getScore(p);
+		Score pSco = o.getScore(p.getDisplayName());
 		pSco.setScore(score);
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static void initPlayersCounter(){
 		sb.registerNewObjective("game_player", "dummy");
 		Objective o = sb.getObjective("game_player");
 		o.setDisplayName("Players");
 		o.setDisplaySlot(DisplaySlot.SIDEBAR);
-		Score score = o.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD + "Players:"));
+		Score score = o.getScore(ChatColor.GOLD + "Players:");
 		score.setScore(Main.players);
-		Score score2 = o.getScore(Bukkit.getOfflinePlayer(ChatColor.DARK_GREEN + "Time:"));
+		Score score2 = o.getScore(ChatColor.DARK_GREEN + "Time:");
 		score2.setScore(Main.countdown);
 	}
 	
 	//Initial game running
-	@SuppressWarnings("deprecation")
 	public static void gameStart(){
 		Objective o = sb.getObjective("game_player");
 		//o.unregister();
@@ -60,21 +58,20 @@ public class ScoreboardHelper {
 			display = display + ":" + second;
 		}
 		o.setDisplayName(display);
-		Score score = o.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD + "Players Scores"));
+		Score score = o.getScore(ChatColor.GOLD + "Players Scores");
 		score.setScore(9999);
 		for (int i = 0; i < Main.playerList.size(); i++){
-			Score pSco = o.getScore(Main.playerList.get(i));
+			Score pSco = o.getScore(Main.playerList.get(i).getDisplayName());
 			pSco.setScore(0);
 		}
-		sb.resetScores(Bukkit.getOfflinePlayer(ChatColor.DARK_GREEN + "Time:"));
-		sb.resetScores(Bukkit.getOfflinePlayer(ChatColor.GOLD + "Players:"));
+		sb.resetScores(ChatColor.DARK_GREEN + "Time:");
+		sb.resetScores(ChatColor.GOLD + "Players:");
 		Bukkit.getLogger().info("Game Start Scoreboard Init!");
 	}
 	
 	//Game Is Running
-	@SuppressWarnings("deprecation")
 	public static void gameStartRunning(){
-		sb.resetScores(Bukkit.getOfflinePlayer(ChatColor.DARK_GREEN + "Time:"));
+		sb.resetScores(ChatColor.DARK_GREEN + "Time:");
 		Objective o = sb.getObjective("game_player");
 		int min = Main.countdown/60;
 		int second = Main.countdown - (min * 60);
@@ -95,36 +92,33 @@ public class ScoreboardHelper {
 		PreGameRunnable.checkPlayerScores();
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static void updatePlayers(){
 		Objective o = sb.getObjective("game_player");
 		o.setDisplayName("Players");
 		o.setDisplaySlot(DisplaySlot.SIDEBAR);
-		Score score = o.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD + "Players:"));
+		Score score = o.getScore(ChatColor.GOLD + "Players:");
 		score.setScore(Main.players);
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static void updateInitTime(){
 		Objective o = sb.getObjective("game_player");
 		o.setDisplayName("Players");
 		o.setDisplaySlot(DisplaySlot.SIDEBAR);
-		Score score = o.getScore(Bukkit.getOfflinePlayer(ChatColor.DARK_GREEN + "Time:"));
+		Score score = o.getScore(ChatColor.DARK_GREEN + "Time:");
 		score.setScore(Main.countdown);
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static void updatePreGameTime(){
 		Objective o = sb.getObjective("game_player");
 		o.setDisplayName("Speed Challenge");
 		o.setDisplaySlot(DisplaySlot.SIDEBAR);
-		Score score = o.getScore(Bukkit.getOfflinePlayer(ChatColor.DARK_GREEN + "Time:"));
+		Score score = o.getScore(ChatColor.DARK_GREEN + "Time:");
 		score.setScore(PreGameRunnable.countdown);
 	}
 	
 	public static int getFinalScore(Player p){
 		Objective o = sb.getObjective("game_player");
-		Score sc = o.getScore(p);
+		Score sc = o.getScore(p.getDisplayName());
 		return sc.getScore();
 	}
 	
@@ -140,27 +134,27 @@ public class ScoreboardHelper {
 	//Reference
 	public static void addScore(String objective, Player p, int scoring){
 		Objective o = sb.getObjective(objective);
-		Score sc = o.getScore(p);
+		Score sc = o.getScore(p.getDisplayName());
 		sc.setScore(sc.getScore() + scoring);
 		
 	}
 	
 	public static void setScore(String objective, Player p, int scoring){
 		Objective o = sb.getObjective(objective);
-		Score sc = o.getScore(p);
+		Score sc = o.getScore(p.getDisplayName());
 		sc.setScore(scoring);
 		
 	}
 	
 	public static int getScore(String objective, Player p){
 		Objective o = sb.getObjective(objective);
-		Score sc = o.getScore(p);
+		Score sc = o.getScore(p.getDisplayName());
 		return sc.getScore();
 	}
 	
 	public static void removeScore(String objective, Player p, int scoring){
 		Objective o = sb.getObjective(objective);
-		Score sc = o.getScore(p);
+		Score sc = o.getScore(p.getDisplayName());
 		sc.setScore(sc.getScore() - scoring);
 	}
 	
