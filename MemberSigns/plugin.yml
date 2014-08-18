@@ -1,6 +1,6 @@
 name: MemberSigns
 main: io.github.itachi1706.MemberSigns.Main
-version: 1.1
+version: 1.2
 description: An internal plugin for Member signs and colors :D
 author: itachi1706
 permissions:
