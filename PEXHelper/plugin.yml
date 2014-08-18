@@ -1,6 +1,6 @@
 name: PEXHelper
 main: io.github.itachi1706.PEXHelper.Main
-version: 1
+version: 1.1
 description: A helper plugin for PermissionsEx
 author: itachi1706
 commands:
