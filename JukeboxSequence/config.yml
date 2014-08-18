@@ -30,7 +30,8 @@ disctext:
   2266: 'C418 - 11'
   2267: 'C418 - wait'
 
-
+enabled: true
+debug: false
 #Discs to use
 enabled-disc: 
   - 2258

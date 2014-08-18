@@ -43,6 +43,8 @@ public class Main extends JavaPlugin implements Listener {
 	public void onDisable(){
 		//Logic when plugin gets disabled
 		getLogger().info("Disabling Plugin...");
+		Bukkit.getScheduler().cancelTask(runnableId);
+		HandlerList.unregisterAll((Plugin) this);
 		this.saveConfig();
 	}
 	
@@ -87,21 +89,61 @@ public class Main extends JavaPlugin implements Listener {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		if (cmd.getName().equalsIgnoreCase("js")){
 			if (args.length != 1){
-				sender.sendMessage(ChatColor.RED + "Usage: /js reload");
+				sender.sendMessage(ChatColor.RED + "Usage: /js reload/stop/start/debug/status");
 				return true;
 			}
 			if (!sender.hasPermission("jukeboxsequence.staff")){
 				sender.sendMessage(ChatColor.DARK_RED + "You do not have permission to use this command");
 				return true;
 			}
-			if (!args[0].equalsIgnoreCase("reload")){
-				sender.sendMessage(ChatColor.RED + "Usage: /js reload");
+			if (args[0].equalsIgnoreCase("reload")){
+				reloadConfigServer();
+				sender.sendMessage(ChatColor.GREEN + "Plugin config reloaded!");
+				
+				return true;
+			} else if (args[0].equalsIgnoreCase("stop")){
+				if (!this.getConfig().getBoolean("enabled")){
+					sender.sendMessage(ChatColor.RED + "Jukebox song has already been stopped globally. To start it, do " 
+				+ ChatColor.GOLD + "/js start");
+					return true;
+				}
+				this.getConfig().set("enabled", false);
+				sender.sendMessage(ChatColor.RED + "Songs stopped");
+				return true;
+			} else if (args[0].equalsIgnoreCase("start")){
+				if (this.getConfig().getBoolean("enabled")){
+					sender.sendMessage(ChatColor.RED + "Jukebox song has already been started globally. To stop it, do " 
+							+ ChatColor.GOLD + "/js stop");
+					return true;
+				}
+				this.getConfig().set("enabled", true);
+				sender.sendMessage(ChatColor.GREEN + "Songs started");
+				return true;
+			} else if (args[0].equalsIgnoreCase("debug")){
+				if (this.getConfig().getBoolean("debug")){
+					//disable
+					this.getConfig().set("debug", false);
+					sender.sendMessage("Debug Mode " + ChatColor.RED + "disabled");
+					return true;
+				} else {
+					//enable
+					this.getConfig().set("debug", true);
+					sender.sendMessage("Debug Mode " + ChatColor.GREEN + "enabled");
+					return true;
+				}
+			} else if (args[0].equalsIgnoreCase("status")){
+				getStatus(sender);
 				return true;
 			}
-			reloadConfigServer();
-			sender.sendMessage(ChatColor.GREEN + "Plugin config reloaded!");
+			else {
+				sender.sendMessage(ChatColor.RED + "Usage: /js reload/stop/start/debug/status");
+			}
 			return true;
 		} else if (cmd.getName().equalsIgnoreCase("nowplaying")){
+			if (!this.getConfig().getBoolean("enabled")){
+				sender.sendMessage(ChatColor.GREEN + "Now Playing on the server: " + ChatColor.RED + "NONE");
+				return true;
+			}
 			sender.sendMessage(ChatColor.GREEN + "Now Playing on the server: " + ChatColor.GOLD + getCurrentDiscName());
 			return true;
 		} else if (cmd.getName().equalsIgnoreCase("fixsong")){
@@ -110,6 +152,23 @@ public class Main extends JavaPlugin implements Listener {
 			return true;
 		}
 		return false;
+	}
+	
+	private void getStatus(CommandSender sender){
+		sender.sendMessage(ChatColor.GOLD + "=========== JukeboxSequence Status ===========");
+		sender.sendMessage("Current Disc Loaded: " + ChatColor.AQUA + currentDisc);
+		if (this.getConfig().getBoolean("debug")){
+			sender.sendMessage("Debug Mode: " + ChatColor.GREEN + "true");
+		} else {
+			sender.sendMessage("Debug Mode: " + ChatColor.RED + "false");
+		}
+		if (this.getConfig().getBoolean("enabled")){
+			sender.sendMessage("Enabled: " + ChatColor.GREEN + "true");
+		} else {
+			sender.sendMessage("Enabled: " + ChatColor.RED + "false");
+		}
+		sender.sendMessage("Enabled Disc IDs: " + ChatColor.AQUA + enabledDiscs.toString());
+		sender.sendMessage(ChatColor.GOLD + "============================================");
 	}
 	
 	private void updateJukeboxLocation(){

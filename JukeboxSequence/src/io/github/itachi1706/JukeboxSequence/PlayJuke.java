@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 public class PlayJuke implements Runnable{
 	
 private Main plugin;
+private boolean debugMode;
 	
 	public PlayJuke(Main plugin){
 		this.plugin = plugin;
@@ -21,13 +22,99 @@ private Main plugin;
 	
 	public void run(){
 		//Check if time up
+		debugMode = plugin.getConfig().getBoolean("debug");
 		long time = Calendar.getInstance().getTimeInMillis();
 		long prevTime = Main.lastTime;
 		//Bukkit.getLogger().info(time + " : " + prevTime);
-		if (time < prevTime){
-			//If time not up ignore
+		if (!plugin.getConfig().getBoolean("enabled")){
 			for (int i = 0; i < Main.jukeboxLocation.size(); i++){
-				if (Main.jukeboxLocation.get(i).getIsPlaying() == false){
+				if (Main.jukeboxLocation.get(i).getIsPlaying() == true){
+					Location jbLoc = Main.jukeboxLocation.get(i).getLocation();
+					Chunk c = jbLoc.getChunk();
+					if (!c.isLoaded()){
+						c.load();
+					}
+					Block b = jbLoc.getBlock();
+					if (b.getType().equals(Material.JUKEBOX)){
+						Jukebox j = (Jukebox) b.getState();
+						j.setPlaying(Material.AIR);
+						Main.jukeboxLocation.get(i).setIsPlaying(false);
+					} else {
+						if (b.isEmpty()){
+							b.setType(Material.JUKEBOX);
+							Main.sendAdminMsg(ChatColor.translateAlternateColorCodes('&', "&7&o[NOTICE]: Placed Jukebox at " + jbLoc.getX() + " " + jbLoc.getY() + " " + jbLoc.getZ() + "]"));
+						} else {
+							Main.sendAdminMsg(ChatColor.translateAlternateColorCodes('&', "&7&o[SEVERE]: Invalid Jukebox at " + jbLoc.getX() + " " + jbLoc.getY() + " " + jbLoc.getZ() + "]"));
+						}
+					}
+				}
+			}
+		} else {
+			if (time < prevTime){
+				//If time not up ignore
+				for (int i = 0; i < Main.jukeboxLocation.size(); i++){
+					if (Main.jukeboxLocation.get(i).getIsPlaying() == false){
+						Material m = getCurrentDisc();
+						Location jbLoc = Main.jukeboxLocation.get(i).getLocation();
+						Chunk c = jbLoc.getChunk();
+						if (!c.isLoaded()){
+							c.load();
+						}
+						Block b = jbLoc.getBlock();
+						if (b.getType().equals(Material.JUKEBOX)){
+							if (playersNearby(b)){
+								Jukebox j = (Jukebox) b.getState();
+								j.setPlaying(m);
+								Main.jukeboxLocation.get(i).setIsPlaying(true);
+							}
+						} else {
+							if (b.isEmpty()){
+								b.setType(Material.JUKEBOX);
+								Main.sendAdminMsg(ChatColor.translateAlternateColorCodes('&', "&7&o[NOTICE]: Placed Jukebox at " + jbLoc.getX() + " " + jbLoc.getY() + " " + jbLoc.getZ() + "]"));
+							} else {
+								Main.sendAdminMsg(ChatColor.translateAlternateColorCodes('&', "&7&o[SEVERE]: Invalid Jukebox at " + jbLoc.getX() + " " + jbLoc.getY() + " " + jbLoc.getZ() + "]"));
+							}
+						}
+					}
+					
+				}
+			} else {
+			//Else switch disc
+				if (debugMode){
+					Bukkit.getLogger().info("Switching disc");
+				}
+				boolean chk = false;
+				for (int i = 0; i < Main.enabledDiscs.size(); i++){
+					String fD = Main.enabledDiscs.get(i);
+					String cD = Main.currentDisc;
+					if (cD.equals(fD)){
+						if (i == (Main.enabledDiscs.size() - 1)){
+							//Restart from 0
+							Main.currentDisc = Main.enabledDiscs.get(0);
+						} else {
+							Main.currentDisc = Main.enabledDiscs.get(i+1);
+						}
+						plugin.getConfig().set("current-disc", Main.currentDisc);
+						updateNewTime(Main.currentDisc);
+						chk = true;
+						break;
+					}
+				}
+				if (chk == false){
+					if (Main.enabledDiscs.size() > 0){
+						Main.currentDisc = Main.enabledDiscs.get(0);
+					} else {
+						Main.sendAdminMsg(ChatColor.translateAlternateColorCodes('&', "&7&o[SEVERE]: Enabled Disc List is empty!]"));
+					}
+				}
+				for (int i = 0; i < Main.jukeboxLocation.size(); i++){
+					Main.jukeboxLocation.get(i).setIsPlaying(false);
+				}
+				if (debugMode) {
+					Bukkit.getLogger().info("Disc switched to " + Main.currentDisc);
+				}
+				//Play sound
+				for (int i = 0; i < Main.jukeboxLocation.size(); i++){
 					Material m = getCurrentDisc();
 					Location jbLoc = Main.jukeboxLocation.get(i).getLocation();
 					Chunk c = jbLoc.getChunk();
@@ -36,7 +123,7 @@ private Main plugin;
 					}
 					Block b = jbLoc.getBlock();
 					if (b.getType().equals(Material.JUKEBOX)){
-						if (playersNearby(b)){
+						if (playersNearby(b) && Main.jukeboxLocation.get(i).getIsPlaying() == false){
 							Jukebox j = (Jukebox) b.getState();
 							j.setPlaying(m);
 							Main.jukeboxLocation.get(i).setIsPlaying(true);
@@ -49,64 +136,8 @@ private Main plugin;
 							Main.sendAdminMsg(ChatColor.translateAlternateColorCodes('&', "&7&o[SEVERE]: Invalid Jukebox at " + jbLoc.getX() + " " + jbLoc.getY() + " " + jbLoc.getZ() + "]"));
 						}
 					}
+					
 				}
-				
-			}
-		} else {
-		//Else switch disc
-			Bukkit.getLogger().info("Switching disc");
-			boolean chk = false;
-			for (int i = 0; i < Main.enabledDiscs.size(); i++){
-				String fD = Main.enabledDiscs.get(i);
-				String cD = Main.currentDisc;
-				if (cD.equals(fD)){
-					if (i == (Main.enabledDiscs.size() - 1)){
-						//Restart from 0
-						Main.currentDisc = Main.enabledDiscs.get(0);
-					} else {
-						Main.currentDisc = Main.enabledDiscs.get(i+1);
-					}
-					plugin.getConfig().set("current-disc", Main.currentDisc);
-					updateNewTime(Main.currentDisc);
-					chk = true;
-					break;
-				}
-			}
-			if (chk == false){
-				if (Main.enabledDiscs.size() > 0){
-					Main.currentDisc = Main.enabledDiscs.get(0);
-				} else {
-					Main.sendAdminMsg(ChatColor.translateAlternateColorCodes('&', "&7&o[SEVERE]: Enabled Disc List is empty!]"));
-				}
-			}
-			for (int i = 0; i < Main.jukeboxLocation.size(); i++){
-				Main.jukeboxLocation.get(i).setIsPlaying(false);
-			}
-			Bukkit.getLogger().info("Disc switched to " + Main.currentDisc);
-			//Play sound
-			for (int i = 0; i < Main.jukeboxLocation.size(); i++){
-				Material m = getCurrentDisc();
-				Location jbLoc = Main.jukeboxLocation.get(i).getLocation();
-				Chunk c = jbLoc.getChunk();
-				if (!c.isLoaded()){
-					c.load();
-				}
-				Block b = jbLoc.getBlock();
-				if (b.getType().equals(Material.JUKEBOX)){
-					if (playersNearby(b) && Main.jukeboxLocation.get(i).getIsPlaying() == false){
-						Jukebox j = (Jukebox) b.getState();
-						j.setPlaying(m);
-						Main.jukeboxLocation.get(i).setIsPlaying(true);
-					}
-				} else {
-					if (b.isEmpty()){
-						b.setType(Material.JUKEBOX);
-						Main.sendAdminMsg(ChatColor.translateAlternateColorCodes('&', "&7&o[NOTICE]: Placed Jukebox at " + jbLoc.getX() + " " + jbLoc.getY() + " " + jbLoc.getZ() + "]"));
-					} else {
-						Main.sendAdminMsg(ChatColor.translateAlternateColorCodes('&', "&7&o[SEVERE]: Invalid Jukebox at " + jbLoc.getX() + " " + jbLoc.getY() + " " + jbLoc.getZ() + "]"));
-					}
-				}
-				
 			}
 		}
 	}
