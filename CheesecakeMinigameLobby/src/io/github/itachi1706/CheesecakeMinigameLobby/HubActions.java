@@ -1,6 +1,8 @@
 package io.github.itachi1706.CheesecakeMinigameLobby;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -57,9 +59,10 @@ public class HubActions implements Listener{
 	@EventHandler
 	private void leaveServer(PlayerQuitEvent e){
 		Player target = e.getPlayer();
-		Player[] onlinePlayers = Bukkit.getServer().getOnlinePlayers();
-		for (int i = 0; i < onlinePlayers.length; i++){
-			Player p = onlinePlayers[i];
+		Collection<? extends Player> onlinePlayers = Bukkit.getServer().getOnlinePlayers();
+		Iterator<? extends Player> i = onlinePlayers.iterator();
+		while(i.hasNext()){
+			Player p = (Player) i.next();
 			if (!p.canSee(target)){
 				//hide players
 				p.showPlayer(target);
@@ -178,9 +181,10 @@ public class HubActions implements Listener{
 	}
 	
 	private void hidePlayers(Player p){
-		Player[] onlinePlayers = Bukkit.getServer().getOnlinePlayers();
-		for (int i = 0; i < onlinePlayers.length; i++){
-			Player target = onlinePlayers[i];
+		Collection<? extends Player> onlinePlayers = Bukkit.getServer().getOnlinePlayers();
+		Iterator<? extends Player> i = onlinePlayers.iterator();
+		while(i.hasNext()){
+			Player target = (Player) i.next();
 			if (!target.hasPermission("cheesecakeminigamelobby.exempt")){
 				//hide players
 				p.hidePlayer(target);
@@ -190,10 +194,11 @@ public class HubActions implements Listener{
 	}
 	
 	private void hidePlayersJoin(Player p){
-		Player[] onlinePlayers = Bukkit.getServer().getOnlinePlayers();
+		Collection<? extends Player> onlinePlayers = Bukkit.getServer().getOnlinePlayers();
 		if (!p.hasPermission("cheesecakeminigamelobby.exempt")) {
-			for (int i = 0; i < onlinePlayers.length; i++){
-				Player target = onlinePlayers[i];
+			Iterator<? extends Player> i = onlinePlayers.iterator();
+			while(i.hasNext()){
+				Player target = (Player) i.next();
 				if (target.getInventory().contains(Material.ENDER_PEARL)){
 					//hide players
 					target.hidePlayer(p);
@@ -203,9 +208,10 @@ public class HubActions implements Listener{
 	}
 	
 	private void showPlayers(Player p){
-		Player[] onlinePlayers = Bukkit.getServer().getOnlinePlayers();
-		for (int i = 0; i < onlinePlayers.length; i++){
-			Player target = onlinePlayers[i];
+		Collection<? extends Player> onlinePlayers = Bukkit.getServer().getOnlinePlayers();
+		Iterator<? extends Player> i = onlinePlayers.iterator();
+		while(i.hasNext()){
+			Player target = (Player) i.next();
 			if (!p.canSee(target)){
 				//hide players
 				p.showPlayer(target);
@@ -215,9 +221,10 @@ public class HubActions implements Listener{
 	}
 	
 	private void showPlayersJoin(Player p){
-		Player[] onlinePlayers = Bukkit.getServer().getOnlinePlayers();
-		for (int i = 0; i < onlinePlayers.length; i++){
-			Player target = onlinePlayers[i];
+		Collection<? extends Player> onlinePlayers = Bukkit.getServer().getOnlinePlayers();
+		Iterator<? extends Player> i = onlinePlayers.iterator();
+		while(i.hasNext()){
+			Player target = (Player) i.next();
 			if (!p.canSee(target)){
 				//hide players
 				p.showPlayer(target);

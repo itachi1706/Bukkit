@@ -1,5 +1,8 @@
 package io.github.itachi1706.CheesecakeMinigameLobby;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -41,7 +44,7 @@ public class SurvMapActions implements Listener{
 			welMsg = welMsg.replaceAll("%playername%", p.getDisplayName());
 			welMsg = welMsg.replaceAll("%time%", time);
 			welMsg = welMsg.replaceAll("%world%", p.getWorld().getName());
-			welMsg = welMsg.replaceAll("%online%", Integer.toString(Bukkit.getServer().getOnlinePlayers().length));
+			welMsg = welMsg.replaceAll("%online%", Integer.toString(Bukkit.getServer().getOnlinePlayers().size()));
 			welMsg = welMsg.replaceAll("%players%", playerList);
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', welMsg));
 		}
@@ -49,22 +52,24 @@ public class SurvMapActions implements Listener{
 	
 	private String getFullPlayerList(){
 		String format = Main.playerlistformat;
-		Player[] players = Bukkit.getServer().getOnlinePlayers();
+		Collection<? extends Player> onlinePlayers = Bukkit.getServer().getOnlinePlayers();
+		Iterator<? extends Player> i = onlinePlayers.iterator();
 		StringBuilder fullmsg = new StringBuilder();
-		for (int i = 0; i < (players.length - 1); i++){
-			Player p = players[i];
+		int count = 0, maxcount = onlinePlayers.size() - 1;
+		
+		while (i.hasNext()){
+			Player p = (Player) i.next();
 			String pref = getPPrefix(p);
 			String tmp = format;
 			tmp = tmp.replaceAll("%prefix%", pref);
 			tmp = tmp.replaceAll("%playername%", p.getDisplayName());
-			fullmsg.append(tmp + ChatColor.RESET + ", ");
+			if (count < maxcount){
+				fullmsg.append(tmp + ChatColor.RESET + ", ");
+			} else {
+				fullmsg.append(tmp);
+			}
+			count++;
 		}
-		Player p = players[players.length - 1];
-		String pref = getPPrefix(p);
-		String tmp = format;
-		tmp = tmp.replaceAll("%prefix%", pref);
-		tmp = tmp.replaceAll("%playername%", p.getDisplayName());
-		fullmsg.append(tmp);
 		return fullmsg.toString();
 	}
 	
