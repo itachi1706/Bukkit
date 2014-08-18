@@ -1,6 +1,6 @@
 name: WynncraftExperience
 main: io.github.itachi1706.WynncraftExperience.Main
-version: 1.1
+version: 1.2
 description: A plugin for wynncraft experience server
 author: itachi1706
 commands:
