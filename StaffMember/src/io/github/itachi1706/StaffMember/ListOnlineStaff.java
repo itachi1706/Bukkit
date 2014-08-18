@@ -1,6 +1,8 @@
 package io.github.itachi1706.StaffMember;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -42,7 +44,8 @@ public class ListOnlineStaff implements CommandExecutor{
 	}
 	
 	public void getOnlineStaff(CommandSender s){
-		Player[] players = Bukkit.getServer().getOnlinePlayers();
+		Collection<? extends Player> playerList = Bukkit.getServer().getOnlinePlayers();
+		Iterator<? extends Player> i = playerList.iterator();
 		ArrayList<String> ops = new ArrayList<String>();
 		ArrayList<String> admins = new ArrayList<String>();
 		ArrayList<String> owners = new ArrayList<String>();
@@ -53,8 +56,8 @@ public class ListOnlineStaff implements CommandExecutor{
 		String owner = "";
 		String mod = "";
 		String yt = "";
-		for (int i = 0; i < players.length; i++){
-			Player p = players[i];
+		while (i.hasNext()){
+			Player p = i.next();
 			if (p.hasPermission("staffmember.isowner")){
 				owners.add(p.getDisplayName());
 			} else if (p.hasPermission("staffmember.isop")){
