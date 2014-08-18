@@ -1,6 +1,6 @@
 name: NBPHelper
 main: io.github.itachi1706.NBPHelper.Main
-version: 1.2
+version: 1.3
 description: A helper plugin for NoteBlock Player
 author: itachi1706
 commands:
