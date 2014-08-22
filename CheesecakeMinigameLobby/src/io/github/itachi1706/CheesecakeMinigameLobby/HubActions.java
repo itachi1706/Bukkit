@@ -73,6 +73,7 @@ public class HubActions implements Listener{
 	@EventHandler
 	private void toggleHidePlayer(PlayerInteractEvent e){
 		Player p = e.getPlayer();
+		try {
 		if (e.getItem().getType().equals(Material.EYE_OF_ENDER)){
 			//Hide Players
 			hidePlayers(p);
@@ -83,6 +84,9 @@ public class HubActions implements Listener{
 			showPlayers(p);
 			giveHidePlayerItem(p);
 			e.setCancelled(true);
+		} 
+		} catch (NullPointerException ex) {
+			Bukkit.getServer().getLogger().warning(p.getName() + " does not have a hide player item!");
 		}
 	}
 	
