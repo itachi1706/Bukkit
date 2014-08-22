@@ -1,6 +1,6 @@
 name: FTBOpJoinAnnounce
 main: io.github.itachi1706.FTBOpJoinAnnounce.Main
-version: 1.3
+version: 1.4.4
 description: An internal plugin for announcing ops and devs join
 author: itachi1706
 commands:
@@ -19,9 +19,17 @@ commands:
     usage: /mojang status
     permission: opjoinannounce.default
     permission-message: You do not have permission to do this command
+  duty:
+    description: Enable Duties
+    usage: /duty [-a]
+    permission: opjoinannounce.duty
+    permission-message: You do not have permission to do this command
 permissions:
   opjoinannounce.edit:
     description: Allows you to edit OP Perms
+    default: op
+  opjoinannounce.duty:
+    description: Allows you to enter/exit duty mode
     default: op
   opjoinannounce.default:
     description: Default command

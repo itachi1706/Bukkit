@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.commons.lang.WordUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -17,11 +18,14 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener{
@@ -54,9 +58,19 @@ public class Main extends JavaPlugin implements Listener{
 		}
 	    loadYamls();
 	    getLogger().info("Enabling listners...");
-	    getServer().getPluginManager().registerEvents(this, this);
+	    init();
 	    getLogger().info("Listners enabled!");
 	    ScoreboardHelper.ensureTeamsAvailable();
+	    for (Player p : this.getServer().getOnlinePlayers()){
+	    	//Check if player in config
+			if (!(config.isBoolean("players." + p.getName()))){
+				config.set("players." + p.getName(), false);
+			}
+	    }
+    }
+    
+    public void init(){
+    	getServer().getPluginManager().registerEvents(this, this);
     }
     
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
@@ -68,8 +82,10 @@ public class Main extends JavaPlugin implements Listener{
     		}
     		if (args[0].equalsIgnoreCase("reload")){
     			//Reloads Plugin
-    			sender.sendMessage(pluginPrefix + ChatColor.GREEN + "Plugin reloaded");
+				disableCommand(this);
 				loadYamls();
+				init();
+				sender.sendMessage(pluginPrefix + ChatColor.GREEN + "Plugin reloaded");
     			return true;
     		} else {
     			//Error
@@ -77,6 +93,47 @@ public class Main extends JavaPlugin implements Listener{
     			return true;
     		}
 		}
+    	
+    	//Enable/Disable Admin Mode
+    	if (cmd.getName().equals("duty")){
+    		if (!sender.hasPermission("opjoinannounce.duty")){
+    			sender.sendMessage(ChatColor.DARK_RED + "You do not have permission to use this command!");
+    			return true;
+    		}
+    		if (args.length > 1){
+    			sender.sendMessage(ChatColor.RED + "Enables/Disable admin duty mode. Usage: /duty [-s]");
+    			return true;
+    		}
+    		if (!(sender instanceof Player)){
+    			sender.sendMessage(ChatColor.DARK_RED + "You must be an administrator in game to use this command!");
+    			return true;
+    		}
+    		if (args.length == 0){
+    			if (config.getBoolean("players." + sender.getName())){
+    				config.set("players." + sender.getName(), false);
+    				sender.sendMessage(ChatColor.DARK_AQUA + "Administrator Mode: " + ChatColor.RED + "Disabled");
+    			} else {
+    				config.set("players." + sender.getName(), true);
+    				sender.sendMessage(ChatColor.DARK_AQUA + "Administrator Mode: " + ChatColor.GREEN + "Enabled");
+    			}
+    			saveYamls();
+    		} else if (args.length == 1 && args[0].equalsIgnoreCase("-a")){
+    			if (config.getBoolean("players." + sender.getName())){
+    				config.set("players." + sender.getName(), false);
+    				sendAdminMsg("&7&o[" + sender.getName() + "] Disabled Admin Mode", sender);
+    				sender.sendMessage(ChatColor.DARK_AQUA + "Administrator Mode: " + ChatColor.RED + "Disabled");
+    			} else {
+    				config.set("players." + sender.getName(), true);
+    				sendAdminMsg("&7&o[" + sender.getName() + "] Enabled Admin Mode", sender);
+    				sender.sendMessage(ChatColor.DARK_AQUA + "Administrator Mode: " + ChatColor.GREEN + "Enabled");
+    			}
+    			saveYamls();
+    		} else {
+    			sender.sendMessage(ChatColor.RED + "Enables/Disable admin duty mode. Usage: /duty [-s]");
+    			return true;
+    		}
+    		return true;
+    	}
     	
     	//Check Mojang Servers
     	if (cmd.getName().equals("mojang")){
@@ -180,6 +237,10 @@ public class Main extends JavaPlugin implements Listener{
     	s.sendMessage(ChatColor.GOLD + "/joinannounce status: " + ChatColor.WHITE +  "Check current status of join announcements");
     }
     
+    private void disableCommand(Plugin plugin){
+		HandlerList.unregisterAll(plugin);
+	}
+    
     public void displayHelp(CommandSender s){
 		s.sendMessage(ChatColor.GOLD + "-----------FTBOpJoin Commands-----------");
 		s.sendMessage(ChatColor.GOLD + "/opjoin: " + ChatColor.WHITE + "Main plugin command");
@@ -188,11 +249,13 @@ public class Main extends JavaPlugin implements Listener{
     	s.sendMessage(ChatColor.GOLD + "/joinannounce dev: " + ChatColor.WHITE + "Enables/Disables Dev Join Announcement");
     	s.sendMessage(ChatColor.GOLD + "/joinannounce status: " + ChatColor.WHITE +  "Check current status of join announcements");
     	s.sendMessage(ChatColor.GOLD + "/mojang status: " + ChatColor.WHITE + "Gets the status of all Mojang Servers");
+    	s.sendMessage(ChatColor.GOLD + "/duty [-a]: " + ChatColor.WHITE + "Enable/Disable Administrative Mode (with announcement)");
 	}
     
     @Override
 	public void onDisable(){
 		getLogger().info("Disabling Plugin...");
+		disableCommand(this);
 		saveYamls();
 	}
     
@@ -235,6 +298,15 @@ public class Main extends JavaPlugin implements Listener{
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
+	}
+	
+	@EventHandler(priority=EventPriority.HIGHEST)
+	public static void adminTalk(final AsyncPlayerChatEvent e){
+		if (config.getBoolean("players." + e.getPlayer().getName()) == true){
+			String msg = e.getFormat();
+			msg = ChatColor.DARK_RED + "[SYSTEM-ADMIN] " + ChatColor.RESET + msg;
+			e.setFormat(msg);
+		}
 	}
 	
 	@EventHandler(priority=EventPriority.HIGH)
@@ -287,6 +359,12 @@ public class Main extends JavaPlugin implements Listener{
 					e.setJoinMessage(opPrefix + p.getDisplayName() + onJoinMsg);
 				}
 			}
+		}
+		
+		//Check if player in config
+		if (!(config.isBoolean("players." + e.getPlayer().getName()))){
+			config.set("players." + e.getPlayer().getName(), false);
+			saveYamls();
 		}
 	}
 	
@@ -400,5 +478,15 @@ public class Main extends JavaPlugin implements Listener{
 			e.setDeathMessage(player.getDisplayName() + ChatColor.WHITE + " " + msg);
 			}
 		}
+	
+	public static void sendAdminMsg(String msg, CommandSender sender){
+		for (Player p : Bukkit.getServer().getOnlinePlayers()){
+			if (!(p.getName().equalsIgnoreCase(sender.getName()))){
+				if (p.hasPermission("bukkit.broadcast.admin")){
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+				}
+			}
+		}
+	}
 
 }
