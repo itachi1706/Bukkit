@@ -1,0 +1,67 @@
+name: NickNamer
+main: io.github.itachi1706.NickNamer.Main
+version: 1
+description: A plugin to nick into other players
+author: itachi1706
+commands:
+  nick:
+    description: Nicks player or other players and reset nicknames
+    usage: 
+      /nick <nick> - Nicks yourself to another player.
+      /nick <player> <nick> - Nicks another player to nickname
+    permission: nicknamer.nick
+    permission-message: You do not have permission to do this command.
+  nickreset:
+    description: Nicks
+    usage:
+      /nickreset - Resets your nickname
+      /nickreset <player> - Resets nick of another player
+    permission: nicknamer.nick.reset
+    permission-message: You do not have permission to do this command.
+      
+permissions:
+  nicknamer.*:
+    description: Gives access to all nick commands
+    children:
+      nicknamer.nick: true
+      nicknamer.nick.other: true
+      nicknamer.nick.reset: true
+      nicknamer.nick.reset.other: true
+  nicknamer.nick.*:
+    description: Allows you to nick and reset nick
+    children:
+      nicknamer.nick: true
+      nicknamer.nick.reset: true
+  nicknamer.nick:
+    description: Allows you to get a nickname
+    default: op
+  nicknamer.nick.other:
+    description: Allows you to nick others
+    default: op
+  nicknamer.nick.reset:
+    description: Allows you to reset nick
+    default: op
+  nicknamer.nick.reset.other:
+    description: Allows you to reset other's nick
+    default: op
+  nicknamer.color.black:
+  nicknamer.color.dark_blue:
+  nicknamer.color.dark_green:
+  nicknamer.color.dark_aqua:
+  nicknamer.color.dark_red:
+  nicknamer.color.dark_purple:
+  nicknamer.color.gold:
+  nicknamer.color.gray:
+  nicknamer.color.dark_gray:
+  nicknamer.color.blue:
+  nicknamer.color.green:
+  nicknamer.color.aqua:
+  nicknamer.color.red:
+  nicknamer.color.light_purple:
+  nicknamer.color.yellow:
+  nicknamer.color.white:
+  nicknamer.format.magic:
+  nicknamer.format.bold:
+  nicknamer.format.strikethrough:
+  nicknamer.format.underline:
+  nicknamer.format.italic:

@@ -1,0 +1,223 @@
+{
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\bukkit-1.6.4-R2.1-20131031.000035-1.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\bukkit-1.6.4-R2.1-20131031.000035-1.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027D:\\Development\\Bukkit\\DL\\Bukkit API\\bukkit-1.6.4-R2.1-20131031.000035-1.jar\u0027. Neither fingerprint \u0027ebbd378351fbdcb65612aeb3a87214e6dc86b6f2\u0027 nor symbolic name \u0027com.google.guava.guava\u0027 are known."
+  },
+  "C:\\Program Files\\Java\\jre7\\lib\\rt.jar": {
+    "coordinate": "jre:jre:zip:call:1.0.0",
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\rt.jar",
+    "status": "RESOLVED"
+  },
+  "C:\\Users\\NP\\Documents\\GitHub\\itachi1706.github.io\\Banception\\Banception\\src": {
+    "location": "C:\\Users\\NP\\Documents\\GitHub\\itachi1706.github.io\\Banception\\Banception\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\NP\\Documents\\GitHub\\itachi1706.github.io\\Banception\\Banception\\src\u0027. Skipped."
+  },
+  "D:\\Development\\Bukkit\\Projects\\Banception\\src": {
+    "location": "D:\\Development\\Bukkit\\Projects\\Banception\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027D:\\Development\\Bukkit\\Projects\\Banception\\src\u0027. Skipped."
+  },
+  "D:\\Development\\Bukkit\\Projects\\NickNamer\\src": {
+    "location": "D:\\Development\\Bukkit\\Projects\\NickNamer\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027D:\\Development\\Bukkit\\Projects\\NickNamer\\src\u0027. Skipped."
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\TagAPI.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\TagAPI.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027D:\\Development\\Bukkit\\DL\\Bukkit API\\TagAPI.jar\u0027. Neither fingerprint \u0027864dff5205c1b1d6aa624cf04b43d290dce8c038\u0027 nor symbolic name \u0027TagAPI\u0027 are known."
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\HeroChat-5.6.7.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\HeroChat-5.6.7.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027D:\\Development\\Bukkit\\DL\\Bukkit API\\HeroChat-5.6.7.jar\u0027. Neither fingerprint \u0027fc72cad15cc3990a91a8c69f78bbaf9ae8e01e18\u0027 nor symbolic name \u0027com.dthielke.herochat.HeroChat\u0027 are known."
+  },
+  "D:\\Development\\Bukkit\\Projects\\Monopoly\\src": {
+    "location": "D:\\Development\\Bukkit\\Projects\\Monopoly\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027D:\\Development\\Bukkit\\Projects\\Monopoly\\src\u0027. Skipped."
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\SQLibrary-6.1.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\SQLibrary-6.1.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027D:\\Development\\Bukkit\\DL\\Bukkit API\\SQLibrary-6.1.jar\u0027. Neither fingerprint \u002717e75d3667e701c38069808c4781a16bd976ebe5\u0027 nor symbolic name \u0027SQLibrary-6.1\u0027 are known."
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\bukkit-1.7.2-R0.3-20140106.202257-6.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\bukkit-1.7.2-R0.3-20140106.202257-6.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027D:\\Development\\Bukkit\\DL\\Bukkit API\\bukkit-1.7.2-R0.3-20140106.202257-6.jar\u0027. Neither fingerprint \u0027ca5a655ad6d61e07d557a35a0b372b4b068ea1dc\u0027 nor symbolic name \u0027com.google.guava.guava\u0027 are known."
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\PermissionsEx-1.20.4.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\PermissionsEx-1.20.4.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027D:\\Development\\Bukkit\\DL\\Bukkit API\\PermissionsEx-1.20.4.jar\u0027. Neither fingerprint \u0027927dce7f547db8031e3acfabf3d4225af7bc09c9\u0027 nor symbolic name \u0027ru.tehkode.PermissionsEx\u0027 are known."
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\bukkit-1.5.2-R1.1-20130701.165003-5.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\bukkit-1.5.2-R1.1-20130701.165003-5.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027D:\\Development\\Bukkit\\DL\\Bukkit API\\bukkit-1.5.2-R1.1-20130701.165003-5.jar\u0027. Neither fingerprint \u002746cd08999bc356e1c5b041a9bc0049982672aa71\u0027 nor symbolic name \u0027com.google.guava.guava\u0027 are known."
+  },
+  "D:\\Development\\Bukkit\\Projects\\FTBLagNotify\\src": {
+    "location": "D:\\Development\\Bukkit\\Projects\\FTBLagNotify\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027D:\\Development\\Bukkit\\Projects\\FTBLagNotify\\src\u0027. Skipped."
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\SQLibrary-7.1.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\SQLibrary-7.1.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027D:\\Development\\Bukkit\\DL\\Bukkit API\\SQLibrary-7.1.jar\u0027. Neither fingerprint \u002710eaf8af6d2c56fa9b1265eec39809443fb55278\u0027 nor symbolic name \u0027SQLibrary-7.1\u0027 are known."
+  },
+  "D:\\Development\\Bukkit\\Projects\\FTBOPJoinAnnounce\\src": {
+    "location": "D:\\Development\\Bukkit\\Projects\\FTBOPJoinAnnounce\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027D:\\Development\\Bukkit\\Projects\\FTBOPJoinAnnounce\\src\u0027. Skipped."
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\BungeeCord.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\BungeeCord.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027D:\\Development\\Bukkit\\DL\\Bukkit API\\BungeeCord.jar\u0027. Neither fingerprint \u00273f3652d09ad031858fbdb0d93a30558a070c08f1\u0027 nor symbolic name \u0027BungeeCord\u0027 are known."
+  },
+  "D:\\Development\\Bukkit\\Projects\\StaffTools\\src": {
+    "location": "D:\\Development\\Bukkit\\Projects\\StaffTools\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027D:\\Development\\Bukkit\\Projects\\StaffTools\\src\u0027. Skipped."
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\BungeeYAML.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\BungeeYAML.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027D:\\Development\\Bukkit\\DL\\Bukkit API\\BungeeYAML.jar\u0027. Neither fingerprint \u0027cc8523b5231d2d3fe0ccbae7d95064c2475ba2b2\u0027 nor symbolic name \u0027net.craftminecraft.bungee.bungeeyaml\u0027 are known."
+  },
+  "D:\\Development\\Bukkit\\Projects\\SpeedChallenge\\src": {
+    "location": "D:\\Development\\Bukkit\\Projects\\SpeedChallenge\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027D:\\Development\\Bukkit\\Projects\\SpeedChallenge\\src\u0027. Skipped."
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\Multiverse-Core-2.5.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\Multiverse-Core-2.5.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027D:\\Development\\Bukkit\\DL\\Bukkit API\\Multiverse-Core-2.5.jar\u0027. Neither fingerprint \u00278561bbb606b63d10b7172d58a15f10795958968a\u0027 nor symbolic name \u0027Multiverse-Core-2.5\u0027 are known."
+  },
+  "C:\\Program Files\\Java\\jre7\\lib\\jsse.jar": {
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\jsse.jar",
+    "status": "UNRESOLVED"
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\sqlite-jdbc-3.7.2.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\sqlite-jdbc-3.7.2.jar",
+    "status": "UNRESOLVED"
+  },
+  "C:\\Program Files\\Java\\jre7\\lib\\ext\\access-bridge-64.jar": {
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\access-bridge-64.jar",
+    "status": "UNRESOLVED"
+  },
+  "C:\\Program Files\\Java\\jre7\\lib\\ext\\zipfs.jar": {
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\zipfs.jar",
+    "status": "UNRESOLVED"
+  },
+  "C:\\Program Files\\Java\\jre7\\lib\\ext\\localedata.jar": {
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\localedata.jar",
+    "status": "UNRESOLVED"
+  },
+  "C:\\Program Files\\Java\\jre7\\lib\\ext\\dnsns.jar": {
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\dnsns.jar",
+    "status": "UNRESOLVED"
+  },
+  "C:\\Program Files\\Java\\jre7\\lib\\jfr.jar": {
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\jfr.jar",
+    "status": "UNRESOLVED"
+  },
+  "C:\\Program Files\\Java\\jre7\\lib\\ext\\sunjce_provider.jar": {
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\sunjce_provider.jar",
+    "status": "UNRESOLVED"
+  },
+  "D:\\Dropbox\\Public\\Azure\\Bungee\\BungeeYAML.jar": {
+    "location": "D:\\Dropbox\\Public\\Azure\\Bungee\\BungeeYAML.jar",
+    "status": "UNRESOLVED"
+  },
+  "C:\\Program Files\\Java\\jre7\\lib\\ext\\sunec.jar": {
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\sunec.jar",
+    "status": "UNRESOLVED"
+  },
+  "C:\\Program Files\\Java\\jre7\\lib\\jce.jar": {
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\jce.jar",
+    "status": "UNRESOLVED"
+  },
+  "C:\\Program Files\\Java\\jre7\\lib\\ext\\sunmscapi.jar": {
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\sunmscapi.jar",
+    "status": "UNRESOLVED"
+  },
+  "C:\\Program Files\\Java\\jre7\\lib\\charsets.jar": {
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\charsets.jar",
+    "status": "UNRESOLVED"
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\sqlite-jdbc4-3.8.2-SNAPSHOT.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\sqlite-jdbc4-3.8.2-SNAPSHOT.jar",
+    "status": "UNRESOLVED"
+  },
+  "C:\\Program Files\\Java\\jre7\\lib\\ext\\jaccess.jar": {
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\jaccess.jar",
+    "status": "UNRESOLVED"
+  },
+  "D:\\Dropbox\\Public\\Azure\\Bungee\\Yamler-Bungee-2.1.1-SNAPSHOT.jar": {
+    "location": "D:\\Dropbox\\Public\\Azure\\Bungee\\Yamler-Bungee-2.1.1-SNAPSHOT.jar",
+    "status": "UNRESOLVED"
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\WorldEdit.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\WorldEdit.jar",
+    "status": "UNRESOLVED"
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\TagAPI-2.7.1.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\TagAPI-2.7.1.jar",
+    "status": "UNRESOLVED"
+  },
+  "C:\\Program Files\\Java\\jre7\\lib\\resources.jar": {
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\resources.jar",
+    "status": "UNRESOLVED"
+  },
+  "D:\\Development\\Bukkit\\Projects\\CheesecakeMinigameLobby\\src": {
+    "location": "D:\\Development\\Bukkit\\Projects\\CheesecakeMinigameLobby\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027D:\\Development\\Bukkit\\Projects\\CheesecakeMinigameLobby\\src\u0027. Skipped."
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\bukkit-1.7.5-R0.1-20140408.014432-7.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\bukkit-1.7.5-R0.1-20140408.014432-7.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027D:\\Development\\Bukkit\\DL\\Bukkit API\\bukkit-1.7.5-R0.1-20140408.014432-7.jar\u0027. Neither fingerprint \u00278b1b49d8b323c1de6abb3af235e2927102bb375f\u0027 nor symbolic name \u0027com.google.guava.guava\u0027 are known."
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\PermissionsEx.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\PermissionsEx.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027D:\\Development\\Bukkit\\DL\\Bukkit API\\PermissionsEx.jar\u0027. Neither fingerprint \u00278a6b4c3f38f91b562aab9b628f56bba311f989b0\u0027 nor symbolic name \u0027net.gravitydevelopment.updater.updater\u0027 are known."
+  },
+  "D:\\Development\\Bukkit\\Projects\\PEXHelper\\src": {
+    "location": "D:\\Development\\Bukkit\\Projects\\PEXHelper\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027D:\\Development\\Bukkit\\Projects\\PEXHelper\\src\u0027. Skipped."
+  },
+  "D:\\Development\\Bukkit\\Projects\\StaffMember\\src": {
+    "location": "D:\\Development\\Bukkit\\Projects\\StaffMember\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027D:\\Development\\Bukkit\\Projects\\StaffMember\\src\u0027. Skipped."
+  },
+  "D:\\Development\\Bukkit\\Projects\\WynncraftExperience\\src": {
+    "location": "D:\\Development\\Bukkit\\Projects\\WynncraftExperience\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027D:\\Development\\Bukkit\\Projects\\WynncraftExperience\\src\u0027. Skipped."
+  },
+  "D:\\Development\\Bukkit\\Projects\\CheesecakeLogger\\src": {
+    "location": "D:\\Development\\Bukkit\\Projects\\CheesecakeLogger\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027D:\\Development\\Bukkit\\Projects\\CheesecakeLogger\\src\u0027. Skipped."
+  },
+  "D:\\Development\\Bukkit\\Projects\\JukeboxSequence\\src": {
+    "location": "D:\\Development\\Bukkit\\Projects\\JukeboxSequence\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027D:\\Development\\Bukkit\\Projects\\JukeboxSequence\\src\u0027. Skipped."
+  },
+  "D:\\Development\\Bukkit\\DL\\Bukkit API\\bukkit-1.7.10-R0.1-20140808.005150-4.jar": {
+    "location": "D:\\Development\\Bukkit\\DL\\Bukkit API\\bukkit-1.7.10-R0.1-20140808.005150-4.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027D:\\Development\\Bukkit\\DL\\Bukkit API\\bukkit-1.7.10-R0.1-20140808.005150-4.jar\u0027. Neither fingerprint \u00271c97ae2a3ca19824d81c60c32893eef288d0ae7e\u0027 nor symbolic name \u0027com.google.guava.guava\u0027 are known."
+  }
+}

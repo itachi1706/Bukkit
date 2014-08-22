@@ -1,0 +1,85 @@
+name: CheesecakeMinigameLobby
+main: io.github.itachi1706.CheesecakeMinigameLobby.Main
+version: 1.8
+description: An internal plugin for minigame server
+author: itachi1706
+commands:
+  cml:
+    description: Main Plugin Command
+    usage: /cml version/reload/stats/module
+    permission: cheesecakeminigamelobby.staff
+    permission-message: You do not have permission to do this command
+    aliases: [cheesecakeminigamelobby]
+  cmla:
+    description: Main Plugin Administration Command
+    usage: /cmla <module>
+    permission: cheesecakeminigamelobby.staff
+    permission-message: You do not have permission to do this command
+    aliases: [cheesecakeminigamelobbyadmin]
+  fly:
+    description: Fly
+    usage: /fly [player]
+    permission: cheesecakeminigamelobby.abilities.fly
+    permission-message: You do not have permission to do this command
+  speed:
+    description: Adjusts Player Speed
+    usage: /speed fly/walk reset/check/<speed> [player]
+    permission: cheesecakeminigamelobby.abilities.speed
+    permission-message: You do not have permission to do this command
+  zeus:
+    description: Zeus Wrath a player
+    usage: /zeus [player]
+    permission: cheesecakeminigamelobby.abilities.zeus
+    permission-message: You do not have permission to do this command
+  smite:
+    description: Smites player
+    usage: /smite [player]
+    permission: cheesecakeminigamelobby.abilities.smite
+    permission-message: You do not have permission to do this command
+  fling:
+    description: Flings player into the air
+    usage: /fling [player]
+    permission: cheesecakeminigamelobby.abilities.fling
+    permission-message: You do not have permission to do this command
+  burn:
+    description: Burns a player
+    usage: /burn [player]
+    permission: cheesecakeminigamelobby.abilities.burn
+    permission-message: You do not have permission to do this command
+  wow:
+    description: Doges a player
+    usage: /wow [player]
+    permission: cheesecakeminigamelobby.abilities.wow
+    permission-message: You do not have permission to do this command
+    aliases: [doge]
+permissions:
+  cheesecakeminigamelobby.default:
+    description: Default command
+    default: true
+  cheesecakeminigamelobby.abilities.fly:
+    description: Fly Command
+    default: op
+  cheesecakeminigamelobby.abilities.speed:
+    description: Speed Command
+    default: op
+  cheesecakeminigamelobby.abilities.fling:
+    description: Fling Command
+    default: op
+  cheesecakeminigamelobby.abilities.zeus:
+    description: Zeus Command
+    default: op
+  cheesecakeminigamelobby.abilities.smite:
+    description: Smite Command
+    default: op
+  cheesecakeminigamelobby.abilities.burn:
+    description: Burn Command
+    default: op
+  cheesecakeminigamelobby.abilities.wow:
+    description: Wow Command
+    default: op
+  cheesecakeminigamelobby.staff:
+    description: Staff command
+    default: op
+  cheesecakeminigamelobby.exempt:
+    description: Prevents being hidden
+    default: op

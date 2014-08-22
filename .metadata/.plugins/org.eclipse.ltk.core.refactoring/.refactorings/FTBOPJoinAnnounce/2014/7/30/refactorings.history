@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;io.github.itachi1706.FTBOpJoinAnnounce.Main.reloadCommand(...)&apos; to &apos;disableCommand&apos;&#x0D;&#x0A;- Original project: &apos;FTBOPJoinAnnounce&apos;&#x0D;&#x0A;- Original element: &apos;io.github.itachi1706.FTBOpJoinAnnounce.Main.reloadCommand(...)&apos;&#x0D;&#x0A;- Renamed element: &apos;io.github.itachi1706.FTBOpJoinAnnounce.Main.disableCommand(...)&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;reloadCommand&apos;" flags="589826" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;io.github.itachi1706.FTBOpJoinAnnounce{Main.java[Main~reloadCommand~QPlugin;" name="disableCommand" references="true" stamp="1406207615295" version="1.0"/>
+</session>

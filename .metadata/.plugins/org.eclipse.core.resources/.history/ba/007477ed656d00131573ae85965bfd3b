@@ -1,0 +1,7 @@
+package io.github.itachi1706.NickNamer;
+
+import org.bukkit.event.Listener;
+
+public class Nick implements Listener {
+
+}

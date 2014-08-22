@@ -1,0 +1,56 @@
+package io.github.itachi1706.NickNamer;
+
+import java.util.Collection;
+import java.util.Iterator;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class RealName implements CommandExecutor{
+	
+	@SuppressWarnings("unused")
+	private Main plugin;
+	
+	public RealName(Main plugin){
+		this.plugin = plugin;
+	}
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
+		if (cmd.getName().equalsIgnoreCase("realname")){
+			if (!(args.length == 1)){
+				sender.sendMessage(ChatColor.RED + "Invalid usage.");
+				return true;
+			}
+			if (!sender.hasPermission("nicknamer.nick.realname")) {
+				sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
+				return true;
+			}
+			String target = args[0];
+			Collection<? extends Player> playerList = Bukkit.getServer().getOnlinePlayers();
+			Iterator<? extends Player> i = playerList.iterator();
+			int tar = -1, count = 0;
+			while (i.hasNext()){
+				String ds = Main.nick.getString(i.next().getName() + ".nick");
+				if (ds.equalsIgnoreCase(target)){
+					tar = count;
+					break;
+				}
+				count++;
+			}
+			if (tar == -1){
+				sender.sendMessage(ChatColor.GOLD + args[0] + ChatColor.BLUE + " is not a valid nick of a player online!");
+				return true;
+			} else {
+				sender.sendMessage(ChatColor.GOLD + args[0] + ChatColor.RED + " is the nickname of " + ChatColor.AQUA + playerList[tar].getName());
+				return true;
+			}
+		}
+		return false;
+	}
+
+}
