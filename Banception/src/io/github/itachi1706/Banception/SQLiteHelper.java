@@ -31,6 +31,27 @@ public class SQLiteHelper {
 				e.printStackTrace();
 			}
 		}
+		if (sqlite.checkTable("mainTabl")){
+		} else {
+			try {
+				sqlite.query("CREATE TABLE mainTabl (VERSION int not null);");
+				sqlite.query("ALTER TABLE BAN ADD COLUMN UUID varchar(40) null;");
+				sqlite.query("INSERT INTO mainTabl VALUES (1);");
+			} catch (SQLException e){
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public static void updateBanMuteLogs(Database sqlite, String playername, String playerUUID){
+		String banUpdate = "UPDATE BAN SET UUID=" + playerUUID + " WHERE NAME=" + playername + ";";
+		try {
+			sqlite.query(banUpdate);
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (Exception ex){
+			ex.printStackTrace();
+		}
 	}
 	
 	public static void addBanLog(Database sqlite, String n, String t, String r, String b){
