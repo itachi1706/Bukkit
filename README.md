@@ -1,13 +1,4 @@
 Bukkit
 ======
 
-Bukkit Projects
-
-Plugins in this repository
-- NickNamer
-- Banception
-- StaffMember
-- MemberSigns
-- FTBOPJoinAnnounce
-- FTBLagNotify
-- Monopoly
+This is just a repo that I chuck my random bukkit plugin projects into. Ignore me :)
