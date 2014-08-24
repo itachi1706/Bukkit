@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename type &apos;io.github.itachi1706.SpeedChallenge.PreGameListener&apos; to &apos;GameListeners&apos;&#x0D;&#x0A;- Original project: &apos;SpeedChallenge&apos;&#x0D;&#x0A;- Original element: &apos;io.github.itachi1706.SpeedChallenge.PreGameListener&apos;&#x0D;&#x0A;- Renamed element: &apos;io.github.itachi1706.SpeedChallenge.GameListeners&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;PreGameListener&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;io.github.itachi1706.SpeedChallenge{PreGameListener.java[PreGameListener" matchStrategy="1" name="GameListeners" qualified="false" references="true" similarDeclarations="false" stamp="1397125455989" textual="false" version="1.0"/>
-</session>

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Delete resource &apos;BungeeJoin&apos;" deleteContents="true" description="Delete resource &apos;BungeeJoin&apos;" element1="/BungeeJoin" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1408719496626"/>
-</session>
