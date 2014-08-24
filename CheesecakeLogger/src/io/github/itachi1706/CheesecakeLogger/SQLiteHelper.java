@@ -55,7 +55,7 @@ public class SQLiteHelper {
 	
 	public static void getLogs(CommandSender p, String target, int no){
 		try {
-			ResultSet rs = sqlite.query("SELECT NAME,TYPE,X,Y,Z,WORLD,TIME,IP FROM LOGINS WHERE NAME='" + target + "';");
+			ResultSet rs = sqlite.query("SELECT NAME,TYPE,X,Y,Z,WORLD,TIME,IP FROM LOGINS WHERE NAME='" + target + "' ORDER BY TIME DESC;");
 			//p.sendMessage(ChatColor.GOLD + "--------- Login History For " + target + " ---------");
 			int i = 1;
 			ArrayList<String> loginHist = new ArrayList<String>();
