@@ -55,7 +55,7 @@ public class SQLiteHelper {
 	}
 	
 	public static void checkLoginLogs(CommandSender p, String target, int no){
-		ArrayList<String> loginHist = getLogs(target);
+		ArrayList<String> loginHist = getFullPlayerLogs(target);
 		if (loginHist == null){
 			//Exception
 			p.sendMessage(ChatColor.RED + "An Error Occured trying to get logs! (" + exceptionMsg + ")");
@@ -64,7 +64,7 @@ public class SQLiteHelper {
 		}
 	}
 	
-	private static ArrayList<String> getLogs(String target){
+	private static ArrayList<String> getFullPlayerLogs(String target){
 		try {
 			ResultSet rs = sqlite.query("SELECT NAME,TYPE,X,Y,Z,WORLD,TIME,IP FROM LOGINS WHERE NAME='" + target + "' ORDER BY TIME DESC;");
 			//p.sendMessage(ChatColor.GOLD + "--------- Login History For " + target + " ---------");
@@ -127,8 +127,8 @@ public class SQLiteHelper {
 		builder.append(ChatColor.GOLD + "," + ChatColor.AQUA + x);
 		builder.append(ChatColor.GOLD + "," + ChatColor.AQUA + y);
 		builder.append(ChatColor.GOLD + "," + ChatColor.AQUA + z);
-		builder.append(ChatColor.RESET + " with ");
-		builder.append(ChatColor.GOLD + "IP: " + ChatColor.LIGHT_PURPLE + ip);
+		builder.append(ChatColor.RESET + " at ");
+		builder.append(ChatColor.LIGHT_PURPLE + ip);
 		return builder.toString();
 	}
 	
@@ -143,8 +143,8 @@ public class SQLiteHelper {
 		builder.append(ChatColor.GOLD + "," + ChatColor.AQUA + x);
 		builder.append(ChatColor.GOLD + "," + ChatColor.AQUA + y);
 		builder.append(ChatColor.GOLD + "," + ChatColor.AQUA + z);
-		builder.append(ChatColor.RESET + " with ");
-		builder.append(ChatColor.GOLD + "IP: " + ChatColor.LIGHT_PURPLE + ip);
+		builder.append(ChatColor.RESET + " at ");
+		builder.append(ChatColor.LIGHT_PURPLE + ip);
 		return builder.toString();
 	}
 	
