@@ -20,6 +20,7 @@ public class Main extends JavaPlugin implements Listener {
 	static File loggingDB;
 	
 	public static Database sql;
+	public static boolean pexPresent = false;
 	
 	ArrayList<PlayerIpStorage> playerIpList = new ArrayList<PlayerIpStorage>();
 	
@@ -35,6 +36,10 @@ public class Main extends JavaPlugin implements Listener {
 			SQLiteHelper.checkTableExist();
 		}
 		getServer().getPluginManager().registerEvents(this, this);
+		if (getServer().getPluginManager().getPlugin("PermissionsEx") != null) {
+		    getLogger().info("Detected PermissionsEx!");
+		    pexPresent=true;
+		}
 		getLogger().info("Plugin loaded!");
 	}
 	

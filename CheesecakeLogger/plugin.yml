@@ -1,6 +1,6 @@
 name: CheesecakeLogger
 main: io.github.itachi1706.CheesecakeLogger.Main
-version: 0.0.1a5
+version: 0.0.2
 description: A logging plugin
 author: itachi1706
 depend: [SQLibrary]

@@ -3,12 +3,16 @@ package io.github.itachi1706.CheesecakeLogger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 
+import ru.tehkode.permissions.PermissionManager;
+import ru.tehkode.permissions.PermissionUser;
+import ru.tehkode.permissions.bukkit.PermissionsEx;
 import lib.PatPeter.SQLibrary.Database;
 
 public class SQLiteHelper {
@@ -88,6 +92,23 @@ public class SQLiteHelper {
 		}
 		p.sendMessage(ChatColor.GOLD + "-------------------- Login Statistics -------------------");
 		p.sendMessage(ChatColor.GOLD + "Player Name: " + ChatColor.RESET + target);
+		if (Main.pexPresent){
+			PermissionManager pex = PermissionsEx.getPermissionManager();
+			PermissionUser user = pex.getUser(target);
+			List<String> grouptmp = user.getParentIdentifiers();
+			StringBuilder build = new StringBuilder();
+			if (grouptmp.size() > 1){
+				build.append("[ ");
+				for (String tmp : grouptmp){
+					build.append(tmp + " ");
+				}
+				build.append("]");
+			} else {
+				build.append(grouptmp.get(0));
+			}
+			
+			p.sendMessage(ChatColor.GOLD + "Rank: " + ChatColor.RESET + build.toString());
+		}
 		p.sendMessage(ChatColor.GOLD + "Logins: " + ChatColor.RESET + logins);
 		p.sendMessage(ChatColor.GOLD + "Logouts: " + ChatColor.RESET + logouts);
 		p.sendMessage(ChatColor.GOLD + "-----------------------------------------------------");

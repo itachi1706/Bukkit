@@ -9,5 +9,10 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="D:/Development/Bukkit/DL/Bukkit API/SQLibrary-7.1.jar"/>
 	<classpathentry kind="lib" path="D:/Development/Bukkit/DL/Bukkit API/sqlite-jdbc4-3.8.2-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="D:/Development/Bukkit/DL/Bukkit API/PermissionsEx.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://ci.nixium.com/job/PermissionsEx/javadoc/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
