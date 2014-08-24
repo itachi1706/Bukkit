@@ -74,11 +74,11 @@
 		<item value="false" key="JarManifestWizardPage.SAVE_MANIFEST"/>
 		<item value="false" key="JarPackageWizardPage.EXPORT_OUTPUT_FOLDER"/>
 		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="D:\Servers\tmp\tml\1.7.10\CheesecakeLogger.jar"/>
 			<item value="D:\Servers\tmp\tml\1.7.10\JukeboxSequence.jar"/>
 			<item value="D:\Servers\tmp\tml\1.7.10\MemberSigns.jar"/>
 			<item value="D:\Servers\tmp\tml\1.7.10\SpeedChallenge.jar"/>
 			<item value="D:\Servers\tmp\tml\1.7.10\StaffMember.jar"/>
-			<item value="D:\Servers\tmp\tml\1.7.10\WynncraftExperience.jar"/>
 		</list>
 	</section>
 	<section name="JavaElementSearchActions">
