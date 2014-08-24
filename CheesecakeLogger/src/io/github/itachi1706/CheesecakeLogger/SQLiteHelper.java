@@ -14,6 +14,7 @@ import lib.PatPeter.SQLibrary.Database;
 public class SQLiteHelper {
 	
 	private static Database sqlite = null;
+	private static String exceptionMsg;
 	
 	@SuppressWarnings("deprecation")
 	public static void checkTableExist() {
@@ -53,7 +54,17 @@ public class SQLiteHelper {
 		}
 	}
 	
-	public static void getLogs(CommandSender p, String target, int no){
+	public static void checkLoginLogs(CommandSender p, String target, int no){
+		ArrayList<String> loginHist = getLogs(target);
+		if (loginHist == null){
+			//Exception
+			p.sendMessage(ChatColor.RED + "An Error Occured trying to get logs! (" + exceptionMsg + ")");
+		} else {
+			parseMessages(loginHist, p, no, target);
+		}
+	}
+	
+	private static ArrayList<String> getLogs(String target){
 		try {
 			ResultSet rs = sqlite.query("SELECT NAME,TYPE,X,Y,Z,WORLD,TIME,IP FROM LOGINS WHERE NAME='" + target + "' ORDER BY TIME DESC;");
 			//p.sendMessage(ChatColor.GOLD + "--------- Login History For " + target + " ---------");
@@ -62,18 +73,19 @@ public class SQLiteHelper {
 			while (rs.next()){
 				if (rs.getString("TYPE").toString().equalsIgnoreCase("LOGIN")){
 					//A login message
-					loginHist.add(sendLogin(p, i, rs.getString("X"), rs.getString("Y"), rs.getString("Z"), rs.getString("WORLD"), rs.getString("TIME"), rs.getString("IP")));
+					loginHist.add(sendLogin(i, rs.getString("X"), rs.getString("Y"), rs.getString("Z"), rs.getString("WORLD"), rs.getString("TIME"), rs.getString("IP")));
 				} else if (rs.getString("TYPE").equalsIgnoreCase("LOGOUT")){
 					//A logout message
-					loginHist.add(sendLogout(p, i, rs.getString("X"), rs.getString("Y"), rs.getString("Z"), rs.getString("WORLD"), rs.getString("TIME"), rs.getString("IP")));
+					loginHist.add(sendLogout(i, rs.getString("X"), rs.getString("Y"), rs.getString("Z"), rs.getString("WORLD"), rs.getString("TIME"), rs.getString("IP")));
 				}
 				i++;
 			}
 			rs.close();
-			parseMessages(loginHist, p, no, target);
+			return loginHist;
 		} catch (Exception e) {
-			p.sendMessage(ChatColor.RED + "An Error Occured trying to get logs! (" + e.toString() + ")");
+			exceptionMsg = e.toString();
 			e.printStackTrace();
+			return null;
 		}
 			
 	}
@@ -104,33 +116,33 @@ public class SQLiteHelper {
 		return;
 	}
 	
-	private static String sendLogin(CommandSender p, int no, String x, String y, String z, String world, String datetime, String ip){
+	private static String sendLogin(int no, String x, String y, String z, String world, String datetime, String ip){
 		//1. datetime Login at X: x, Y: y, Z:z, World: world with IP
 		StringBuilder builder = new StringBuilder();
 		builder.append(ChatColor.GOLD + "" + no + ". ");
 		builder.append(ChatColor.RESET + "" + ChatColor.ITALIC + datetime + " " + ChatColor.RESET + "");
 		builder.append(ChatColor.GREEN + "Login ");
 		builder.append(ChatColor.RESET + "at ");
-		builder.append(ChatColor.GOLD + "X: " + ChatColor.AQUA + "" + x);
-		builder.append(ChatColor.GOLD + ", Y: " + ChatColor.AQUA + "" + y);
-		builder.append(ChatColor.GOLD + ", Z: " + ChatColor.AQUA + "" + z);
-		builder.append(ChatColor.GOLD + ", World: " + ChatColor.AQUA + "" + world);
+		builder.append(ChatColor.GOLD + "" + ChatColor.AQUA + world);
+		builder.append(ChatColor.GOLD + "," + ChatColor.AQUA + x);
+		builder.append(ChatColor.GOLD + "," + ChatColor.AQUA + y);
+		builder.append(ChatColor.GOLD + "," + ChatColor.AQUA + z);
 		builder.append(ChatColor.RESET + " with ");
 		builder.append(ChatColor.GOLD + "IP: " + ChatColor.LIGHT_PURPLE + ip);
 		return builder.toString();
 	}
 	
-	private static String sendLogout(CommandSender p, int no, String x, String y, String z, String world, String datetime, String ip){
+	private static String sendLogout(int no, String x, String y, String z, String world, String datetime, String ip){
 		//1. datetime Logout at X: x, Y: y, Z:z, World: world with IP
 		StringBuilder builder = new StringBuilder();
 		builder.append(ChatColor.GOLD + "" + no + ". ");
 		builder.append(ChatColor.RESET + "" + ChatColor.ITALIC + datetime + " " + ChatColor.RESET + "");
 		builder.append(ChatColor.RED + "Logout ");
 		builder.append(ChatColor.RESET + "at ");
-		builder.append(ChatColor.GOLD + "X: " + ChatColor.AQUA + "" + x);
-		builder.append(ChatColor.GOLD + ", Y: " + ChatColor.AQUA + "" + y);
-		builder.append(ChatColor.GOLD + ", Z: " + ChatColor.AQUA + "" + z);
-		builder.append(ChatColor.GOLD + ", World: " + ChatColor.AQUA + "" + world);
+		builder.append(ChatColor.GOLD + "" + ChatColor.AQUA + world);
+		builder.append(ChatColor.GOLD + "," + ChatColor.AQUA + x);
+		builder.append(ChatColor.GOLD + "," + ChatColor.AQUA + y);
+		builder.append(ChatColor.GOLD + "," + ChatColor.AQUA + z);
 		builder.append(ChatColor.RESET + " with ");
 		builder.append(ChatColor.GOLD + "IP: " + ChatColor.LIGHT_PURPLE + ip);
 		return builder.toString();

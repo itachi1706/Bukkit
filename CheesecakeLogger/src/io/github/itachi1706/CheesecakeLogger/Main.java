@@ -78,7 +78,7 @@ public class Main extends JavaPlugin implements Listener {
 			}
 			int value;
 			if (args.length == 1){
-				SQLiteHelper.getLogs(sender, args[0], 1);
+				SQLiteHelper.checkLoginLogs(sender, args[0], 1);
 				return true;
 			}
 			if (args.length == 2){
@@ -89,7 +89,7 @@ public class Main extends JavaPlugin implements Listener {
 						return true;
 					}
 					
-					SQLiteHelper.getLogs(sender, args[0], value);
+					SQLiteHelper.checkLoginLogs(sender, args[0], value);
 				} catch (NumberFormatException ex){
 					sender.sendMessage(ChatColor.RED + "Invalid Usage. Please specify only a number!");
 					return true;
