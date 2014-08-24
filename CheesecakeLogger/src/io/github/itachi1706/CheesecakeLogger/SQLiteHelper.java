@@ -59,8 +59,85 @@ public class SQLiteHelper {
 		if (loginHist == null){
 			//Exception
 			p.sendMessage(ChatColor.RED + "An Error Occured trying to get logs! (" + exceptionMsg + ")");
+			exceptionMsg = new String();	//Reset exception message
 		} else {
 			parseMessages(loginHist, p, no, target);
+		}
+	}
+	
+	public static void checkLoginStats(CommandSender p, String target){
+		int logins = getLoginCount(target);
+		if (logins == -2){
+			p.sendMessage(ChatColor.RED + "An Error Occured trying to convert login count! (" + exceptionMsg + ")");
+			exceptionMsg = new String();	//Reset exception message
+			return;
+		} else if (logins == -1){
+			p.sendMessage(ChatColor.RED + "An Error Occured trying to get stats! (" + exceptionMsg + ")");
+			exceptionMsg = new String();	//Reset exception message
+			return;
+		}
+		int logouts = getLogoutCount(target);
+		if (logouts == -2){
+			p.sendMessage(ChatColor.RED + "An Error Occured trying to convert logout count! (" + exceptionMsg + ")");
+			exceptionMsg = new String();	//Reset exception message
+			return;
+		} else if (logouts == -1){
+			p.sendMessage(ChatColor.RED + "An Error Occured trying to get stats! (" + exceptionMsg + ")");
+			exceptionMsg = new String();	//Reset exception message
+			return;
+		}
+		p.sendMessage(ChatColor.GOLD + "-------------------- Login Statistics -------------------");
+		p.sendMessage(ChatColor.GOLD + "Player Name: " + ChatColor.RESET + target);
+		p.sendMessage(ChatColor.GOLD + "Logins: " + ChatColor.RESET + logins);
+		p.sendMessage(ChatColor.GOLD + "Logouts: " + ChatColor.RESET + logouts);
+		p.sendMessage(ChatColor.GOLD + "-----------------------------------------------------");
+	}
+	
+	private static int getLoginCount(String target){
+		int loginCount = 0;
+		try {
+			//get login count
+			ResultSet rs = sqlite.query("SELECT COUNT(*) FROM LOGINS WHERE NAME='" + target + "' AND TYPE='LOGIN';");
+			while (rs.next()){
+				String tmp = rs.getString(1);
+				if (tmp != null){
+					loginCount=Integer.parseInt(tmp);
+				}
+			}
+			rs.close();
+			return loginCount;
+		} catch (NumberFormatException e){
+			exceptionMsg = e.toString();
+			e.printStackTrace();
+			return -2;
+		}catch (Exception e) {
+			exceptionMsg = e.toString();
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	private static int getLogoutCount(String target){
+		int logoutCount = 0;
+		try {
+			//get logout count
+			ResultSet rs = sqlite.query("SELECT COUNT(*) FROM LOGINS WHERE NAME='" + target + "' AND TYPE='LOGOUT';");
+			while (rs.next()){
+				String tmp = rs.getString(1);
+				if (tmp != null){
+					logoutCount=Integer.parseInt(tmp);
+				}
+			}
+			rs.close();
+			return logoutCount;
+		} catch (NumberFormatException e){
+			exceptionMsg = e.toString();
+			e.printStackTrace();
+			return -2;
+		}catch (Exception e) {
+			exceptionMsg = e.toString();
+			e.printStackTrace();
+			return -1;
 		}
 	}
 	

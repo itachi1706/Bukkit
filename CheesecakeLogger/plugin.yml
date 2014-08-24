@@ -1,6 +1,6 @@
 name: CheesecakeLogger
 main: io.github.itachi1706.CheesecakeLogger.Main
-version: 0.0.1a4
+version: 0.0.1a5
 description: A logging plugin
 author: itachi1706
 depend: [SQLibrary]
@@ -13,6 +13,11 @@ commands:
   viewlogins:
     description: View login and logout history of a player
     usage: /viewlogins <player> <#>
+    permission: cheesecakelogger.logs
+    permission-message: You do not have permission to do this command.
+  viewplayerstats:
+    description: View login and logout history of a player
+    usage: /viewplayerstats <player>
     permission: cheesecakelogger.logs
     permission-message: You do not have permission to do this command.
   delloginhistory:

@@ -107,6 +107,17 @@ public class Main extends JavaPlugin implements Listener {
 			}
 			SQLiteHelper.deleteLogs(sender, args[0]);
 			return true;
+		} else if (cmd.getName().equalsIgnoreCase("viewplayerstats")){
+			if (args.length != 1){
+				sender.sendMessage(ChatColor.RED + "Invalid Usage! Usage: /viewplayerstats <player>");
+				return true;
+			}
+			if (!sender.hasPermission("cheesecakelogger.logs")){
+				sender.sendMessage(ChatColor.DARK_RED + "You do not have permission to use this command!");
+				return true;
+			}
+			SQLiteHelper.checkLoginStats(sender, args[0]);
+			return true;
 		}
 		return false;
 	}
