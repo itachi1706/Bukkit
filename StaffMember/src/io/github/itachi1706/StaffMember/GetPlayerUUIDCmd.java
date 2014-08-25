@@ -51,10 +51,10 @@ public class GetPlayerUUIDCmd implements CommandExecutor{
 							return true;
 						}
 					}
-					sender.sendMessage(ChatColor.RED + "Unable to get UUID. Players must have joined at least once to get their UUID");
+					sender.sendMessage(ChatColor.RED + "Unable to get " + playername + "'s UUID. Players must have joined at least once to get their UUID");
 					return true;
 				}
-				sender.sendMessage(ChatColor.GOLD + "UUID of " + target.getDisplayName() + ChatColor.GOLD + " is: " + target.getUniqueId());
+				sender.sendMessage(ChatColor.GOLD + "UUID of " + ChatColor.GRAY + ChatColor.ITALIC + target.getDisplayName() + ChatColor.GOLD + " is: " + target.getUniqueId());
 				return true;
 			}
 		}
