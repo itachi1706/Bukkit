@@ -40,6 +40,7 @@ public class GamemodeCmd implements CommandExecutor{
 				}
 				//Sets yourself to creative
 				Player p = (Player) sender;
+				stat = changeGamemode(p, "1", sender);
 			} else {
 				//Sets a player to creative
 				Player p = Bukkit.getServer().getPlayer(args[0]);
@@ -47,6 +48,7 @@ public class GamemodeCmd implements CommandExecutor{
 					sender.sendMessage(ChatColor.RED + "Player is not online!");
 					return true;
 				}
+				stat = changeGamemode(p, "1", sender);
 			}
 			
 			if (!stat){
@@ -70,6 +72,7 @@ public class GamemodeCmd implements CommandExecutor{
 				}
 				//Sets yourself to survival
 				Player p = (Player) sender;
+				stat = changeGamemode(p, "0", sender);
 			} else {
 				//Sets a player to survival
 				Player p = Bukkit.getServer().getPlayer(args[0]);
@@ -77,6 +80,7 @@ public class GamemodeCmd implements CommandExecutor{
 					sender.sendMessage(ChatColor.RED + "Player is not online!");
 					return true;
 				}
+				stat = changeGamemode(p, "0", sender);
 			}
 			
 			if (!stat){
@@ -100,6 +104,7 @@ public class GamemodeCmd implements CommandExecutor{
 				}
 				//Sets yourself to adventure
 				Player p = (Player) sender;
+				stat = changeGamemode(p, "2", sender);
 			} else {
 				//Sets a player to adventure
 				Player p = Bukkit.getServer().getPlayer(args[0]);
@@ -107,6 +112,8 @@ public class GamemodeCmd implements CommandExecutor{
 					sender.sendMessage(ChatColor.RED + "Player is not online!");
 					return true;
 				}
+				
+				stat = changeGamemode(p, "2", sender);
 			}
 			
 			if (!stat){
@@ -118,11 +125,15 @@ public class GamemodeCmd implements CommandExecutor{
 				sender.sendMessage(ChatColor.DARK_RED + "You do not have the permission to use this command");
 				return true;
 			}
-			if (args.length > 2 || args.length < 1){
+			if (args.length > 2){
 				sender.sendMessage(ChatColor.RED + "Usage: /gm <gamemode> [player]");
 				return true;
 			}
-			
+			if (args.length == 0){
+				sender.sendMessage(ChatColor.RED + "Usage: /gm <gamemode> [player]");
+				sender.sendMessage(ChatColor.RED + "Possible gamemodes: c,s,a,sp");
+				return true;
+			}
 			if (args.length == 1){
 				if (!(sender instanceof Player)){
 					sender.sendMessage("You cannot gamemode yourself!");
@@ -133,11 +144,12 @@ public class GamemodeCmd implements CommandExecutor{
 				stat = changeGamemode(p, args[0], sender);
 			} else {
 				//Changes a player's gamemode
-				Player p = Bukkit.getServer().getPlayer(args[0]);
+				Player p = Bukkit.getServer().getPlayer(args[1]);
 				if (p == null){
 					sender.sendMessage(ChatColor.RED + "Player is not online!");
 					return true;
 				}
+				stat = changeGamemode(p, args[0], sender);
 			}
 			
 			if (!stat){
@@ -151,29 +163,36 @@ public class GamemodeCmd implements CommandExecutor{
 	private static boolean changeGamemode(Player p, String gamemode, CommandSender sender){
 		if (gamemode.equals("1") || gamemode.equals("creative") || gamemode.equals("c")){
 			if (p.getGameMode().equals(GameMode.CREATIVE)){
-				sender.sendMessage(ChatColor.DARK_AQUA + p.getDisplayName() + " is already in Creative Mode");
+				sender.sendMessage(p.getDisplayName() + ChatColor.DARK_AQUA + " is already in Creative Mode");
 				return true;
 			}
 			p.setGameMode(GameMode.CREATIVE);
+			sender.sendMessage(ChatColor.DARK_PURPLE + "Changed " + p.getDisplayName() + ChatColor.DARK_PURPLE + " gamemode to Creative Mode");
 			Main.sendAdminMsg("&7&o[" + sender.getName() + ": Set Creative Mode for " + p.getName() + "]");
 			return true;
 		}
 		if (gamemode.equals("2") || gamemode.equals("adventure") || gamemode.equals("a")){
 			if (p.getGameMode().equals(GameMode.ADVENTURE)){
-				sender.sendMessage(ChatColor.DARK_AQUA + p.getDisplayName() + " is already in Adventure Mode");
+				sender.sendMessage(p.getDisplayName() + ChatColor.DARK_AQUA + " is already in Adventure Mode");
 				return true;
 			}
 			p.setGameMode(GameMode.ADVENTURE);
+			sender.sendMessage(ChatColor.DARK_PURPLE + "Changed " + p.getDisplayName() + ChatColor.DARK_PURPLE + " gamemode to Adventure Mode");
 			Main.sendAdminMsg("&7&o[" + sender.getName() + ": Set Adventure Mode for " + p.getName() + "]");
 			return true;
 		}
 		if (gamemode.equals("0") || gamemode.equals("survival") || gamemode.equals("s")){
 			if (p.getGameMode().equals(GameMode.SURVIVAL)){
-				sender.sendMessage(ChatColor.DARK_AQUA + p.getDisplayName() + " is already in Survival Mode");
+				sender.sendMessage(p.getDisplayName() + ChatColor.DARK_AQUA + " is already in Survival Mode");
 				return true;
 			}
 			p.setGameMode(GameMode.SURVIVAL);
+			sender.sendMessage(ChatColor.DARK_PURPLE + "Changed " + p.getDisplayName() + ChatColor.DARK_PURPLE + " gamemode to Survival Mode");
 			Main.sendAdminMsg("&7&o[" + sender.getName() + ": Set Survival Mode for " + p.getName() + "]");
+			return true;
+		}
+		if (gamemode.equals("2") || gamemode.equals("spectator") || gamemode.equals("sp")){
+			sender.sendMessage(ChatColor.GOLD + "Spectator Mode is only available in Minecraft 1.8");
 			return true;
 		}
 		return false;
@@ -181,6 +200,7 @@ public class GamemodeCmd implements CommandExecutor{
 	
 	private void availableGamemodes(CommandSender sender){
 		sender.sendMessage(ChatColor.DARK_RED + "INVALID GAMEMODE");
+		sender.sendMessage(ChatColor.RED + "Possible gamemodes: c,s,a,sp");
 	}
 
 }
