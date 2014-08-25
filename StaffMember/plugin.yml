@@ -1,6 +1,6 @@
 name: StaffMember
 main: io.github.itachi1706.StaffMember.Main
-version: 1.4
+version: 1.5
 description: A plugin for listing staff members and staff tools
 author: itachi1706
 commands:

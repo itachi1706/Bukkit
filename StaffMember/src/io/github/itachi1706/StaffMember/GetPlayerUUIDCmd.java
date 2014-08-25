@@ -2,6 +2,7 @@ package io.github.itachi1706.StaffMember;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -43,7 +44,14 @@ public class GetPlayerUUIDCmd implements CommandExecutor{
 				String playername = args[0];
 				Player target = Bukkit.getServer().getPlayer(playername);
 				if (target == null){
-					sender.sendMessage(ChatColor.RED + "Unable to get UUID");
+					//Attempt to get an offline player
+					for (OfflinePlayer op : Bukkit.getServer().getOfflinePlayers()){
+						if (op.getName().equals(playername)){
+							sender.sendMessage(ChatColor.GOLD + "UUID of " + op.getName() + ChatColor.GOLD + " is: " + op.getUniqueId());
+							return true;
+						}
+					}
+					sender.sendMessage(ChatColor.RED + "Unable to get UUID. Players must have joined at least once to get their UUID");
 					return true;
 				}
 				sender.sendMessage(ChatColor.GOLD + "UUID of " + target.getDisplayName() + ChatColor.GOLD + " is: " + target.getUniqueId());
