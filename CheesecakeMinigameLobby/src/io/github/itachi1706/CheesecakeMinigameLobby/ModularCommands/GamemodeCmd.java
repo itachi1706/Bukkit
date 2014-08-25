@@ -167,7 +167,7 @@ public class GamemodeCmd implements CommandExecutor{
 				return true;
 			}
 			p.setGameMode(GameMode.CREATIVE);
-			sender.sendMessage(ChatColor.DARK_PURPLE + "Changed " + p.getDisplayName() + ChatColor.DARK_PURPLE + " gamemode to Creative Mode");
+			sender.sendMessage(ChatColor.DARK_PURPLE + "Changed gamemode of " + p.getDisplayName() + ChatColor.DARK_PURPLE + " to Creative Mode");
 			Main.sendAdminMsg("&7&o[" + sender.getName() + ": Set Creative Mode for " + p.getName() + "]");
 			return true;
 		}
@@ -177,7 +177,7 @@ public class GamemodeCmd implements CommandExecutor{
 				return true;
 			}
 			p.setGameMode(GameMode.ADVENTURE);
-			sender.sendMessage(ChatColor.DARK_PURPLE + "Changed " + p.getDisplayName() + ChatColor.DARK_PURPLE + " gamemode to Adventure Mode");
+			sender.sendMessage(ChatColor.DARK_PURPLE + "Changed gamemode of " + p.getDisplayName() + ChatColor.DARK_PURPLE + " to Adventure Mode");
 			Main.sendAdminMsg("&7&o[" + sender.getName() + ": Set Adventure Mode for " + p.getName() + "]");
 			return true;
 		}
@@ -187,7 +187,7 @@ public class GamemodeCmd implements CommandExecutor{
 				return true;
 			}
 			p.setGameMode(GameMode.SURVIVAL);
-			sender.sendMessage(ChatColor.DARK_PURPLE + "Changed " + p.getDisplayName() + ChatColor.DARK_PURPLE + " gamemode to Survival Mode");
+			sender.sendMessage(ChatColor.DARK_PURPLE + "Changed gamemode of " + p.getDisplayName() + ChatColor.DARK_PURPLE + " to Survival Mode");
 			Main.sendAdminMsg("&7&o[" + sender.getName() + ": Set Survival Mode for " + p.getName() + "]");
 			return true;
 		}
