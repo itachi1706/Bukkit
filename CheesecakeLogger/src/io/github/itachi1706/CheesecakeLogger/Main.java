@@ -127,11 +127,10 @@ public class Main extends JavaPlugin implements Listener {
 				sender.sendMessage(ChatColor.DARK_RED + "You do not have permission to use this command!");
 				return true;
 			}
-			for (OfflinePlayer p : getServer().getOfflinePlayers()){
-				if (p.getName().equals(args[0])){
-					SQLiteHelper.checkLoginStats(sender, args[0], p.getUniqueId(), convertTime(p.getFirstPlayed()), convertTime(p.getLastPlayed()));
-					return true;
-				}
+			OfflinePlayer p = getServer().getOfflinePlayer(args[0]);
+			if (p.hasPlayedBefore()){
+				SQLiteHelper.checkLoginStats(sender, args[0], p.getUniqueId(), convertTime(p.getFirstPlayed()), convertTime(p.getLastPlayed()));
+				return true;
 			}
 			sender.sendMessage(ChatColor.RED + args[0] + " is either a nickname or has never joined this server.");
 			return true;
@@ -140,11 +139,10 @@ public class Main extends JavaPlugin implements Listener {
 				sender.sendMessage(ChatColor.RED + "Invalid Usage! Usage: /lastseen <player>");
 				return true;
 			}
-			for (OfflinePlayer p : getServer().getOfflinePlayers()){
-				if (p.getName().equals(args[0])){
-					sender.sendMessage(ChatColor.GOLD + args[0] + ChatColor.WHITE + " is last seen on " + ChatColor.ITALIC + convertTime(p.getLastPlayed()));
-					return true;
-				}
+			OfflinePlayer p = getServer().getOfflinePlayer(args[0]);
+			if (p.hasPlayedBefore()){
+				sender.sendMessage(ChatColor.GOLD + args[0] + ChatColor.WHITE + " is last seen on " + ChatColor.ITALIC + convertTime(p.getLastPlayed()));
+				return true;
 			}
 			sender.sendMessage(ChatColor.RED + args[0] + " is either a nickname or has never joined this server.");
 			return true;
