@@ -140,7 +140,7 @@ public class Main extends JavaPlugin implements Listener {
 	
 	private String convertTime(long time){
 	    Date date = new Date(time);
-	    Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
+	    Format format = new SimpleDateFormat("EEE, dd-MMM-yyyy HH:mm:ss z");
 	    return format.format(date);
 	}
 

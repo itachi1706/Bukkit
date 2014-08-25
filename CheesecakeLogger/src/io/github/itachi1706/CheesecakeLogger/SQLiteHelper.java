@@ -118,7 +118,7 @@ public class SQLiteHelper {
 		p.sendMessage(ChatColor.GOLD + "-------------------- Login Statistics -------------------");
 		p.sendMessage(ChatColor.GOLD + "Player Name: " + ChatColor.RESET + target);
 		p.sendMessage(ChatColor.GOLD + "Rank: " + ChatColor.RESET + rank);
-		p.sendMessage(ChatColor.GOLD + "Player UUID: " + ChatColor.RESET + uuid);
+		p.sendMessage(ChatColor.GOLD + "UUID: " + ChatColor.RESET + uuid);
 		p.sendMessage(ChatColor.GOLD + "Logins: " + ChatColor.RESET + logins);
 		p.sendMessage(ChatColor.GOLD + "Logouts: " + ChatColor.RESET + logouts);
 		p.sendMessage(ChatColor.GOLD + "First Joined: " + ChatColor.RESET + firstPlayed);
