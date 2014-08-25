@@ -47,14 +47,14 @@ public class GetPlayerUUIDCmd implements CommandExecutor{
 					//Attempt to get an offline player
 					for (OfflinePlayer op : Bukkit.getServer().getOfflinePlayers()){
 						if (op.getName().equals(playername)){
-							sender.sendMessage(ChatColor.GOLD + "UUID of " + op.getName() + ChatColor.GOLD + " is: " + op.getUniqueId());
+							sender.sendMessage(ChatColor.GOLD + "UUID of " + ChatColor.GRAY + ChatColor.ITALIC + op.getName() + ChatColor.GOLD + " is: " + op.getUniqueId());
 							return true;
 						}
 					}
 					sender.sendMessage(ChatColor.RED + "Unable to get " + playername + "'s UUID. Players must have joined at least once to get their UUID");
 					return true;
 				}
-				sender.sendMessage(ChatColor.GOLD + "UUID of " + ChatColor.GRAY + ChatColor.ITALIC + target.getDisplayName() + ChatColor.GOLD + " is: " + target.getUniqueId());
+				sender.sendMessage(ChatColor.GOLD + "UUID of " + target.getDisplayName() + ChatColor.GOLD + " is: " + target.getUniqueId());
 				return true;
 			}
 		}
