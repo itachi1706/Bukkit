@@ -5,6 +5,12 @@ description: A logging plugin
 author: itachi1706
 depend: [SQLibrary]
 commands:
+  lastseen:
+    description: Last seen Command
+    usage: /lastseen <player>
+    permission: cheesecakelogger.default
+    permission-message: You do not have permission to do this command.
+    aliases: [seen]
   cheesecakelogger:
     description: Main Command
     usage: /cheesecakelogger help
