@@ -3,7 +3,6 @@ package io.github.itachi1706.CheesecakeLogger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -184,10 +183,10 @@ public class SQLiteHelper {
 			while (rs.next()){
 				if (rs.getString("TYPE").toString().equalsIgnoreCase("LOGIN")){
 					//A login message
-					loginHist.add(sendLogin(i, rs.getString("X"), rs.getString("Y"), rs.getString("Z"), rs.getString("WORLD"), rs.getDate("TIME"), rs.getString("IP")));
+					loginHist.add(sendLogin(i, rs.getString("X"), rs.getString("Y"), rs.getString("Z"), rs.getString("WORLD"), rs.getString("TIME"), rs.getString("IP")));
 				} else if (rs.getString("TYPE").equalsIgnoreCase("LOGOUT")){
 					//A logout message
-					loginHist.add(sendLogout(i, rs.getString("X"), rs.getString("Y"), rs.getString("Z"), rs.getString("WORLD"), rs.getDate("TIME"), rs.getString("IP")));
+					loginHist.add(sendLogout(i, rs.getString("X"), rs.getString("Y"), rs.getString("Z"), rs.getString("WORLD"), rs.getString("TIME"), rs.getString("IP")));
 				}
 				i++;
 			}
@@ -227,11 +226,11 @@ public class SQLiteHelper {
 		return;
 	}
 	
-	private static String sendLogin(int no, String x, String y, String z, String world, Date datetime, String ip){
+	private static String sendLogin(int no, String x, String y, String z, String world, String datetime, String ip){
 		//1. datetime Login at X: x, Y: y, Z:z, World: world with IP
 		StringBuilder builder = new StringBuilder();
 		builder.append(ChatColor.GOLD + "" + no + ". ");
-		builder.append(ChatColor.RESET + "" + ChatColor.ITALIC + datetime.toString() + " " + ChatColor.RESET + "");
+		builder.append(ChatColor.RESET + "" + ChatColor.ITALIC + datetime + " UTC " + ChatColor.RESET + "");
 		builder.append(ChatColor.GREEN + "Login ");
 		builder.append(ChatColor.RESET + "at ");
 		builder.append(ChatColor.GOLD + "" + ChatColor.AQUA + world);
@@ -243,11 +242,11 @@ public class SQLiteHelper {
 		return builder.toString();
 	}
 	
-	private static String sendLogout(int no, String x, String y, String z, String world, Date datetime, String ip){
+	private static String sendLogout(int no, String x, String y, String z, String world, String datetime, String ip){
 		//1. datetime Logout at X: x, Y: y, Z:z, World: world with IP
 		StringBuilder builder = new StringBuilder();
 		builder.append(ChatColor.GOLD + "" + no + ". ");
-		builder.append(ChatColor.RESET + "" + ChatColor.ITALIC + datetime.toString() + " " + ChatColor.RESET + "");
+		builder.append(ChatColor.RESET + "" + ChatColor.ITALIC + datetime + " UTC " + ChatColor.RESET + "");
 		builder.append(ChatColor.RED + "Logout ");
 		builder.append(ChatColor.RESET + "at ");
 		builder.append(ChatColor.GOLD + "" + ChatColor.AQUA + world);
