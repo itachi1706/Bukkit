@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -69,8 +70,26 @@ public class SQLiteHelper {
 		}
 	}
 	
-	public static void checkLoginStats(CommandSender p, String target){
+	private static String getPexRank(String target){
+		PermissionManager pex = PermissionsEx.getPermissionManager();
+		PermissionUser user = pex.getUser(target);
+		List<String> grouptmp = user.getParentIdentifiers();
+		StringBuilder build = new StringBuilder();
+		if (grouptmp.size() > 1){
+			build.append("[ ");
+			for (String tmp : grouptmp){
+				build.append(tmp + " ");
+			}
+			build.append("]");
+		} else {
+			build.append(grouptmp.get(0));
+		}
+		return build.toString();
+	}
+	
+	public static void checkLoginStats(CommandSender p, String target, UUID uuid, String firstPlayed, String lastPlayed){
 		int logins = getLoginCount(target);
+		String rank = "PermissionsEx is not installed";
 		if (logins == -2){
 			p.sendMessage(ChatColor.RED + "An Error Occured trying to convert login count! (" + exceptionMsg + ")");
 			exceptionMsg = new String();	//Reset exception message
@@ -90,27 +109,20 @@ public class SQLiteHelper {
 			exceptionMsg = new String();	//Reset exception message
 			return;
 		}
+		//Get PEX Rank if present
+		if (Main.pexPresent){
+			rank = getPexRank(target);
+		}
+		
+		//Present them all out
 		p.sendMessage(ChatColor.GOLD + "-------------------- Login Statistics -------------------");
 		p.sendMessage(ChatColor.GOLD + "Player Name: " + ChatColor.RESET + target);
-		if (Main.pexPresent){
-			PermissionManager pex = PermissionsEx.getPermissionManager();
-			PermissionUser user = pex.getUser(target);
-			List<String> grouptmp = user.getParentIdentifiers();
-			StringBuilder build = new StringBuilder();
-			if (grouptmp.size() > 1){
-				build.append("[ ");
-				for (String tmp : grouptmp){
-					build.append(tmp + " ");
-				}
-				build.append("]");
-			} else {
-				build.append(grouptmp.get(0));
-			}
-			
-			p.sendMessage(ChatColor.GOLD + "Rank: " + ChatColor.RESET + build.toString());
-		}
+		p.sendMessage(ChatColor.GOLD + "Rank: " + ChatColor.RESET + rank);
+		p.sendMessage(ChatColor.GOLD + "Player UUID: " + ChatColor.RESET + uuid);
 		p.sendMessage(ChatColor.GOLD + "Logins: " + ChatColor.RESET + logins);
 		p.sendMessage(ChatColor.GOLD + "Logouts: " + ChatColor.RESET + logouts);
+		p.sendMessage(ChatColor.GOLD + "First Joined: " + ChatColor.RESET + firstPlayed);
+		p.sendMessage(ChatColor.GOLD + "Last Played: " + ChatColor.RESET + lastPlayed);
 		p.sendMessage(ChatColor.GOLD + "-----------------------------------------------------");
 	}
 	

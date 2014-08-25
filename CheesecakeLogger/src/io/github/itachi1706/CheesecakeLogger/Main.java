@@ -1,9 +1,13 @@
 package io.github.itachi1706.CheesecakeLogger;
 
 import java.io.File;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
@@ -67,6 +71,7 @@ public class Main extends JavaPlugin implements Listener {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		if (cmd.getName().equalsIgnoreCase("cheesecakelogger")){
 			sender.sendMessage(ChatColor.BLUE + "View login info of a player with /viewlogins <player> <#>");
@@ -121,10 +126,22 @@ public class Main extends JavaPlugin implements Listener {
 				sender.sendMessage(ChatColor.DARK_RED + "You do not have permission to use this command!");
 				return true;
 			}
-			SQLiteHelper.checkLoginStats(sender, args[0]);
+			for (OfflinePlayer p : getServer().getOfflinePlayers()){
+				if (p.getName().equals(args[0])){
+					SQLiteHelper.checkLoginStats(sender, args[0], p.getUniqueId(), convertTime(p.getFirstPlayed()), convertTime(p.getLastPlayed()));
+					return true;
+				}
+			}
+			sender.sendMessage(ChatColor.RED + args[0] + " is either a nickname or has never joined this server.");
 			return true;
 		}
 		return false;
+	}
+	
+	private String convertTime(long time){
+	    Date date = new Date(time);
+	    Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
+	    return format.format(date);
 	}
 
 }
