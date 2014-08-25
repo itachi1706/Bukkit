@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import ru.tehkode.permissions.PermissionManager;
 import ru.tehkode.permissions.PermissionUser;
@@ -113,10 +114,21 @@ public class SQLiteHelper {
 		if (Main.pexPresent){
 			rank = getPexRank(target);
 		}
+		String status = ChatColor.RED + "Offline";
+		String nick = target;
+		//Check if player is online
+		for (Player pl : Bukkit.getServer().getOnlinePlayers()){
+			if (pl.getName().equals(target)){
+				status = ChatColor.GREEN + "Online";
+				nick = pl.getDisplayName();
+			}
+		}
 		
 		//Present them all out
 		p.sendMessage(ChatColor.GOLD + "-------------------- Login Statistics -------------------");
+		p.sendMessage(ChatColor.GOLD + "Status: " + ChatColor.RESET + status);
 		p.sendMessage(ChatColor.GOLD + "Player Name: " + ChatColor.RESET + target);
+		p.sendMessage(ChatColor.GOLD + "Nickname: " + ChatColor.RESET + nick);
 		p.sendMessage(ChatColor.GOLD + "Rank: " + ChatColor.RESET + rank);
 		p.sendMessage(ChatColor.GOLD + "UUID: " + ChatColor.RESET + uuid);
 		p.sendMessage(ChatColor.GOLD + "Logins: " + ChatColor.RESET + logins);

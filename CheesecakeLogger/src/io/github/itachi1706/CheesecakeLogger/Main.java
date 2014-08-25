@@ -75,6 +75,7 @@ public class Main extends JavaPlugin implements Listener {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		if (cmd.getName().equalsIgnoreCase("cheesecakelogger")){
 			sender.sendMessage(ChatColor.BLUE + "View login info of a player with /viewlogins <player> <#>");
+			sender.sendMessage(ChatColor.BLUE + "View statistics of a player with /viewplayerstats <player>");
 			sender.sendMessage(ChatColor.BLUE + "Delete login data of a player with /delloginhistory <player>");
 			return true;
 		} else if (cmd.getName().equalsIgnoreCase("viewlogins")){
