@@ -3,6 +3,7 @@ package io.github.itachi1706.CheesecakeMinigameLobby;
 import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.BurnCmd;
 import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.FlingCmd;
 import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.FlyCmd;
+import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.GamemodeCmd;
 import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.SmiteCmd;
 import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.SpeedCmd;
 import io.github.itachi1706.CheesecakeMinigameLobby.ModularCommands.WowCmd;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -57,6 +59,10 @@ public class Main extends JavaPlugin implements Listener{
 		getCommand("smite").setExecutor(new SmiteCmd(this));
 		getCommand("burn").setExecutor(new BurnCmd(this));
 		getCommand("fling").setExecutor(new FlingCmd(this));
+		getCommand("gm").setExecutor(new GamemodeCmd(this));
+		getCommand("gmc").setExecutor(new GamemodeCmd(this));
+		getCommand("gms").setExecutor(new GamemodeCmd(this));
+		getCommand("gma").setExecutor(new GamemodeCmd(this));
 	}
 	
 	@Override
@@ -112,6 +118,10 @@ public class Main extends JavaPlugin implements Listener{
     	s.sendMessage(ChatColor.GOLD + "/cml stats: " + ChatColor.WHITE +  "Display Current Config stats");
     	s.sendMessage(ChatColor.GOLD + "/cml module: " + ChatColor.WHITE +  "Display Current Modules");
     	s.sendMessage(ChatColor.GOLD + "/cmla <module>: " + ChatColor.WHITE +  "Administration Command");
+    	s.sendMessage(ChatColor.GOLD + "/gmc [player]: " + ChatColor.WHITE +  "Sets Player to Creative Mode");
+    	s.sendMessage(ChatColor.GOLD + "/gms [player]: " + ChatColor.WHITE +  "Sets Player to Survival Mode");
+    	s.sendMessage(ChatColor.GOLD + "/gma [player]: " + ChatColor.WHITE +  "Sets Player to Adventure Mode");
+    	s.sendMessage(ChatColor.GOLD + "/gm [player]: " + ChatColor.WHITE +  "Changes a Player's Gamemode");
     	if (commandFly){
     		s.sendMessage(ChatColor.GOLD + "/fly [player]: " + ChatColor.WHITE +  "Allows a player to fly");
     	}
@@ -252,6 +262,14 @@ public class Main extends JavaPlugin implements Listener{
             }
         }
 		return null;
+	}
+	
+	public static void sendAdminMsg(String msg){
+		for (Player p : Bukkit.getServer().getOnlinePlayers()){
+			if (p.hasPermission("bukkit.broadcast.admin")){
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+			}
+		}
 	}
 
 }
