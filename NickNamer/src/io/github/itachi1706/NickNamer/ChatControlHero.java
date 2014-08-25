@@ -23,8 +23,8 @@ public class ChatControlHero implements Listener{
 				//Do true nicked chat hiding
 				String msg = e.getMessage();
 				String dname = staffer.getDisplayName();
-				String herochatFor = "{color}[{nick}] " + ChatColor.BLUE + "[Member] " + staffer.getDisplayName() + "{color}: " + e.getMessage();
-				String format = ChatColor.BLUE + "[Member] <player>: <message>";
+				String herochatFor = "{color}[{nick}] " + ChatColor.BLUE + "[MEMBER] " + staffer.getDisplayName() + "{color}: " + e.getMessage();
+				String format = ChatColor.BLUE + "[MEMBER] <player>: <message>";
 				format.replace("<player>", dname);
 				format.replace("<message>", msg);
 				e.setBukkitFormat(format);
@@ -37,8 +37,8 @@ public class ChatControlHero implements Listener{
 			//Do true nicked chat hiding
 			String msg = e.getMessage();
 			String dname = player.getDisplayName();
-			String herochatFor = ChatColor.BLUE + "[Member] " + player.getDisplayName() + "{color}: " + e.getMessage();
-			String format = ChatColor.BLUE + "[Member] <player>: <message>";
+			String herochatFor = ChatColor.BLUE + "[MEMBER] " + player.getDisplayName() + "{color}: " + e.getMessage();
+			String format = ChatColor.BLUE + "[MEMBER] <player>: <message>";
 			format.replace("<player>", dname);
 			format.replace("<message>", msg);
 			e.setBukkitFormat(format);
