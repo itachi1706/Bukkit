@@ -151,8 +151,10 @@ public class Main extends JavaPlugin implements Listener{
 				p.sendMessage("You were teleported back to the main world!");
 			}
 		}
-		WorldGen.deleteSCWorlds();
-		reinitializeListeners();
+		if (initGame){
+			WorldGen.deleteSCWorlds();
+			reinitializeListeners();
+		}
 		if (initGame == false){
 			Bukkit.getLogger().info("Resetting countdown timer!");
 			Bukkit.getServer().getScheduler().cancelTask(countDownTimer);
@@ -175,7 +177,6 @@ public class Main extends JavaPlugin implements Listener{
 		players = 0;
 		gameStart = false;
 		countdown = 90;
-		initGame = false;
 		gamemode = 0;
 		pvp = 0;
 		respawn = 0;
@@ -188,8 +189,11 @@ public class Main extends JavaPlugin implements Listener{
 		while (i.hasNext()){
 			i.next().kickPlayer("Game is restarting");
 		}
-		Bukkit.getLogger().info("Regenerating worlds...");
-		WorldGen.generateSCWorld();
+		if (initGame){
+			Bukkit.getLogger().info("Regenerating worlds...");
+			WorldGen.generateSCWorld();
+		}
+		initGame = false;
 	}
 	
 	@EventHandler
