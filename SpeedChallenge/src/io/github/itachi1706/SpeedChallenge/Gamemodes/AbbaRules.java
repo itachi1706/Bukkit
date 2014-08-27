@@ -51,12 +51,12 @@ public class AbbaRules {
 	}
 	
 	public static void checkInventory(){
-		if (Main.playerList.size() == 0){
+		if (Main.gamePlayerList.size() == 0){
 			Bukkit.getLogger().info("INVALID - NO PLAYERS");
 			return;
 		}
-		for (int i = 0; i < Main.playerList.size(); i++){
-			Player p = Main.playerList.get(i);
+		for (int i = 0; i < Main.gamePlayerList.size(); i++){
+			Player p = Main.gamePlayerList.get(i);
 			@SuppressWarnings("unused")
 			int check = checkObjective(p);
 		}
@@ -115,8 +115,8 @@ public class AbbaRules {
 		is.addUnsafeEnchantment(Enchantment.DURABILITY, 9999);
 		is.addUnsafeEnchantment(Enchantment.DIG_SPEED, 2);
 		is.addUnsafeEnchantment(Enchantment.SILK_TOUCH, 1);
-		for (int i = 0; i < Main.playerList.size(); i++){
-			Player p = Main.playerList.get(i);
+		for (int i = 0; i < Main.gamePlayerList.size(); i++){
+			Player p = Main.gamePlayerList.get(i);
 			p.getInventory().addItem(is);
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6You have been given a &aSilk Touch Diamond Pickaxe with Efficiency II and Unbreaking&6 for this challenge!"));
 		}

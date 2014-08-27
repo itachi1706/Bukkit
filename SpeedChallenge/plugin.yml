@@ -3,6 +3,7 @@ main: io.github.itachi1706.SpeedChallenge.Main
 version: 1.4
 description: A plugin for a speed challenge game
 author: itachi1706
+depend: [Multiverse-Core]
 commands:
   sc:
     description: Main Plugin Command

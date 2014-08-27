@@ -38,10 +38,10 @@ public class SpecCmd implements CommandExecutor {
 						if (!check){
 							Main.spectators.add(p);
 						}
-						for (int i = 0; i < Main.playerList.size(); i++){
-							Player pl = Main.playerList.get(i);
+						for (int i = 0; i < Main.gamePlayerList.size(); i++){
+							Player pl = Main.gamePlayerList.get(i);
 							if (pl.equals(p)){
-								Main.playerList.remove(i);
+								Main.gamePlayerList.remove(i);
 								break;
 							}
 						}
@@ -70,8 +70,8 @@ public class SpecCmd implements CommandExecutor {
 			}
 			for (Player online: Bukkit.getServer().getOnlinePlayers()){
 				if (online.getName().equals(args[0]) || online.getDisplayName().contains(args[0])){
-					for (int i = 0; i < Main.playerList.size(); i++){
-						Player pla = Main.playerList.get(i);
+					for (int i = 0; i < Main.gamePlayerList.size(); i++){
+						Player pla = Main.gamePlayerList.get(i);
 						if (pla.getName().equals(online.getName())){
 							Player starter = (Player) sender;
 							if (starter.getWorld().equals(online.getWorld())){
@@ -112,8 +112,8 @@ public class SpecCmd implements CommandExecutor {
 	}
 	
 	public boolean checkPlayerInGame(Player p){
-		for (int i = 0; i < Main.playerList.size(); i++){
-			Player game = Main.playerList.get(i);
+		for (int i = 0; i < Main.gamePlayerList.size(); i++){
+			Player game = Main.gamePlayerList.get(i);
 			if (p.getName().equals(game.getName())){
 				return true;
 			}

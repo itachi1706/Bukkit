@@ -104,7 +104,7 @@ public class InventoriesPreGame {
 	}
 	
 	public static void selectGamemode(Player p, int clickslot){
-		if (p.hasPermission("sc.override") || Main.playerList.get(0).getName().equals(p.getName())){
+		if (p.hasPermission("sc.override") || Main.gamePlayerList.get(0).getName().equals(p.getName())){
 			switch (clickslot){
 			case 0: 	Main.gamemode = 1;
 						break;
@@ -134,7 +134,7 @@ public class InventoriesPreGame {
 	}
 	
 	public static void selectHCMode(Player p, int clickslot){
-		if (p.hasPermission("sc.override") || Main.playerList.get(0).getName().equals(p.getName())){
+		if (p.hasPermission("sc.override") || Main.gamePlayerList.get(0).getName().equals(p.getName())){
 			switch (clickslot){
 			case 3: 	Main.respawn = 2;
 						p.sendMessage(ChatColor.BLUE + "Enabled Hardcore Mode!");
@@ -154,7 +154,7 @@ public class InventoriesPreGame {
 	}
 	
 	public static void selectPVPMode(Player p, int clickslot){
-		if (p.hasPermission("sc.override") || Main.playerList.get(0).getName().equals(p.getName())){
+		if (p.hasPermission("sc.override") || Main.gamePlayerList.get(0).getName().equals(p.getName())){
 			switch (clickslot){
 			case 3: 	Main.pvp = 1;
 						p.sendMessage(ChatColor.BLUE + "Enabled PVP!");

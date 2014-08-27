@@ -30,8 +30,8 @@ public class GameListeners implements Listener{
 		if (!Main.gameStart){
 			if (Main.initGame){
 				Player p = e.getPlayer();
-				for (int i = 0; i < Main.playerList.size(); i++){
-					Player pla = Main.playerList.get(i);
+				for (int i = 0; i < Main.gamePlayerList.size(); i++){
+					Player pla = Main.gamePlayerList.get(i);
 					if (p.getName().equals(pla.getName())){
 						//In game, freeze player
 						Location lfrom = e.getFrom(), lTo = e.getTo();
@@ -120,17 +120,17 @@ public class GameListeners implements Listener{
 			//Denies Respawn On Death
 			e.getPlayer().sendMessage(ChatColor.RED + "You are now a spectator as respawn on death is disabled!");
 			Main.spectators.add(e.getPlayer());
-			for (int i = 0; i < Main.playerList.size(); i++){
-				Player p = Main.playerList.get(i);
+			for (int i = 0; i < Main.gamePlayerList.size(); i++){
+				Player p = Main.gamePlayerList.get(i);
 				if (p.equals(e.getPlayer())){
-					Main.playerList.remove(i);
+					Main.gamePlayerList.remove(i);
 					break;
 				}
 			}
 			Spec.addSpectator(e.getPlayer());
 			Bukkit.getLogger().info("Spectators: " + Main.spectators.size());
-			Bukkit.getLogger().info("Player Remaining:" + Main.playerList.size());
-			if (Main.playerList.size() == 0){
+			Bukkit.getLogger().info("Player Remaining:" + Main.gamePlayerList.size());
+			if (Main.gamePlayerList.size() == 0){
 				Bukkit.getServer().broadcastMessage(ChatColor.DARK_RED + "As all players have died, Game will end in 30 seconds!");
 				Main.countdown = 31;
 			}
@@ -179,7 +179,7 @@ public class GameListeners implements Listener{
 		}
 		if (!Main.gameStart){
 			if (e.getPlayer().getItemInHand().isSimilar(InventoriesPreGame.gmSelector)){
-				if (e.getPlayer().hasPermission("sc.override") || Main.playerList.get(0).getName().equals(e.getPlayer().getName())){
+				if (e.getPlayer().hasPermission("sc.override") || Main.gamePlayerList.get(0).getName().equals(e.getPlayer().getName())){
 					e.getPlayer().openInventory(InventoriesPreGame.gamemodeInventory);
 					e.setCancelled(true);
 				} else {
@@ -187,7 +187,7 @@ public class GameListeners implements Listener{
 					e.setCancelled(true);
 				}
 			} else if (e.getPlayer().getItemInHand().isSimilar(InventoriesPreGame.hcSelector)){
-				if (e.getPlayer().hasPermission("sc.override") || Main.playerList.get(0).getName().equals(e.getPlayer().getName())){
+				if (e.getPlayer().hasPermission("sc.override") || Main.gamePlayerList.get(0).getName().equals(e.getPlayer().getName())){
 					e.getPlayer().openInventory(InventoriesPreGame.hardcoreInventory);
 					e.setCancelled(true);
 				} else {
@@ -196,7 +196,7 @@ public class GameListeners implements Listener{
 				}
 				
 			} else if (e.getPlayer().getItemInHand().isSimilar(InventoriesPreGame.pvpSelector)){
-				if (e.getPlayer().hasPermission("sc.override") || Main.playerList.get(0).getName().equals(e.getPlayer().getName())){
+				if (e.getPlayer().hasPermission("sc.override") || Main.gamePlayerList.get(0).getName().equals(e.getPlayer().getName())){
 					e.getPlayer().openInventory(InventoriesPreGame.pvpInventory);
 					e.setCancelled(true);
 				} else {

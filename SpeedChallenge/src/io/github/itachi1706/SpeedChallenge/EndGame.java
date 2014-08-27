@@ -50,12 +50,12 @@ public class EndGame implements Runnable {
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', final1));
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', final2));
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', final3));
-		for (int i = 0; i < Main.playerList.size(); i++){
-			Player p = Main.playerList.get(i);
+		for (int i = 0; i < Main.gamePlayerList.size(); i++){
+			Player p = Main.gamePlayerList.get(i);
 			playerListScore.add(ScoreboardHelper.getFinalScore(p));
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&b[SpeedChallenge] &6" + p.getDisplayName() + ": &c" + ScoreboardHelper.getFinalScore(p) + " points"));
 		}
-		if (Main.playerList.size() != 0){
+		if (Main.gamePlayerList.size() != 0){
 			int high = playerListScore.get(0);
 			int index = 0;
 			for (int i = 0; i < playerListScore.size(); i++){
@@ -65,7 +65,7 @@ public class EndGame implements Runnable {
 					index = i;
 				}
 			}
-			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&b[SpeedChallenge] &6&l" + Main.playerList.get(index).getDisplayName() + " &6&lhas the highest score at &b&l" + playerListScore.get(index) + " points!"));
+			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&b[SpeedChallenge] &6&l" + Main.gamePlayerList.get(index).getDisplayName() + " &6&lhas the highest score at &b&l" + playerListScore.get(index) + " points!"));
 		} else {
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&b[SpeedChallenge] &6&lAll players have died! Resulting in this match being a draw!"));
 		}

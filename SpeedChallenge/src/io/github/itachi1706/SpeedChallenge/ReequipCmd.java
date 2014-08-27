@@ -26,8 +26,8 @@ public class ReequipCmd implements CommandExecutor{
 				sender.sendMessage("You must be an in-game player to use this command!");
 				return true;
 			}
-			for (int i = 0; i < Main.playerList.size(); i++){
-				Player p = Main.playerList.get(i);
+			for (int i = 0; i < Main.gamePlayerList.size(); i++){
+				Player p = Main.gamePlayerList.get(i);
 				if (p.getName().equals(sender.getName())){
 					//Matches
 					reequip((Player) sender);

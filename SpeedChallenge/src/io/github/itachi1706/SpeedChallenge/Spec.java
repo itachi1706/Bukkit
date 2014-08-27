@@ -49,8 +49,8 @@ public class Spec {
 	
 	public static void updateSpectatorList(){
 		spectatePlayerList.clear();
-		for (int i = 0; i < Main.playerList.size(); i++){
-			Player p = Main.playerList.get(i);
+		for (int i = 0; i < Main.gamePlayerList.size(); i++){
+			Player p = Main.gamePlayerList.get(i);
 			List<String> lore = new ArrayList<String>();
 			lore.add("Click here to teleport");
 			lore.add("to the player!");
@@ -101,10 +101,10 @@ public class Spec {
 	
 	//Get Nearest Player
 	public static Player getNearestPlayer (Player player){
-        Player nearest = Main.playerList.get(0);
+        Player nearest = Main.gamePlayerList.get(0);
         double dist = player.getLocation().distance(nearest.getLocation());
-        for (int i = 0; i < Main.playerList.size(); i++){
-        	Player inGamePlayer = Main.playerList.get(i);
+        for (int i = 0; i < Main.gamePlayerList.size(); i++){
+        	Player inGamePlayer = Main.gamePlayerList.get(i);
         	if (!player.getWorld().equals(inGamePlayer.getWorld())) continue;
         	if (player.getLocation().distance(inGamePlayer.getLocation()) < dist){
         		nearest = inGamePlayer;
@@ -139,8 +139,8 @@ public class Spec {
 	}
 	
 	public static boolean checkPlayerInGame(Player p){
-		for (int i = 0; i < Main.playerList.size(); i++){
-			Player game = Main.playerList.get(i);
+		for (int i = 0; i < Main.gamePlayerList.size(); i++){
+			Player game = Main.gamePlayerList.get(i);
 			if (p.getName().equals(game.getName())){
 				return true;
 			}

@@ -52,7 +52,7 @@ public class Main extends JavaPlugin implements Listener{
 	public static int pvp = 0;	//PVP enabled or not (0 is random, 1 is on, 2 is off)
 	public static int respawn = 0; //Whether or not to respawn players if dead (0 random, 1 yes, 2 no)
 	public static int countdown = 90;	//Countdown timer
-	public static ArrayList<Player> playerList = new ArrayList<Player>();			//Players
+	public static ArrayList<Player> gamePlayerList = new ArrayList<Player>();	//Players
 	public static ArrayList<Player> spectators = new ArrayList<Player>();		//Spectators
 	public static boolean invulnerable = true;		//Invulnerable
 	public static boolean serverstarted = false;	//Server has started or not
@@ -78,10 +78,14 @@ public class Main extends JavaPlugin implements Listener{
 		getLogger().info("Deleting previous stats of player in case its not deleted");
 		deletePlayerStats();
 		InventoriesPreGame.initSelectionStuff();
-		getLogger().info("Deleting and regenerating worlds...");
-		WorldGen.deleteSCWorlds();
-		WorldGen.generateSCWorld();
-		getLogger().info("Worlds regenerated!");
+		getLogger().info("Deleting and regenerating worlds after 10 seconds...");
+		getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
+			public void run(){
+				WorldGen.deleteSCWorlds();
+				WorldGen.generateSCWorld();
+				getLogger().info("Worlds regenerated!");
+			}
+		}, 200L);
 		plugin = this;
 		serverstarted = false;
 		
@@ -175,7 +179,7 @@ public class Main extends JavaPlugin implements Listener{
 		gamemode = 0;
 		pvp = 0;
 		respawn = 0;
-		playerList.clear();
+		gamePlayerList.clear();
 		spectators.clear();
 		serverstarted = false;
 		
@@ -190,6 +194,12 @@ public class Main extends JavaPlugin implements Listener{
 	public void checkIfWorldReset(PlayerLoginEvent e){
 		if (WorldGen.resettingWorlds){
 			e.getPlayer().kickPlayer("The world is still being resetted! Wait a while before rejoining!");
+			return;
+		}
+		if (this.getServer().hasWhitelist()){
+			if (!e.getPlayer().isWhitelisted()){
+				e.getPlayer().kickPlayer("You are not whitelisted on the server!");
+			}
 		}
 	}
 	
@@ -227,7 +237,7 @@ public class Main extends JavaPlugin implements Listener{
 			e.getPlayer().sendMessage(ChatColor.GOLD + "==================================================");
 			e.getPlayer().sendMessage(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "                 Speed Challenge");
 			e.getPlayer().sendMessage(ChatColor.GOLD + "==================================================");
-			if (playerList.size() == 0){
+			if (gamePlayerList.size() == 0){
 				e.getPlayer().sendMessage(ChatColor.DARK_GREEN + "Use the items in your first 3 slots of your inventory to configure this game!");
 			} else {
 				e.getPlayer().sendMessage(ChatColor.DARK_GREEN + "Wait for the game to start!");
@@ -241,7 +251,7 @@ public class Main extends JavaPlugin implements Listener{
 			e.getPlayer().sendMessage(ChatColor.GOLD + "==================================================");
 			e.getPlayer().setScoreboard(ScoreboardHelper.sb);
 			players++;
-			playerList.add(e.getPlayer());
+			gamePlayerList.add(e.getPlayer());
 			getLogger().info(players + " player(s)");
 			if (players == 1 && !gameStart){
 				ScoreboardHelper.initPlayersCounter();
@@ -272,10 +282,10 @@ public class Main extends JavaPlugin implements Listener{
 			prefix = ChatColor.translateAlternateColorCodes('&', result);
 		}
 		Bukkit.getServer().broadcastMessage(prefix + " " + e.getPlayer().getDisplayName() + " left the game!");
-		for (int i = 0; i < playerList.size(); i++){
-			Player pla = playerList.get(i);
+		for (int i = 0; i < gamePlayerList.size(); i++){
+			Player pla = gamePlayerList.get(i);
 			if (pla.equals(e.getPlayer())){
-				playerList.remove(i);
+				gamePlayerList.remove(i);
 				players--;
 				break;
 			}

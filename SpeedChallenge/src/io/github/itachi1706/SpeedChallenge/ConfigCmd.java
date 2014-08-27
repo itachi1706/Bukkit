@@ -42,7 +42,7 @@ public class ConfigCmd implements CommandExecutor {
 					sender.sendMessage(ChatColor.RED + "Game has already started!");
 					return true;
 				}
-				if (sender.hasPermission("sc.override") || Main.playerList.get(0).getName().equals(sender.getName())){
+				if (sender.hasPermission("sc.override") || Main.gamePlayerList.get(0).getName().equals(sender.getName())){
 					//Able to do config
 					if (args[0].equalsIgnoreCase("gamemode")){
 						//Modify gamemode

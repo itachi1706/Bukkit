@@ -26,8 +26,8 @@ public class ListObjectives implements CommandExecutor{
 				sender.sendMessage(ChatColor.RED + "Game has not started yet!");
 			}
 			if (sender instanceof Player){
-				for (int i = 0; i < Main.playerList.size(); i++){
-					Player p = Main.playerList.get(i);
+				for (int i = 0; i < Main.gamePlayerList.size(); i++){
+					Player p = Main.gamePlayerList.get(i);
 					if (p.getName().equals(sender.getName())){
 						//Is a player playing the game
 						PreGameRunnable.checkPlayerObjectives((Player) sender);

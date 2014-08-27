@@ -51,12 +51,12 @@ public class AbbaRulesRetardStyle {
 	}
 	
 	public static void checkInventory(){
-		if (Main.playerList.size() == 0){
+		if (Main.gamePlayerList.size() == 0){
 			Bukkit.getLogger().info("INVALID - NO PLAYERS");
 			return;
 		}
-		for (int i = 0; i < Main.playerList.size(); i++){
-			Player p = Main.playerList.get(i);
+		for (int i = 0; i < Main.gamePlayerList.size(); i++){
+			Player p = Main.gamePlayerList.get(i);
 			@SuppressWarnings("unused")
 			int check = checkObjective(p);
 		}
@@ -183,8 +183,8 @@ public class AbbaRulesRetardStyle {
 		is7.addUnsafeEnchantment(Enchantment.DURABILITY, 9999);
 		is7.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 9999);
 		is7.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 9999);
-		for (int i = 0; i < Main.playerList.size(); i++){
-			Player p = Main.playerList.get(i);
+		for (int i = 0; i < Main.gamePlayerList.size(); i++){
+			Player p = Main.gamePlayerList.get(i);
 			p.getInventory().addItem(is);
 			p.getInventory().addItem(is2);
 			p.getInventory().addItem(is3);

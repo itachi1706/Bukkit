@@ -43,12 +43,12 @@ public class Sample {
 	
 	public static void checkInventory(){
 		checkCompleted.clear();
-		if (Main.playerList.size() == 0){
+		if (Main.gamePlayerList.size() == 0){
 			Bukkit.getLogger().info("INVALID - NO PLAYERS");
 			return;
 		}
-		for (int i = 0; i < Main.playerList.size(); i++){
-			Player p = Main.playerList.get(i);
+		for (int i = 0; i < Main.gamePlayerList.size(); i++){
+			Player p = Main.gamePlayerList.get(i);
 			int check = checkObjective(p);
 			checkCompleted.add(check);
 		}
@@ -56,7 +56,7 @@ public class Sample {
 		for (int i = 0; i < checkCompleted.size(); i++){
 			total += checkCompleted.get(i);
 		}
-		if (total == (maxPts*Main.playerList.size())){
+		if (total == (maxPts*Main.gamePlayerList.size())){
 			//Completed
 			Bukkit.getServer().broadcastMessage("All players have completed the objective! Game ends now!");
 			Main.countdown = 0;

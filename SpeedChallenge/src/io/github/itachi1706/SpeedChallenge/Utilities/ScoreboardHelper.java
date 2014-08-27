@@ -60,8 +60,8 @@ public class ScoreboardHelper {
 		o.setDisplayName(display);
 		Score score = o.getScore(ChatColor.GOLD + "Players Scores");
 		score.setScore(9999);
-		for (int i = 0; i < Main.playerList.size(); i++){
-			Score pSco = o.getScore(Main.playerList.get(i).getDisplayName());
+		for (int i = 0; i < Main.gamePlayerList.size(); i++){
+			Score pSco = o.getScore(Main.gamePlayerList.get(i).getDisplayName());
 			pSco.setScore(0);
 		}
 		sb.resetScores(ChatColor.DARK_GREEN + "Time:");
