@@ -12,11 +12,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
-import org.bukkit.World.Environment;
-import org.bukkit.WorldType;
 import org.bukkit.entity.Player;
-
-import com.onarandombox.MultiverseCore.MultiverseCore;
 
 public class InitGame implements Runnable {
 	
@@ -25,42 +21,12 @@ public class InitGame implements Runnable {
 	public InitGame(Main plugin){
 		this.plugin = plugin;
 	}
-
-	public static int randomInt = 0;
 	
 	public void run() {
 		if (Main.countdown == 60){
 			String finalCountDown2 = "&b[SpeedChallenge] &6&lGame starts in 1 minute!";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', finalCountDown2));
 		}
-		if (Main.countdown == 31){
-			//Generate new overworld
-			String worldgen = "&b[SpeedChallenge] &6Generating new world maps with a random seed";
-			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', worldgen));
-			}
-		if (Main.countdown == 30){
-			//Generate new overworld
-			String worldgen = "&b[SpeedChallenge] &2Generating new Overworld";
-			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', worldgen));
-			generateOverworld();
-			}
-		if (Main.countdown == 29){
-			//Generate nether
-			String nethergen = "&b[SpeedChallenge] &4Generating new Nether";
-			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', nethergen));
-			generateNether();
-		}
-		if (Main.countdown == 28){
-			//Generate The End
-			String endgen = "&b[SpeedChallenge] &eGenerating new End";
-			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', endgen));
-			generateEnd();
-		}
-		if (Main.countdown == 27){
-			//Generate new overworld
-			String worldgen = "&b[SpeedChallenge] &6Worlds generated. Seed used: &b" + randomInt;
-			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', worldgen));
-			}
 		if (Main.countdown <= 10 && Main.countdown > 0){
 			//Start counting down
 			String finalCountDown = "&b[SpeedChallenge] &6&lGame begins in " + Main.countdown + " second(s)!";
@@ -97,28 +63,6 @@ public class InitGame implements Runnable {
 		}
 	}
 	
-	public void generateOverworld(){
-		Random randomGenerator = new Random();
-		randomInt = randomGenerator.nextInt();
-		MultiverseCore mc = (MultiverseCore) Bukkit.getServer().getPluginManager().getPlugin("Multiverse-Core");
-		mc.getMVWorldManager().addWorld("SC", Environment.NORMAL, randomInt + "", WorldType.NORMAL, true, null, true);
-		//String worldgen = "&b[SpeedChallenge] &2Overworld has been randomly generated! Seed used: &b" + randomInt;
-		//Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', worldgen));
-	}
-	
-	public void generateNether(){
-		MultiverseCore mc = (MultiverseCore) Bukkit.getServer().getPluginManager().getPlugin("Multiverse-Core");
-		mc.getMVWorldManager().addWorld("SC_nether", Environment.NETHER, randomInt + "", WorldType.NORMAL, true, null, true);
-		//String nethergen = "&b[SpeedChallenge] &4Nether has been randomly generated! Seed used: &b" + randomInt;
-		//Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', nethergen));
-	}
-	
-	public void generateEnd(){
-		MultiverseCore mc = (MultiverseCore) Bukkit.getServer().getPluginManager().getPlugin("Multiverse-Core");
-		mc.getMVWorldManager().addWorld("SC_the_end", Environment.THE_END, randomInt + "", WorldType.NORMAL, true, null, true);
-		//String endgen = "&b[SpeedChallenge] &eThe End has been randomly generated! Seed used: &b" + randomInt;
-		//Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', endgen));
-	}
 	
 	public void optionSelected(){
 		String troll = "&b[SpeedChallenge] &4&lChallenge Selected: &b&l" + Main.gamemode + " (" + PreGameRunnable.getTitle() + ")";
