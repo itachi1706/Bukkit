@@ -66,6 +66,7 @@ public class Main extends JavaPlugin implements Listener{
 	@Override
 	public void onEnable(){
 		getLogger().info("Enabling Plugin...");
+		getServer().dispatchCommand(Bukkit.getConsoleSender(), "s [SpeedChallenge] server starting...");
 		getServer().getPluginManager().registerEvents(this, this);
 		getServer().getPluginManager().registerEvents(new GameListeners(), this);
 		this.saveDefaultConfig(); 
@@ -88,6 +89,7 @@ public class Main extends JavaPlugin implements Listener{
 		}, 200L);
 		plugin = this;
 		serverstarted = false;
+		getServer().dispatchCommand(Bukkit.getConsoleSender(), "s [SpeedChallenge] server started...");
 		
 	}
 	

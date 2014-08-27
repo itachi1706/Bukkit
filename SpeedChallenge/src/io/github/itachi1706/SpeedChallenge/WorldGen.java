@@ -19,6 +19,7 @@ public class WorldGen {
 	public static void generateSCWorld(){
 		resettingWorlds = true;
 		Bukkit.getLogger().info("Generating Worlds...");
+		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "s [SpeedChallenge] Generating Worlds...");
 		Random randomGenerator = new Random();
 		randomInt = randomGenerator.nextInt();
 		generateOverworld();
@@ -26,6 +27,7 @@ public class WorldGen {
 		generateEnd();
 		Bukkit.getLogger().info("Worlds Generated...");
 		resettingWorlds = false;
+		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "s [SpeedChallenge] Worlds generated!");
 	}
 	
 	public static void deleteSCWorlds(){
