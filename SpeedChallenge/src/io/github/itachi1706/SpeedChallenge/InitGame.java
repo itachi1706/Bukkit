@@ -85,6 +85,8 @@ public class InitGame implements Runnable {
 			String respawn = "&b[SpeedChallenge] &4&lHardcore Mode will be &a&lenabled!";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', respawn));
 		}
+		String wSeed = "&b[SpeedChallenge] &4&lSeed: &b&l" + WorldGen.randomInt;
+		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', wSeed));
 	}
 	
 	public void teleportPlayers(){

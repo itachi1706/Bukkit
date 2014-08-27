@@ -34,12 +34,12 @@ public class AdminCmd implements CommandExecutor {
 					sender.sendMessage(ChatColor.DARK_RED + "Game is in initialization mode");
 					return true;
 				}
-				if (Main.countdown > 33){
-					Main.countdown = 32;
+				if (Main.countdown > 15){
+					Main.countdown = 11;
 					sender.sendMessage("Force starting game");
 					return true;
 				}
-				else if (Main.countdown < 27){
+				else if (Main.countdown < 10){
 					Main.countdown = 5;
 					sender.sendMessage("Force starting game");
 					return true;

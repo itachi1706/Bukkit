@@ -150,8 +150,6 @@ public class Main extends JavaPlugin implements Listener{
 			}
 		}
 		WorldGen.deleteSCWorlds();
-		Bukkit.getLogger().info("Regenerating worlds...");
-		WorldGen.generateSCWorld();
 		reinitializeListeners();
 		if (initGame == false){
 			Bukkit.getLogger().info("Resetting countdown timer!");
@@ -188,6 +186,8 @@ public class Main extends JavaPlugin implements Listener{
 		while (i.hasNext()){
 			i.next().kickPlayer("Game is restarting");
 		}
+		Bukkit.getLogger().info("Regenerating worlds...");
+		WorldGen.generateSCWorld();
 	}
 	
 	@EventHandler
