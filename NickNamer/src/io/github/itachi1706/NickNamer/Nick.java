@@ -5,13 +5,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.kitteh.tag.PlayerReceiveNameTagEvent;
+import org.kitteh.tag.AsyncPlayerReceiveNameTagEvent;
 import org.kitteh.tag.TagAPI;
 
 public class Nick implements Listener {
 
 	@EventHandler(priority=EventPriority.NORMAL)
-	public void initNameTag(PlayerReceiveNameTagEvent e){
+	public void initNameTag(AsyncPlayerReceiveNameTagEvent e){
 		if (e.getNamedPlayer().getName().equals(e.getNamedPlayer().getName())){
 			if (!Main.nick.getBoolean(e.getNamedPlayer().getName() + ".disguised")){
 			String format = checkFormatPerm(e.getNamedPlayer());
