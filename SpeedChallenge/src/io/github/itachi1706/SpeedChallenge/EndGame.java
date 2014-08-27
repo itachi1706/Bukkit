@@ -34,7 +34,7 @@ public class EndGame implements Runnable {
 					Bukkit.getLogger().info("Files deleted");
 				}
 			}, 200L);
-			Main.resetGame();
+			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "sc reset");
 			Bukkit.getServer().getScheduler().cancelTask(Main.countDownTimer4);
 			timer = -1;
 		}

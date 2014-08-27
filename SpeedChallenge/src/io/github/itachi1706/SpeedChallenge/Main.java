@@ -17,13 +17,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import com.onarandombox.MultiverseCore.MultiverseCore;
-import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 
 import ru.tehkode.permissions.PermissionManager;
 import ru.tehkode.permissions.PermissionUser;
@@ -41,6 +40,8 @@ public class Main extends JavaPlugin implements Listener{
 	
 	//User editable variables
 	public static int numberOfChallenges = 5;
+	
+	public static Plugin plugin;
 	
 	//Plugin variables (DO NOT TOUCH)
 	public static int players = 0;	//Number of players
@@ -66,6 +67,7 @@ public class Main extends JavaPlugin implements Listener{
 	public void onEnable(){
 		getLogger().info("Enabling Plugin...");
 		getServer().getPluginManager().registerEvents(this, this);
+		getServer().getPluginManager().registerEvents(new GameListeners(), this);
 		this.saveDefaultConfig(); 
 		getCommand("scconfig").setExecutor(new ConfigCmd(this));
 		getCommand("spectate").setExecutor(new SpecCmd(this));
@@ -73,10 +75,14 @@ public class Main extends JavaPlugin implements Listener{
 		getCommand("reequip").setExecutor(new ReequipCmd(this));
 		getCommand("scadmin").setExecutor(new AdminCmd(this));
 		getCommand("scconfig").setTabCompleter(new ConfigTabCompleter());
-		Bukkit.getServer().getPluginManager().registerEvents(new GameListeners(), this);
 		getLogger().info("Deleting previous stats of player in case its not deleted");
 		deletePlayerStats();
 		InventoriesPreGame.initSelectionStuff();
+		getLogger().info("Deleting and regenerating worlds...");
+		WorldGen.deleteSCWorlds();
+		WorldGen.generateSCWorld();
+		getLogger().info("Worlds regenerated!");
+		plugin = this;
 		serverstarted = false;
 		
 	}
@@ -109,32 +115,25 @@ public class Main extends JavaPlugin implements Listener{
 	
 	@Override
 	public void onDisable(){
+		Plugin plugin = this;
 		//Logic when plugin gets disabled
 		getLogger().info("Disabling Plugin...");
+		HandlerList.unregisterAll(plugin);
 	}
 	
-	public void startCountDown(){
+	private void reinitializeListeners(){
+		HandlerList.unregisterAll(plugin);
+		getServer().getPluginManager().registerEvents(this, this);
+		getServer().getPluginManager().registerEvents(new GameListeners(), this);
+	}
+	
+	private void startCountDown(){
 		String finalCountDown2 = "&b[SpeedChallenge] &6&lGame is starting in 1 and a half minute!";
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', finalCountDown2));
 		countDownTimer = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new InitGame(this), 20L, 20L);
-		MultiverseCore mc = (MultiverseCore) Bukkit.getServer().getPluginManager().getPlugin("Multiverse-Core");
-		Collection<MultiverseWorld> collate = mc.getMVWorldManager().getMVWorlds();
-		ArrayList<MultiverseWorld> obj = new ArrayList<MultiverseWorld>(collate);
-		for (int i = 0; i < obj.size(); i++){
-			MultiverseWorld world = obj.get(i);
-			if (world.getName().equals("SC")){
-				mc.getMVWorldManager().deleteWorld("SC");
-			}
-			if (world.getName().equals("SC_nether")){
-				mc.getMVWorldManager().deleteWorld("SC_nether");
-			}
-			if (world.getName().equals("SC_the_end")){
-				mc.getMVWorldManager().deleteWorld("SC_the_end");
-			}
-		}
 	}
 	
-	public static void resetGame(){
+	public void resetGame(){
 		Collection<? extends Player> playerList = Bukkit.getServer().getOnlinePlayers();
 		Iterator<? extends Player> i = playerList.iterator();
 		World w = Bukkit.getWorld("world");
@@ -146,21 +145,10 @@ public class Main extends JavaPlugin implements Listener{
 				p.sendMessage("You were teleported back to the main world!");
 			}
 		}
-		MultiverseCore mc = (MultiverseCore) Bukkit.getServer().getPluginManager().getPlugin("Multiverse-Core");
-		Collection<MultiverseWorld> collate = mc.getMVWorldManager().getMVWorlds();
-		ArrayList<MultiverseWorld> obj = new ArrayList<MultiverseWorld>(collate);
-		for (int j = 0; j < obj.size(); j++){
-			MultiverseWorld world = obj.get(j);
-			if (world.getName().equals("SC")){
-				mc.getMVWorldManager().deleteWorld("SC");
-			}
-			if (world.getName().equals("SC_nether")){
-				mc.getMVWorldManager().deleteWorld("SC_nether");
-			}
-			if (world.getName().equals("SC_the_end")){
-				mc.getMVWorldManager().deleteWorld("SC_the_end");
-			}
-		}
+		WorldGen.deleteSCWorlds();
+		Bukkit.getLogger().info("Regenerating worlds...");
+		WorldGen.generateSCWorld();
+		reinitializeListeners();
 		if (initGame == false){
 			Bukkit.getLogger().info("Resetting countdown timer!");
 			Bukkit.getServer().getScheduler().cancelTask(countDownTimer);
@@ -310,7 +298,7 @@ public class Main extends JavaPlugin implements Listener{
 		}
 	}
 	
-	public void deletePlayerStats(){
+	private void deletePlayerStats(){
 		File dir = new File("world/stats");
 		if (dir.isDirectory()){
 			for (String pStats : dir.list()){
