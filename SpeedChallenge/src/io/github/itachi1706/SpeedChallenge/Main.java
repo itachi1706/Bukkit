@@ -20,6 +20,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -55,7 +56,6 @@ public class Main extends JavaPlugin implements Listener{
 	public static ArrayList<Player> spectators = new ArrayList<Player>();		//Spectators
 	public static boolean invulnerable = true;		//Invulnerable
 	public static boolean serverstarted = false;	//Server has started or not
-	
 	
 	//Countdown timers
 	public static int countDownTimer = 1;
@@ -166,7 +166,6 @@ public class Main extends JavaPlugin implements Listener{
 			Player spec = spectators.get(j);
 			spec.setFlying(false);
 			spec.setCanPickupItems(true);
-			
 		}
 		
 		players = 0;
@@ -180,11 +179,17 @@ public class Main extends JavaPlugin implements Listener{
 		spectators.clear();
 		serverstarted = false;
 		
-		Bukkit.getServer().broadcastMessage("WORLDS DELETED!");
 		ScoreboardHelper.resetScoreboard();
 		i = playerList.iterator();
 		while (i.hasNext()){
 			i.next().kickPlayer("Game is restarting");
+		}
+	}
+	
+	@EventHandler
+	public void checkIfWorldReset(PlayerLoginEvent e){
+		if (WorldGen.resettingWorlds){
+			e.getPlayer().kickPlayer("The world is still being resetted! Wait a while before rejoining!");
 		}
 	}
 	

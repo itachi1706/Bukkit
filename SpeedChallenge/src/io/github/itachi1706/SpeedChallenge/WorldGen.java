@@ -14,8 +14,10 @@ import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 public class WorldGen {
 	
 	public static int randomInt;
+	public static boolean resettingWorlds = false;
 	
 	public static void generateSCWorld(){
+		resettingWorlds = true;
 		Bukkit.getLogger().info("Generating Worlds...");
 		Random randomGenerator = new Random();
 		randomInt = randomGenerator.nextInt();
@@ -23,9 +25,11 @@ public class WorldGen {
 		generateNether();
 		generateEnd();
 		Bukkit.getLogger().info("Worlds Generated...");
+		resettingWorlds = false;
 	}
 	
 	public static void deleteSCWorlds(){
+		resettingWorlds = true;
 		MultiverseCore mc = (MultiverseCore) Bukkit.getServer().getPluginManager().getPlugin("Multiverse-Core");
 		Collection<MultiverseWorld> collate = mc.getMVWorldManager().getMVWorlds();
 		ArrayList<MultiverseWorld> obj = new ArrayList<MultiverseWorld>(collate);
@@ -41,6 +45,8 @@ public class WorldGen {
 				mc.getMVWorldManager().deleteWorld("SC_the_end");
 			}
 		}
+		Bukkit.getServer().broadcastMessage("WORLDS DELETED!");
+		resettingWorlds = false;
 	}
 	
 	private static void generateOverworld(){
