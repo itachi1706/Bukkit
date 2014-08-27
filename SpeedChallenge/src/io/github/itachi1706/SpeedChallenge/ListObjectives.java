@@ -24,6 +24,7 @@ public class ListObjectives implements CommandExecutor{
 			}
 			if (!Main.gameStart){
 				sender.sendMessage(ChatColor.RED + "Game has not started yet!");
+				return true;
 			}
 			if (sender instanceof Player){
 				for (int i = 0; i < Main.gamePlayerList.size(); i++){
