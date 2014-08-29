@@ -2,6 +2,7 @@ package io.github.itachi1706.SpeedChallenge;
 
 import io.github.itachi1706.SpeedChallenge.Gamemodes.AbbaRules;
 import io.github.itachi1706.SpeedChallenge.Gamemodes.AbbaRulesRetardStyle;
+import io.github.itachi1706.SpeedChallenge.Gamemodes.GetAsManyAchievements;
 import io.github.itachi1706.SpeedChallenge.Gamemodes.ModAbbaRules;
 import io.github.itachi1706.SpeedChallenge.Gamemodes.EthoSpeedChallenge3;
 import io.github.itachi1706.SpeedChallenge.Gamemodes.Sample;
@@ -94,6 +95,8 @@ public class PreGameRunnable implements Runnable{
 				break;
 		case 5: AbbaRulesRetardStyle.checkInventory();
 				break;
+		case 6: GetAsManyAchievements.checkInventory();
+				break;
 		default: Bukkit.getServer().broadcastMessage("Error occured");
 				break;
 		}
@@ -127,6 +130,8 @@ public class PreGameRunnable implements Runnable{
 				break;
 		case 5: AbbaRulesRetardStyle.listObjectives(p);
 				break;
+		case 6: GetAsManyAchievements.listObjectives(p);
+				break;
 		default: p.sendMessage("Invalid Gamemode!");
 				break;
 		}
@@ -145,6 +150,8 @@ public class PreGameRunnable implements Runnable{
 				break;
 		case 5: AbbaRulesRetardStyle.gmInfo();
 				break;
+		case 6: GetAsManyAchievements.gmInfo();
+				break;
 		default: Bukkit.getServer().broadcastMessage("Error occured");
 				break;
 		}
@@ -158,6 +165,7 @@ public class PreGameRunnable implements Runnable{
 		case 3: return ModAbbaRules.getGMTitle();
 		case 4: return AbbaRules.getGMTitle();
 		case 5: return AbbaRulesRetardStyle.getGMTitle();
+		case 6: return GetAsManyAchievements.getGMTitle();
 		default: Bukkit.getServer().broadcastMessage("Error occured");
 		return "";
 		}

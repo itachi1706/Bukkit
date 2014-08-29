@@ -40,7 +40,7 @@ public class Main extends JavaPlugin implements Listener{
 	 */
 	
 	//User editable variables
-	public static int numberOfChallenges = 5;
+	public static int numberOfChallenges = 6;
 	
 	public static Plugin plugin;
 	

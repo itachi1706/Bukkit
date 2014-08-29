@@ -56,6 +56,7 @@ public class ConfigTabCompleter implements TabCompleter{
                 	list.add("3");
                 	list.add("4");
                 	list.add("5");
+                	list.add("6");
                 	for (int i = 0; i < list.size(); i++){
                     	String s = list.get(i);
                         // Since the player has already typed something in,
