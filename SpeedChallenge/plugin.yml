@@ -1,6 +1,6 @@
 name: SpeedChallenge
 main: io.github.itachi1706.SpeedChallenge.Main
-version: 1.4
+version: 1.5
 description: A plugin for a speed challenge game
 author: itachi1706
 depend: [Multiverse-Core]

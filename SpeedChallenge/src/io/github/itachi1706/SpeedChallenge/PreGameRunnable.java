@@ -59,6 +59,7 @@ public class PreGameRunnable implements Runnable{
 				online.getInventory().setBoots(new ItemStack(Material.AIR));
 				online.getInventory().setChestplate(new ItemStack(Material.AIR));
 				online.getInventory().setLeggings(new ItemStack(Material.AIR));
+				online.playSound(online.getLocation(), Sound.LEVEL_UP, 1, 10);
 			}
 			initPlayerWithWeapon();
 			Main.gameStart = true;

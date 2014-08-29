@@ -66,6 +66,9 @@ public class GameIsRunning implements Runnable{
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', finalCountDown));
 		}
 		if (Main.countdown == 0){
+			for (Player online : Bukkit.getServer().getOnlinePlayers()){
+				online.playSound(online.getLocation(), Sound.LEVEL_UP, 1, 10);
+			}
 			String finalCountDown3 = "&b[SpeedChallenge] &6&lGame Ended! Now calculating scores and determining winner!";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', finalCountDown3));
 			EndGame.getWinner();

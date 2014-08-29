@@ -41,6 +41,7 @@ public class InitGame implements Runnable {
 				online.setLevel(0);
 				online.setExp(0);
 				InventoriesPreGame.removeItemFromPlayer(online);
+				online.playSound(online.getLocation(), Sound.LEVEL_UP, 1, 10);
 			}
 			String finalCountDown3 = "&b[SpeedChallenge] &6&lGame Will Start NOW!";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', finalCountDown3));
