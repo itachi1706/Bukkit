@@ -177,6 +177,7 @@ public class Main extends JavaPlugin implements Listener{
 		players = 0;
 		gameStart = false;
 		countdown = 90;
+		PreGameRunnable.countdown = 30;
 		gamemode = 0;
 		pvp = 0;
 		respawn = 0;
