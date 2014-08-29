@@ -174,7 +174,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -195,7 +195,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -216,7 +216,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -237,7 +237,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -258,7 +258,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -279,7 +279,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -300,7 +300,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -321,7 +321,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -342,7 +342,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -363,7 +363,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -384,7 +384,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -405,7 +405,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -441,7 +441,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -467,7 +467,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -488,7 +488,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -509,7 +509,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -530,7 +530,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -551,7 +551,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -572,7 +572,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -593,7 +593,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -614,7 +614,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -635,7 +635,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -656,7 +656,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -677,7 +677,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -698,7 +698,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -719,7 +719,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -740,7 +740,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -761,7 +761,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -782,7 +782,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -803,7 +803,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
@@ -824,7 +824,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} catch (NullPointerException ex){
 			o = "0";
 		}
-		Bukkit.broadcastMessage("DEBUG: " + o);
+		
 		int check = 0;
 		try {
 			check = Integer.parseInt(o);
