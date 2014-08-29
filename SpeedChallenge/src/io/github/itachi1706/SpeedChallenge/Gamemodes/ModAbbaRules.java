@@ -14,7 +14,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class ModAbbaRules {
+public class ModAbbaRules extends AbstractGamemode {
 	
 	private static String challengeTitle = "Modified ABBA Rules";
 	

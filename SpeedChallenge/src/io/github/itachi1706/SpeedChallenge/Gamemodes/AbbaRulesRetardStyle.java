@@ -14,7 +14,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class AbbaRulesRetardStyle {
+public class AbbaRulesRetardStyle extends AbstractGamemode {
 	
 	private static String challengeTitle = "ABBA Rules (God Edition)";
 	

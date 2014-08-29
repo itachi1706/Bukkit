@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import io.github.itachi1706.SpeedChallenge.Main;
 import io.github.itachi1706.SpeedChallenge.Utilities.ScoreboardHelper;
 
-public class EthoSpeedChallenge3 {
+public class EthoSpeedChallenge3 extends AbstractGamemode {
 	
 	private static ArrayList<Integer> checkCompleted = new ArrayList<Integer>();
 	private static int maxPts = 5;	//Max points possible to get per player
