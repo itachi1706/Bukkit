@@ -191,7 +191,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkMineWood(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.mineWood").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
