@@ -112,6 +112,99 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		if (checkMineWood(jArr)){
 			total += 1;
 		}
+		if (checkBuildWorkbench(jArr)){
+			total += 1;
+		}
+		if (checkBuildHoe(jArr)){
+			total += 1;
+		}
+		if (checkMakeBread(jArr)){
+			total += 1;
+		}
+		if (checkBakeCake(jArr)){
+			total += 1;
+		}
+		if (checkBuildSword(jArr)){
+			total += 1;
+		}
+		if (checkKillEnemy(jArr)){
+			total += 1;
+		}
+		if (checkSnipeSkeleton(jArr)){
+			total += 1;
+		}
+		if (checkKillCow(jArr)){
+			total += 1;
+		}
+		if (checkBreedCow(jArr)){
+			total += 1;
+		}
+		if (checkFlyPig(jArr)){
+			total += 1;
+		}
+		if (checkBuildPickaxe(jArr)){
+			total += 1;
+		}
+		if (checkBuildBetterPickaxe(jArr)){
+			total += 1;
+		}
+		if (checkOverpowered(jArr)){
+			total += 1;
+		}
+		if (checkBuildFurnance(jArr)){
+			total += 1;
+		}
+		if (checkAcquireIron(jArr)){
+			total += 1;
+		}
+		if (checkCookFish(jArr)){
+			total += 1;
+		}
+		if (checkOnARail(jArr)){
+			total += 1;
+		}
+		if (checkDiamonds(jArr)){
+			total += 1;
+		}
+		if (checkDiamondsToYou(jArr)){
+			total += 1;
+		}
+		if (checkEnchantments(jArr)){
+			total += 1;
+		}
+		if (checkOverkill(jArr)){
+			total += 1;
+		}
+		if (checkBookcase(jArr)){
+			total += 1;
+		}
+		if (checkPortal(jArr)){
+			total += 1;
+		}
+		if (checkBlazerod(jArr)){
+			total += 1;
+		}
+		if (checkPotion(jArr)){
+			total += 1;
+		}
+		if (checkExploreAllBiomes(jArr)){
+			total += 1;
+		}
+		if (checkTheEnd(jArr)){
+			total += 1;
+		}
+		if (checkTheEnd2(jArr)){
+			total += 1;
+		}
+		if (checkSpawnWither(jArr)){
+			total += 1;
+		}
+		if (checkKillWither(jArr)){
+			total += 1;
+		}
+		if (checkFullBeacon(jArr)){
+			total += 1;
+		}
 		ScoreboardHelper.setScoreOfPlayer(p, total);
 		return total;
 	}
@@ -212,7 +305,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkBuildWorkbench(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.buildWorkBench").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -233,7 +326,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkBuildHoe(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.buildHoe").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -254,7 +347,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkMakeBread(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.makeBread").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -275,7 +368,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkBakeCake(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.bakeCake").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -296,7 +389,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkBuildSword(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.buildSword").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -317,7 +410,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkKillEnemy(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.killEnemy").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -338,7 +431,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkSnipeSkeleton(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.snipeSkeleton").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -359,7 +452,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkKillCow(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.killCow").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -380,7 +473,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkBreedCow(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.breedCow").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -401,7 +494,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkFlyPig(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.flyPig").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -420,24 +513,9 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	}
 	
 	private static boolean checkBuildPickaxe(JSONObject array){
-		String o = array.get("achievement.openInventory").toString();
-		int check = 0;
-		try {
-			check = Integer.parseInt(o);
-		} catch (NumberFormatException ex) {
-			ex.printStackTrace();
-			return false;
-		}
-		if (check > 0){
-			return true;
-		}
-		return false;
-	}
-	
-	private static boolean checkBuildBetterPickaxe(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.buildPickaxe").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -455,15 +533,52 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		return false;
 	}
 	
-	//False regardless till 1.8
+	private static boolean checkBuildBetterPickaxe(JSONObject array){
+		String o = null;
+		try {
+			o = array.get("achievement.buildBetterPickaxe").toString();
+		} catch (NullPointerException ex){
+			o = "0";
+		}
+		
+		int check = 0;
+		try {
+			check = Integer.parseInt(o);
+		} catch (NumberFormatException ex) {
+			ex.printStackTrace();
+			return false;
+		}
+		if (check > 0){
+			return true;
+		}
+		return false;
+	}
+	
 	private static boolean checkOverpowered(JSONObject array){
+		String o = null;
+		try {
+			o = array.get("achievement.overpowered").toString();
+		} catch (NullPointerException ex){
+			o = "0";
+		}
+		
+		int check = 0;
+		try {
+			check = Integer.parseInt(o);
+		} catch (NumberFormatException ex) {
+			ex.printStackTrace();
+			return false;
+		}
+		if (check > 0){
+			return true;
+		}
 		return false;
 	}
 	
 	private static boolean checkBuildFurnance(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.buildFurnance").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -484,7 +599,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkAcquireIron(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.acquireIron").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -505,7 +620,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkCookFish(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.cookFish").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -526,7 +641,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkOnARail(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.onARail").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -547,7 +662,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkDiamonds(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.diamonds").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -568,7 +683,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkDiamondsToYou(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.diamondsToYou").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -589,7 +704,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkEnchantments(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.enchantments").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -610,7 +725,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkOverkill(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.overkill").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -631,7 +746,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkBookcase(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.bookcase").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -652,7 +767,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkPortal(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.portal").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -673,7 +788,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkBlazerod(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.blazeRod").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -694,7 +809,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkPotion(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.potion").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -715,7 +830,8 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkExploreAllBiomes(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			JSONObject sec = (JSONObject) array.get("achievement.exploreAllBiomes");
+			o = sec.get("value").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -736,7 +852,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkTheEnd(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.theEnd").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -757,7 +873,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkTheEnd2(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.theEnd2").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -778,7 +894,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkSpawnWither(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.spawnWither").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -799,7 +915,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	private static boolean checkKillWither(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.killWither").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
@@ -817,10 +933,10 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		return false;
 	}
 	
-	private boolean checkFullBeacon(JSONObject array){
+	private static boolean checkFullBeacon(JSONObject array){
 		String o = null;
 		try {
-			o = array.get("achievement.openInventory").toString();
+			o = array.get("achievement.fullBeacon").toString();
 		} catch (NullPointerException ex){
 			o = "0";
 		}
