@@ -210,7 +210,194 @@ public class GetAsManyAchievements extends AbstractGamemode {
 	}
 	
 	public static void listObjectives(Player p) {
-		p.sendMessage("Unimplemented");
+		Bukkit.savePlayers();
+		JSONObject jArr = getStatsOfPlayer(p);
+		ArrayList<String> check = new ArrayList<String>();
+		check.add(ChatColor.GOLD + "Objectives Check");
+		check.add("Legend of this list: ");
+		check.add(ChatColor.GREEN + "Obtained " + ChatColor.RED + "Unobtained");
+		if (checkOpenInventory(jArr)){
+			check.add(ChatColor.GREEN + "Open Inventory");
+		} else {
+			check.add(ChatColor.RED + "Open Inventory");
+		}
+		if (checkMineWood(jArr)){
+			check.add(ChatColor.GREEN + "Getting Wood");
+		} else {
+			check.add(ChatColor.RED + "Getting Wood");
+		}
+		if (checkBuildWorkbench(jArr)){
+			check.add(ChatColor.GREEN + "Benchmarking");
+		} else {
+			check.add(ChatColor.RED + "Benchmarking");
+		}
+		if (checkBuildHoe(jArr)){
+			check.add(ChatColor.GREEN + "Time to Farm!");
+		} else {
+			check.add(ChatColor.RED + "Time to Farm!");
+		}
+		if (checkMakeBread(jArr)){
+			check.add(ChatColor.GREEN + "Bake Bread");
+		} else {
+			check.add(ChatColor.RED + "Bake Bread");
+		}
+		if (checkBakeCake(jArr)){
+			check.add(ChatColor.GREEN + "The Lie");
+		} else {
+			check.add(ChatColor.RED + "The Lie");
+		}
+		if (checkBuildSword(jArr)){
+			check.add(ChatColor.GREEN + "Time to Strike");
+		} else {
+			check.add(ChatColor.RED + "Time to Strike");
+		}
+		if (checkKillEnemy(jArr)){
+			check.add(ChatColor.GREEN + "Monster Hunter");
+		} else {
+			check.add(ChatColor.RED + "Monster Hunter");
+		}
+		if (checkSnipeSkeleton(jArr)){
+			check.add(ChatColor.GREEN + "Sniper Duel");
+		} else {
+			check.add(ChatColor.RED + "Sniper Duel");
+		}
+		if (checkKillCow(jArr)){
+			check.add(ChatColor.GREEN + "Cow Tipper");
+		} else {
+			check.add(ChatColor.RED + "Cow Tipper");
+		}
+		if (checkBreedCow(jArr)){
+			check.add(ChatColor.GREEN + "Repopulation");
+		} else {
+			check.add(ChatColor.RED + "Repopulation");
+		}
+		if (checkFlyPig(jArr)){
+			check.add(ChatColor.GREEN + "When Pigs Fly");
+		} else {
+			check.add(ChatColor.RED + "When Pigs Fly");
+		}
+		if (checkBuildPickaxe(jArr)){
+			check.add(ChatColor.GREEN + "Time to Mine!");
+		} else {
+			check.add(ChatColor.RED + "Time to Mine!");
+		}
+		if (checkBuildBetterPickaxe(jArr)){
+			check.add(ChatColor.GREEN + "Getting an Upgrade");
+		} else {
+			check.add(ChatColor.RED + "Getting an Upgrade");
+		}
+		if (checkOverpowered(jArr)){
+			check.add(ChatColor.GREEN + "Overpowered");
+		} else {
+			check.add(ChatColor.RED + "Overpowered");
+		}
+		if (checkBuildFurnance(jArr)){
+			check.add(ChatColor.GREEN + "Hot Topic");
+		} else {
+			check.add(ChatColor.RED + "Hot Topic");
+		}
+		if (checkAcquireIron(jArr)){
+			check.add(ChatColor.GREEN + "Acquire Hardware");
+		} else {
+			check.add(ChatColor.RED + "Acquire Hardware");
+		}
+		if (checkCookFish(jArr)){
+			check.add(ChatColor.GREEN + "Delicious Fish");
+		} else {
+			check.add(ChatColor.RED + "Delicious Fish");
+		}
+		if (checkOnARail(jArr)){
+			check.add(ChatColor.GREEN + "On A Rail");
+		} else {
+			check.add(ChatColor.RED + "On A Rail");
+		}
+		if (checkDiamonds(jArr)){
+			check.add(ChatColor.GREEN + "DIAMONDS!");
+		} else {
+			check.add(ChatColor.RED + "DIAMONDS!");
+		}
+		if (checkDiamondsToYou(jArr)){
+			check.add(ChatColor.GREEN + "Diamonds To You!");
+		} else {
+			check.add(ChatColor.RED + "Diamonds To You!");
+		}
+		if (checkEnchantments(jArr)){
+			check.add(ChatColor.GREEN + "Enchanter");
+		} else {
+			check.add(ChatColor.RED + "Enchanter");
+		}
+		if (checkOverkill(jArr)){
+			check.add(ChatColor.GREEN + "Overkill");
+		} else {
+			check.add(ChatColor.RED + "Overkill");
+		}
+		if (checkBookcase(jArr)){
+			check.add(ChatColor.GREEN + "Librarian");
+		} else {
+			check.add(ChatColor.RED + "Librarian");
+		}
+		if (checkPortal(jArr)){
+			check.add(ChatColor.GREEN + "We Need To Go Deeper");
+		} else {
+			check.add(ChatColor.RED + "We Need To Go Deeper");
+		}
+		if (checkBlazerod(jArr)){
+			check.add(ChatColor.GREEN + "Into Fire");
+		} else {
+			check.add(ChatColor.RED + "Into Fire");
+		}
+		if (checkPotion(jArr)){
+			check.add(ChatColor.GREEN + "Local Brewery");
+		} else {
+			check.add(ChatColor.RED + "Local Brewery");
+		}
+		if (checkExploreAllBiomes(jArr)){
+			check.add(ChatColor.GREEN + "Adventuring Time");
+		} else {
+			check.add(ChatColor.RED + "Adventuring Time");
+		}
+		if (checkTheEnd(jArr)){
+			check.add(ChatColor.GREEN + "The End?");
+		} else {
+			check.add(ChatColor.RED + "The End?");
+		}
+		if (checkTheEnd2(jArr)){
+			check.add(ChatColor.GREEN + "The End.");
+		} else {
+			check.add(ChatColor.RED + "The End.");
+		}
+		if (checkSpawnWither(jArr)){
+			check.add(ChatColor.GREEN + "The Beginning?");
+		} else {
+			check.add(ChatColor.RED + "The Beginning?");
+		}
+		if (checkKillWither(jArr)){
+			check.add(ChatColor.GREEN + "The Beginning.");
+		} else {
+			check.add(ChatColor.RED + "The Beginning.");
+		}
+		if (checkFullBeacon(jArr)){
+			check.add(ChatColor.GREEN + "Beaconator");
+		} else {
+			check.add(ChatColor.RED + "Beaconator");
+		}
+		p.sendMessage(check.get(0));
+		p.sendMessage(check.get(1));
+		p.sendMessage(check.get(2));
+		for (int i = 3; i < check.size(); i++)
+		if (i % 3 == 0){
+			if ((i + 1) >= check.size()){
+				//Only display 1
+				p.sendMessage(check.get(i));
+			} else if ((i+2) >= check.size()){
+				//Only displays 2
+				p.sendMessage(check.get(i) + "\t" + check.get(i+1));
+			} else {
+				//Displays 3
+				p.sendMessage(check.get(i) + "\t" + check.get(i+1) + "\t" + check.get(i+2));
+			}
+				
+		}
 	}
 	
 	
