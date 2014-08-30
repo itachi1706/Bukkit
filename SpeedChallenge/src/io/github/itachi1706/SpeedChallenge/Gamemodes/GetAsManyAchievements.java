@@ -69,8 +69,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&a&lObjectives"));
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&bComplete as many achievements as you can!"));
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&a"));
-		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&a&lAchievements can be viewed in the achievements pane"));
-		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&a&lin the pause menu"));
+		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&a&lAchievements can be viewed in the achievements pane in the pause menu"));
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', ""));
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "Note: - &cAchievements like Overpowered are not available"));
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "      - &cAchievements like On A Rail, Beaconator or Adventuring Time etc. while impossible, will still be available to obtain"));
@@ -215,7 +214,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		ArrayList<String> check = new ArrayList<String>();
 		check.add(ChatColor.GOLD + "Objectives Check");
 		check.add("Legend of this list: ");
-		check.add(ChatColor.GREEN + "Obtained " + ChatColor.RED + "Unobtained");
+		check.add("Green = " + ChatColor.GREEN + "Obtained " + ChatColor.RESET + ",Red = " + ChatColor.RED + "Unobtained");
 		if (checkOpenInventory(jArr)){
 			check.add(ChatColor.GREEN + "Open Inventory");
 		} else {
@@ -391,10 +390,10 @@ public class GetAsManyAchievements extends AbstractGamemode {
 				p.sendMessage(check.get(i));
 			} else if ((i+2) >= check.size()){
 				//Only displays 2
-				p.sendMessage(check.get(i) + "\t" + check.get(i+1));
+				p.sendMessage(check.get(i) + "    " + check.get(i+1));
 			} else {
 				//Displays 3
-				p.sendMessage(check.get(i) + "\t" + check.get(i+1) + "\t" + check.get(i+2));
+				p.sendMessage(check.get(i) + "    " + check.get(i+1) + "    " + check.get(i+2));
 			}
 				
 		}
