@@ -106,10 +106,12 @@ public class ConfigCmd implements CommandExecutor {
 						try {
 							time = Integer.parseInt(args[1]);
 							if (time > 60){
+								Main.customGameTime = time;
 								sender.sendMessage(ChatColor.BLUE + "Game Duration will be set at " + (time/60) + " minutes and " + (time%60) + " seconds");
 								String gametimer = "&b[SpeedChallenge] &4&lGame Duration will be set at " + (time/60) + " minutes and " + (time%60) + " seconds";
 								Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', gametimer));
 							} else {
+								Main.customGameTime = time;
 								sender.sendMessage(ChatColor.BLUE + "Game Duration will be set at " + time + " seconds");
 								String gametimer = "&b[SpeedChallenge] &4&lGame Duration will be set at " + time + " seconds";
 								Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', gametimer));

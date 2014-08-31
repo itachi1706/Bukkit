@@ -24,6 +24,7 @@ public class ConfigTabCompleter implements TabCompleter{
                 	// Add a list of words that you'd like to show up
                     // when the player presses tab.
                     list.add("gamemode");
+                    list.add("gametime");
                     list.add("pvp");
                     list.add("respawn");
                     list.add("list");
@@ -36,6 +37,7 @@ public class ConfigTabCompleter implements TabCompleter{
                 // argument because of the space after the hello.
                 } else if (args.length == 1) {
                 	list.add("gamemode");
+                	list.add("gametime");
                     list.add("pvp");
                     list.add("respawn");
                     list.add("list");
