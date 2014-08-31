@@ -22,7 +22,7 @@ public class InventoriesPreGame {
 	public static Inventory gamemodeInventory = Bukkit.createInventory(null, 9, ChatColor.DARK_GREEN + "Choose a Challenge!");
 	public static Inventory hardcoreInventory = Bukkit.createInventory(null, 9, ChatColor.DARK_GREEN + "Choose Hardcore Mode Option!");
 	public static Inventory pvpInventory = Bukkit.createInventory(null, 9, ChatColor.DARK_GREEN + "Choose PVP Option!");
-	public static Inventory timeInventory = Bukkit.createInventory(null, 9, ChatColor.DARK_GREEN + "Choose Game Duration (Default 30 min)");
+	public static Inventory timeInventory = Bukkit.createInventory(null, 9, ChatColor.DARK_GREEN + "Choose Game Duration");
 	
 	public static ItemStack gmSelector = null;
 	public static ItemStack pvpSelector = null;

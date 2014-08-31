@@ -205,6 +205,7 @@ public class GameListeners implements Listener{
 				}
 			} else if (e.getPlayer().getItemInHand().isSimilar(InventoriesPreGame.timeSelector)){
 				if (e.getPlayer().hasPermission("sc.override") || Main.gamePlayerList.get(0).getName().equals(e.getPlayer().getName())){
+					InventoriesPreGame.updateTime();
 					e.getPlayer().openInventory(InventoriesPreGame.timeInventory);
 					e.setCancelled(true);
 				} else {
