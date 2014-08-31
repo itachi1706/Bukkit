@@ -391,10 +391,10 @@ public class GetAsManyAchievements extends AbstractGamemode {
 				p.sendMessage(check.get(i));
 			} else if ((i+2) >= check.size()){
 				//Only displays 2
-				p.sendMessage(check.get(i) + "    " + check.get(i+1));
+				p.sendMessage(check.get(i) + ChatColor.RESET + "  -  " + check.get(i+1));
 			} else {
 				//Displays 3
-				p.sendMessage(check.get(i) + "    " + check.get(i+1) + "    " + check.get(i+2));
+				p.sendMessage(check.get(i) + ChatColor.RESET + "  -  " + check.get(i+1) + ChatColor.RESET + "  -  " + check.get(i+2));
 			}
 				
 		}
