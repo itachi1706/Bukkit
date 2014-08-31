@@ -258,6 +258,10 @@ public class GameListeners implements Listener{
 		Spec.selectPlayer(player, clickSlot);
 		event.getWhoClicked().closeInventory();
 		event.setCancelled(true);
+	} else if (inventory.getName().equals(InventoriesPreGame.timeInventory.getName())){
+		InventoriesPreGame.selectGameTimeMode(player, clickSlot);
+		event.getWhoClicked().closeInventory();
+		event.setCancelled(true);
 	}
 	}
 	
