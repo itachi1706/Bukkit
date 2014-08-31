@@ -66,6 +66,7 @@ public class InitGame implements Runnable {
 	
 	
 	public void optionSelected(){
+		Bukkit.getServer().broadcastMessage(ChatColor.GOLD + "==================================================");
 		String troll = "&b[SpeedChallenge] &4&lChallenge Selected: &b&l" + Main.gamemode + " (" + PreGameRunnable.getTitle() + ")";
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', troll));
 		String duration = "&b[SpeedChallenge] &4&lGame Duration: &b&l30 Minutes";
@@ -88,6 +89,7 @@ public class InitGame implements Runnable {
 		}
 		String wSeed = "&b[SpeedChallenge] &4&lSeed: &b&l" + WorldGen.randomInt;
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', wSeed));
+		Bukkit.getServer().broadcastMessage(ChatColor.GOLD + "==================================================");
 	}
 	
 	public void teleportPlayers(){

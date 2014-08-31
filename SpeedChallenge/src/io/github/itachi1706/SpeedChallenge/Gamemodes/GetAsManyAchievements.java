@@ -71,7 +71,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&a"));
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&a&lAchievements can be viewed in the achievements pane in the pause menu"));
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', ""));
-		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "Note: - &cAchievements like Overpowered are not available"));
+		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "Note: - &cAchievements like Overpowered are not available until 1.8"));
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "      - &cAchievements like On A Rail, Beaconator or Adventuring Time etc. while impossible, will still be available to obtain"));
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "      - &cScoreboard will only update every 10 seconds due to achievement file limitation"));
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&6=================================================="));
@@ -380,6 +380,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		} else {
 			check.add(ChatColor.RED + "Beaconator");
 		}
+		p.sendMessage(ChatColor.GOLD + "==================================================");
 		p.sendMessage(check.get(0));
 		p.sendMessage(check.get(1));
 		p.sendMessage(check.get(2));
@@ -397,6 +398,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 			}
 				
 		}
+		p.sendMessage(ChatColor.GOLD + "==================================================");
 	}
 	
 	
