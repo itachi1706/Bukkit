@@ -64,7 +64,11 @@ public class PreGameRunnable implements Runnable{
 			}
 			initPlayerWithWeapon();
 			Main.gameStart = true;
-			Main.countdown = 1800;
+			if (Main.customGameTime == -1){
+				Main.countdown = 1800;
+			} else {
+				Main.countdown = Main.customGameTime;
+			}
 			ScoreboardHelper.gameStart();
 			Main.countDownTimer3 = Bukkit.getScheduler().scheduleSyncRepeatingTask(this.plugin, new GameIsRunning(this.plugin), 20L, 20L);
 			Bukkit.getServer().getScheduler().cancelTask(Main.countDownTimer2);

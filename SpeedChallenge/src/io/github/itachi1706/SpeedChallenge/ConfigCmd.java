@@ -64,7 +64,7 @@ public class ConfigCmd implements CommandExecutor {
 							return true;
 						}
 					} 
-					if (args[0].equalsIgnoreCase("pvp")){
+					else if (args[0].equalsIgnoreCase("pvp")){
 						//Modify PVP option
 						if (args[1].equalsIgnoreCase("true")){
 							//Enables PVP
@@ -83,7 +83,7 @@ public class ConfigCmd implements CommandExecutor {
 						}
 						return true;
 					}
-					if (args[0].equalsIgnoreCase("respawn")){
+					else if (args[0].equalsIgnoreCase("respawn")){
 						//Modify Respawn Option
 						if (args[1].equalsIgnoreCase("true")){
 							//Enables Respawn
@@ -101,6 +101,23 @@ public class ConfigCmd implements CommandExecutor {
 							sender.sendMessage(ChatColor.RED + "Only true or false is accepted.");
 						}
 						return true;
+					} else if (args[0].equalsIgnoreCase("gametime")){
+						int time = 1800;
+						try {
+							time = Integer.parseInt(args[1]);
+							if (time > 60){
+								sender.sendMessage(ChatColor.BLUE + "Game Duration will be set at " + (time/60) + " minutes and " + (time%60) + " seconds");
+								String gametimer = "&b[SpeedChallenge] &4&lGame Duration will be set at " + (time/60) + " minutes and " + (time%60) + " seconds";
+								Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', gametimer));
+							} else {
+								sender.sendMessage(ChatColor.BLUE + "Game Duration will be set at " + time + " seconds");
+								String gametimer = "&b[SpeedChallenge] &4&lGame Duration will be set at " + time + " seconds";
+								Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', gametimer));
+							}
+						} catch (NumberFormatException ex){
+							sender.sendMessage(ChatColor.RED + "Usage: /scconfig gametime <time in seconds>");
+							return true;
+						}
 					} else {
 						displayConfigHelp(sender);
 					}

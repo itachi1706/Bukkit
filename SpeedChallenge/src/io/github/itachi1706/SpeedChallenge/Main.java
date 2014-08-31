@@ -56,6 +56,7 @@ public class Main extends JavaPlugin implements Listener{
 	public static ArrayList<Player> spectators = new ArrayList<Player>();		//Spectators
 	public static boolean invulnerable = true;		//Invulnerable
 	public static boolean serverstarted = false;	//Server has started or not
+	public static int customGameTime = -1;
 	
 	//Countdown timers
 	public static int countDownTimer = 1;
@@ -184,6 +185,7 @@ public class Main extends JavaPlugin implements Listener{
 		gamePlayerList.clear();
 		spectators.clear();
 		serverstarted = false;
+		customGameTime = -1;
 		
 		ScoreboardHelper.resetScoreboard();
 		i = playerList.iterator();

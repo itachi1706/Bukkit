@@ -69,7 +69,16 @@ public class InitGame implements Runnable {
 		Bukkit.getServer().broadcastMessage(ChatColor.GOLD + "==================================================");
 		String troll = "&b[SpeedChallenge] &4&lChallenge Selected: &b&l" + Main.gamemode + " (" + PreGameRunnable.getTitle() + ")";
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', troll));
-		String duration = "&b[SpeedChallenge] &4&lGame Duration: &b&l30 Minutes";
+		String duration = "";
+		if (Main.customGameTime == -1){
+			duration = "&b[SpeedChallenge] &4&lGame Duration: &b&l30 Minutes";
+		} else {
+			if (Main.customGameTime > 60){
+				duration = "&b[SpeedChallenge] &4&lGame Duration: &b&l" + (Main.customGameTime/60) + " minutes " + (Main.customGameTime%60) + " seconds";
+			} else {
+				duration = "&b[SpeedChallenge] &4&lGame Duration: &b&l" + Main.customGameTime + " seconds";
+			}
+		}
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', duration));
 		if (Main.pvp == 1){
 			String pvp = "&b[SpeedChallenge] &4&lPVP will be &a&lenabled!";
