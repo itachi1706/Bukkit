@@ -294,7 +294,7 @@ public class InventoriesPreGame {
 		gmImtmp.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6&lSelect A Challenge!"));
 		pvpImtmp.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&2&lSelect A PVP Option!"));
 		hcImtmp.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&4&lSelect Hardcore Mode Option!"));
-		timeImtmp.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&4&lSelect Gametime Duration!"));
+		timeImtmp.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&lSelect Gametime Duration!"));
 		gmtmp.setItemMeta(gmImtmp);
 		pvptmp.setItemMeta(pvpImtmp);
 		hctmp.setItemMeta(hcImtmp);
