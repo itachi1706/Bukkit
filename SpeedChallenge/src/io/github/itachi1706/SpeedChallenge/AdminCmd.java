@@ -58,6 +58,11 @@ public class AdminCmd implements CommandExecutor {
 					sender.sendMessage(ChatColor.DARK_RED + "Game has not begun");
 					return true;
 				}
+				if (Main.countdown < 10){
+					Main.countdown = 1;
+					sender.sendMessage("Insta-ending game now");
+					return true;
+				}
 				Main.countdown = 10;
 				sender.sendMessage("Force ending game");
 				return true;
