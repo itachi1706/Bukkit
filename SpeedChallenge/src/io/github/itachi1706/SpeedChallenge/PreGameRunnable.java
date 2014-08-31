@@ -87,6 +87,10 @@ public class PreGameRunnable implements Runnable{
 	}
 	
 	public static void checkPlayerScores(){
+		if (Main.gamePlayerList.size() == 0){
+			Main.countdown = 0;
+			return;
+		}
 		//Activates the specific class files for checks
 		switch(Main.gamemode){
 		case 1:	Sample.checkInventory();
