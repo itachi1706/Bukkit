@@ -73,7 +73,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', ""));
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "Note: - &cAchievements like Overpowered are not available until 1.8"));
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "      - &cAchievements like On A Rail, Beaconator or Adventuring Time etc. while impossible, will still be available to obtain"));
-		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "      - &cScoreboard will only update every 10 seconds due to achievement file limitation"));
+		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "      - &cScoreboard will only update every 10 seconds due to achievement file saving limitation"));
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&6=================================================="));
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&aTo check your current objectives, do &6/listobjectives"));
 	}
@@ -213,8 +213,8 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		JSONObject jArr = getStatsOfPlayer(p);
 		ArrayList<String> check = new ArrayList<String>();
 		check.add(ChatColor.GOLD + "Objectives Check");
-		check.add("Legend of this list: ");
-		check.add("Green = " + ChatColor.GREEN + "Obtained " + ChatColor.RESET + ",Red = " + ChatColor.RED + "Unobtained");
+		check.add("Legend: Green = " + ChatColor.GREEN + "Obtained " + ChatColor.RESET + ",Red = " + ChatColor.RED + "Unobtained");
+		check.add("");
 		if (checkOpenInventory(jArr)){
 			check.add(ChatColor.GREEN + "Open Inventory");
 		} else {

@@ -39,6 +39,11 @@ public class AdminCmd implements CommandExecutor {
 					sender.sendMessage("Force starting game");
 					return true;
 				}
+				else if (Main.countdown < 5){
+					Main.countdown = 1;
+					sender.sendMessage("Insta-starting game now");
+					return true;
+				}
 				else if (Main.countdown < 10){
 					Main.countdown = 5;
 					sender.sendMessage("Force starting game");
