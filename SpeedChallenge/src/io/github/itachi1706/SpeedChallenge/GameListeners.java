@@ -203,6 +203,14 @@ public class GameListeners implements Listener{
 					e.getPlayer().sendMessage(ChatColor.DARK_RED + "You do not have the ability to modify the config of this game!");
 					e.setCancelled(true);
 				}
+			} else if (e.getPlayer().getItemInHand().isSimilar(InventoriesPreGame.timeSelector)){
+				if (e.getPlayer().hasPermission("sc.override") || Main.gamePlayerList.get(0).getName().equals(e.getPlayer().getName())){
+					e.getPlayer().openInventory(InventoriesPreGame.timeInventory);
+					e.setCancelled(true);
+				} else {
+					e.getPlayer().sendMessage(ChatColor.DARK_RED + "You do not have the ability to modify the config of this game!");
+					e.setCancelled(true);
+				}
 			}
 				
 		}

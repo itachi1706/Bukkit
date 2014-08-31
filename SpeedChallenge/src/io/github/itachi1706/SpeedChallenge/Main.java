@@ -218,7 +218,6 @@ public class Main extends JavaPlugin implements Listener{
 			players.showPlayer(e.getPlayer());
 		}
 		String prefix = "";
-		InventoriesPreGame.giveItemToPlayer(e.getPlayer());
 		if (Bukkit.getServer().getPluginManager().getPlugin("PermissionsEx") != null) {
 			PermissionManager pex = PermissionsEx.getPermissionManager();
 			PermissionUser target = pex.getUser(e.getPlayer());
@@ -247,12 +246,14 @@ public class Main extends JavaPlugin implements Listener{
 			e.getPlayer().sendMessage(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "                 Speed Challenge");
 			e.getPlayer().sendMessage(ChatColor.GOLD + "==================================================");
 			if (gamePlayerList.size() == 0){
-				e.getPlayer().sendMessage(ChatColor.DARK_GREEN + "Use the items in your first 3 slots of your inventory to configure this game!");
+				e.getPlayer().sendMessage(ChatColor.DARK_GREEN + "Use the items in your first 4 slots of your inventory to configure this game!");
+				InventoriesPreGame.giveItemToPlayer(e.getPlayer());
 			} else {
 				e.getPlayer().sendMessage(ChatColor.DARK_GREEN + "Wait for the game to start!");
 				if (e.getPlayer().hasPermission("sc.override")){
 					e.getPlayer().sendMessage(ChatColor.DARK_RED + "You are able to configure this game as well due to your Staff status");
-					e.getPlayer().sendMessage(ChatColor.DARK_GREEN + "Use the items in your first 3 slots of your inventory to configure");
+					e.getPlayer().sendMessage(ChatColor.DARK_GREEN + "Use the items in your first 4 slots of your inventory to configure");
+					InventoriesPreGame.giveItemToPlayer(e.getPlayer());
 				}
 			}
 			e.getPlayer().sendMessage(ChatColor.GOLD + "==================================================");
