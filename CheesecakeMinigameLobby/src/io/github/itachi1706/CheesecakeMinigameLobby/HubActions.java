@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -41,6 +42,13 @@ public class HubActions implements Listener{
 			giveHidePlayerItem(p);
 			giveBook(p);
 			giveClock(p);
+			if (p.hasPermission("cheesecakeminigamelobby.abilities.fly")){
+				if (p.getAllowFlight()){
+					giveStopFlying(p);
+				} else {
+					giveFlying(p);
+				}
+			}
 		}
 		welcomeMessage(p);
 		showPlayersJoin(p);
@@ -71,7 +79,7 @@ public class HubActions implements Listener{
 	}
 	
 	@EventHandler
-	private void toggleHidePlayer(PlayerInteractEvent e){
+	private void togglePlayerActions(PlayerInteractEvent e){
 		Player p = e.getPlayer();
 		try {
 		if (e.getItem().getType().equals(Material.EYE_OF_ENDER)){
@@ -84,68 +92,12 @@ public class HubActions implements Listener{
 			showPlayers(p);
 			giveHidePlayerItem(p);
 			e.setCancelled(true);
-		} 
-		} catch (NullPointerException ex) {
-			Bukkit.getServer().getLogger().warning(p.getName() + " does not have a hide player item!");
+		}  else if (e.getItem().getType().equals(Material.FEATHER)){
+			
 		}
-	}
-	
-	private void giveBook(Player p){
-		ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-		BookMeta bm = (BookMeta) book.getItemMeta();
-		String lol = ChatColor.DARK_GREEN + "===================\n" + ChatColor.DARK_GREEN + "Welcome to the" + ChatColor.GOLD + " Cheesecake Network!\n" + ChatColor.DARK_GREEN + "===================\n" +
-		ChatColor.DARK_RED + "\nUse the compass to go to other servers!\nUse the eye of ender to hide players!\n\nObey all " + ChatColor.DARK_RED + "server rules" + ChatColor.DARK_RED + ", accessible with " + ChatColor.GOLD +
-		"/rules\n" + ChatColor.DARK_GREEN + "HAVE FUN ON THE SERVER!!!";
-		String lore = "The server's Welcome Message and Info book!";
-		ArrayList<String> lored = new ArrayList<String>();
-		lored.add(lore);
-		bm.addPage(lol);
-		bm.setAuthor(ChatColor.GOLD + "Cheesecake Network");
-		bm.setDisplayName(ChatColor.GREEN + "Welcome!");
-		bm.setTitle(ChatColor.GREEN + "Welcome!");
-		bm.setLore(lored);
-		book.setItemMeta(bm);
-		p.getInventory().clear(8);
-		p.getInventory().setItem(8, book);
-	}
-	
-	private void giveCompass(Player p){
-		ItemStack item = new ItemStack(Material.COMPASS);
-		ItemMeta im = item.getItemMeta();
-		String lore1 = "Right-click to travel to other servers!";
-		ArrayList<String> lore = new ArrayList<String>();
-		lore.add(lore1);
-		im.setDisplayName(ChatColor.GREEN + "Quick Travel!");
-		im.setLore(lore);
-		item.setItemMeta(im);
-		p.getInventory().clear(0);
-		p.getInventory().setItem(0, item);
-	}
-	
-	private void giveClock(Player p){
-		ItemStack item = new ItemStack(Material.WATCH);
-		ItemMeta im = item.getItemMeta();
-		String lore1 = "Right-click to teleport to other areas in this server!";
-		ArrayList<String> lore = new ArrayList<String>();
-		lore.add(lore1);
-		im.setDisplayName(ChatColor.GOLD + "Teleport to other areas in this server!");
-		im.setLore(lore);
-		item.setItemMeta(im);
-		p.getInventory().clear(2);
-		p.getInventory().setItem(2, item);
-	}
-	
-	private void giveHidePlayerItem(Player p){
-		ItemStack item = new ItemStack(Material.EYE_OF_ENDER);
-		ItemMeta im = item.getItemMeta();
-		String lore1 = ChatColor.DARK_RED + "" + ChatColor.ITALIC + "Right-click to hide players!";
-		ArrayList<String> lore = new ArrayList<String>();
-		lore.add(lore1);
-		im.setDisplayName(ChatColor.GOLD + "Hide Player Status: " + ChatColor.GREEN + "Shown");
-		im.setLore(lore);
-		item.setItemMeta(im);
-		p.getInventory().clear(1);
-		p.getInventory().setItem(1, item);
+		} catch (NullPointerException ex) {
+			Bukkit.getServer().getLogger().warning(p.getName() + " does not have a lobby action item!");
+		}
 	}
 	
 	@EventHandler
@@ -171,18 +123,7 @@ public class HubActions implements Listener{
 		}
 	}
 	
-	private void giveUnhidePlayerItem(Player p){
-		ItemStack item = new ItemStack(Material.ENDER_PEARL);
-		ItemMeta im = item.getItemMeta();
-		String lore1 = ChatColor.DARK_GREEN + "" + ChatColor.ITALIC + "Right-click to show players!";
-		ArrayList<String> lore = new ArrayList<String>();
-		lore.add(lore1);
-		im.setDisplayName(ChatColor.GOLD + "Hide Player Status: " + ChatColor.RED + "Hidden");
-		im.setLore(lore);
-		item.setItemMeta(im);
-		p.getInventory().clear(1);
-		p.getInventory().setItem(1, item);
-	}
+	
 	
 	private void hidePlayers(Player p){
 		Collection<? extends Player> onlinePlayers = Bukkit.getServer().getOnlinePlayers();
@@ -256,5 +197,131 @@ public class HubActions implements Listener{
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', welMsg));
 		}
 		}
+	private void giveUnhidePlayerItem(Player p){
+		
+		p.getInventory().clear(1);
+		p.getInventory().setItem(1, item);
+	}
+	
+	private void giveBook(Player p){
+		
+		p.getInventory().clear(8);
+		p.getInventory().setItem(8, book);
+	}
+	
+	private void giveCompass(Player p){
+		
+		p.getInventory().clear(0);
+		p.getInventory().setItem(0, item);
+	}
+	
+	private void giveClock(Player p){
+		
+		p.getInventory().clear(2);
+		p.getInventory().setItem(2, item);
+	}
+	
+	private void giveHidePlayerItem(Player p){
+		
+		p.getInventory().clear(1);
+		p.getInventory().setItem(1, item);
+	}
+	
+	private void giveStopFlying(Player p){
+		
+		p.getInventory().clear(3);
+		p.getInventory().setItem(3, item);
+	}
+	
+	private void giveFlying(Player p){
+		
+		p.getInventory().clear(3);
+		p.getInventory().setItem(3, item);
+	}
+	
+	private ItemStack infoBookItem(){
+		ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+		BookMeta bm = (BookMeta) book.getItemMeta();
+		String lol = ChatColor.DARK_GREEN + "===================\n" + ChatColor.DARK_GREEN + "Welcome to the" + ChatColor.GOLD + " Cheesecake Network!\n" + ChatColor.DARK_GREEN + "===================\n" +
+		ChatColor.DARK_RED + "\nUse the compass to go to other servers!\nUse the eye of ender to hide players!\n\nObey all " + ChatColor.DARK_RED + "server rules" + ChatColor.DARK_RED + ", accessible with " + ChatColor.GOLD +
+		"/rules\n" + ChatColor.DARK_GREEN + "HAVE FUN ON THE SERVER!!!";
+		String lore = "The server's Welcome Message and Info book!";
+		ArrayList<String> lored = new ArrayList<String>();
+		lored.add(lore);
+		bm.addPage(lol);
+		bm.setAuthor(ChatColor.GOLD + "Cheesecake Network");
+		bm.setDisplayName(ChatColor.GREEN + "Welcome!");
+		bm.setTitle(ChatColor.GREEN + "Welcome!");
+		bm.setLore(lored);
+		book.setItemMeta(bm);
+		return book;
+	}
+	private ItemStack hidePlayerItem(){
+		ItemStack item = new ItemStack(Material.EYE_OF_ENDER);
+		ItemMeta im = item.getItemMeta();
+		String lore1 = ChatColor.DARK_RED + "" + ChatColor.ITALIC + "Right-click to hide players!";
+		ArrayList<String> lore = new ArrayList<String>();
+		lore.add(lore1);
+		im.setDisplayName(ChatColor.GOLD + "Hide Player Status: " + ChatColor.GREEN + "Shown");
+		im.setLore(lore);
+		item.setItemMeta(im);
+		return item;
+	}
+	private ItemStack showPlayerItem(){
+		ItemStack item = new ItemStack(Material.ENDER_PEARL);
+		ItemMeta im = item.getItemMeta();
+		String lore1 = ChatColor.DARK_GREEN + "" + ChatColor.ITALIC + "Right-click to show players!";
+		ArrayList<String> lore = new ArrayList<String>();
+		lore.add(lore1);
+		im.setDisplayName(ChatColor.GOLD + "Hide Player Status: " + ChatColor.RED + "Hidden");
+		im.setLore(lore);
+		item.setItemMeta(im);
+		return item;
+	}
+	private ItemStack navigateLobbyItem(){
+		ItemStack item = new ItemStack(Material.WATCH);
+		ItemMeta im = item.getItemMeta();
+		String lore1 = "Right-click to teleport to other areas in this server!";
+		ArrayList<String> lore = new ArrayList<String>();
+		lore.add(lore1);
+		im.setDisplayName(ChatColor.GOLD + "Teleport to other areas in this server!");
+		im.setLore(lore);
+		item.setItemMeta(im);
+		return item;
+	}
+	private ItemStack startFlyItem(){
+		ItemStack item = new ItemStack(Material.FEATHER);
+		ItemMeta im = item.getItemMeta();
+		String lore1 = ChatColor.DARK_GREEN + "" + ChatColor.ITALIC + "Right-click to start flying!";
+		ArrayList<String> lore = new ArrayList<String>();
+		lore.add(lore1);
+		im.setDisplayName(ChatColor.GOLD + "Fly Mode: " + ChatColor.RED + "Disabled");
+		im.setLore(lore);
+		item.setItemMeta(im);
+		return item;
+	}
+	private ItemStack stopFlyItem(){
+		ItemStack item = new ItemStack(Material.FEATHER);
+		ItemMeta im = item.getItemMeta();
+		String lore1 = ChatColor.DARK_RED + "" + ChatColor.ITALIC + "Right-click to stop flying!";
+		ArrayList<String> lore = new ArrayList<String>();
+		lore.add(lore1);
+		im.setDisplayName(ChatColor.GOLD + "Fly Mode: " + ChatColor.GREEN + "Enabled");
+		im.setLore(lore);
+		im.addEnchant(Enchantment.PROTECTION_FALL, 10, true);
+		item.setItemMeta(im);
+		return item;
+	}
+	private ItemStack navigateServerItem(){
+		ItemStack item = new ItemStack(Material.COMPASS);
+		ItemMeta im = item.getItemMeta();
+		String lore1 = "Right-click to travel to other servers!";
+		ArrayList<String> lore = new ArrayList<String>();
+		lore.add(lore1);
+		im.setDisplayName(ChatColor.GREEN + "Quick Travel!");
+		im.setLore(lore);
+		item.setItemMeta(im);
+		return item;
+	}
 
 }
