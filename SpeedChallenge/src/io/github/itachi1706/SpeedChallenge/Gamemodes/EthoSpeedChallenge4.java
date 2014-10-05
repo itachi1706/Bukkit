@@ -136,7 +136,7 @@ public class EthoSpeedChallenge4 extends AbstractGamemode {
 	public static void listObjectives(Player p){
 		ArrayList<String> check = new ArrayList<String>();
 		check.add(ChatColor.GOLD + "Objectives Check");
-		check.add("Legend: Green = " + ChatColor.GREEN + "Obtained " + ChatColor.RESET + ",Red = " + ChatColor.RED + "Unobtained");
+		check.add("Legend: Green = " + ChatColor.GREEN + "Obtained" + ChatColor.RESET + ", Red = " + ChatColor.RED + "Unobtained");
 		check.add("");
 		Inventory i = p.getInventory();
 		//Check for the 16 wool colours

@@ -213,7 +213,7 @@ public class GetAsManyAchievements extends AbstractGamemode {
 		JSONObject jArr = getStatsOfPlayer(p);
 		ArrayList<String> check = new ArrayList<String>();
 		check.add(ChatColor.GOLD + "Objectives Check");
-		check.add("Legend: Green = " + ChatColor.GREEN + "Obtained " + ChatColor.RESET + ",Red = " + ChatColor.RED + "Unobtained");
+		check.add("Legend: Green = " + ChatColor.GREEN + "Obtained" + ChatColor.RESET + ", Red = " + ChatColor.RED + "Unobtained");
 		check.add("");
 		if (checkOpenInventory(jArr)){
 			check.add(ChatColor.GREEN + "Open Inventory");
