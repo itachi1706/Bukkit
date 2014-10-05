@@ -82,18 +82,26 @@ public class HubActions implements Listener{
 	private void togglePlayerActions(PlayerInteractEvent e){
 		Player p = e.getPlayer();
 		try {
-		if (e.getItem().getType().equals(Material.EYE_OF_ENDER)){
+		if (e.getItem().equals(hidePlayerItem())){
 			//Hide Players
 			hidePlayers(p);
 			giveUnhidePlayerItem(p);
 			e.setCancelled(true);
-		} else if (e.getItem().getType().equals(Material.ENDER_PEARL)){
+		} else if (e.getItem().getType().equals(showPlayerItem())){
 			//Show Players
 			showPlayers(p);
 			giveHidePlayerItem(p);
 			e.setCancelled(true);
-		}  else if (e.getItem().getType().equals(Material.FEATHER)){
-			
+		}  else if (e.getItem().getType().equals(startFlyItem())){
+			//Start Flying
+			Bukkit.getServer().dispatchCommand(p, "fly");
+			giveStopFlying(p);
+			e.setCancelled(true);
+		}  else if (e.getItem().getType().equals(stopFlyItem())){
+			//Stop Flying
+			Bukkit.getServer().dispatchCommand(p, "fly");
+			giveFlying(p);
+			e.setCancelled(true);
 		}
 		} catch (NullPointerException ex) {
 			Bukkit.getServer().getLogger().warning(p.getName() + " does not have a lobby action item!");
@@ -104,7 +112,9 @@ public class HubActions implements Listener{
 	private void onItemDrop(PlayerDropItemEvent e){
 		World w = Bukkit.getServer().getWorld("world");
 		if (e.getPlayer().getWorld().equals(w)){
-			e.setCancelled(true);
+			if (checkIfItemIsLobbyItem(e.getItemDrop().getItemStack())){
+				e.setCancelled(true);
+			}
 		}
 	}
 	
@@ -112,6 +122,10 @@ public class HubActions implements Listener{
 	private void InventoryMove(InventoryClickEvent e){
 		World w = Bukkit.getServer().getWorld("world");
 		if (e.getWhoClicked().getWorld().equals(w)){
+			if (checkIfItemIsLobbyItem(e.getCurrentItem())){
+				e.setCancelled(true);
+			}
+			/*
 			int clicked = e.getSlot();
 			if (clicked == 1 || clicked == 0 || clicked == 8 || clicked == 2){
 				e.setCancelled(true);
@@ -119,7 +133,7 @@ public class HubActions implements Listener{
 			int click = e.getHotbarButton();
 			if (click == 1 || click == 0 || click == 8 || clicked == 2){
 				e.setCancelled(true);
-			}
+			}*/
 		}
 	}
 	
@@ -144,7 +158,7 @@ public class HubActions implements Listener{
 			Iterator<? extends Player> i = onlinePlayers.iterator();
 			while(i.hasNext()){
 				Player target = (Player) i.next();
-				if (target.getInventory().contains(Material.ENDER_PEARL)){
+				if (target.getInventory().contains(showPlayerItem())){
 					//hide players
 					target.hidePlayer(p);
 				}
@@ -250,6 +264,7 @@ public class HubActions implements Listener{
 		book.setItemMeta(bm);
 		return book;
 	}
+	
 	private ItemStack hidePlayerItem(){
 		ItemStack item = new ItemStack(Material.EYE_OF_ENDER);
 		ItemMeta im = item.getItemMeta();
@@ -261,6 +276,7 @@ public class HubActions implements Listener{
 		item.setItemMeta(im);
 		return item;
 	}
+	
 	private ItemStack showPlayerItem(){
 		ItemStack item = new ItemStack(Material.ENDER_PEARL);
 		ItemMeta im = item.getItemMeta();
@@ -272,6 +288,7 @@ public class HubActions implements Listener{
 		item.setItemMeta(im);
 		return item;
 	}
+	
 	private ItemStack navigateLobbyItem(){
 		ItemStack item = new ItemStack(Material.WATCH);
 		ItemMeta im = item.getItemMeta();
@@ -283,6 +300,7 @@ public class HubActions implements Listener{
 		item.setItemMeta(im);
 		return item;
 	}
+	
 	private ItemStack startFlyItem(){
 		ItemStack item = new ItemStack(Material.FEATHER);
 		ItemMeta im = item.getItemMeta();
@@ -294,6 +312,7 @@ public class HubActions implements Listener{
 		item.setItemMeta(im);
 		return item;
 	}
+	
 	private ItemStack stopFlyItem(){
 		ItemStack item = new ItemStack(Material.FEATHER);
 		ItemMeta im = item.getItemMeta();
@@ -306,6 +325,7 @@ public class HubActions implements Listener{
 		item.setItemMeta(im);
 		return item;
 	}
+	
 	private ItemStack navigateServerItem(){
 		ItemStack item = new ItemStack(Material.COMPASS);
 		ItemMeta im = item.getItemMeta();
@@ -316,6 +336,31 @@ public class HubActions implements Listener{
 		im.setLore(lore);
 		item.setItemMeta(im);
 		return item;
+	}
+	
+	private boolean checkIfItemIsLobbyItem(ItemStack i){
+		if (i.equals(navigateServerItem())){
+			return true;
+		}
+		if (i.equals(stopFlyItem())){
+			return true;
+		}
+		if (i.equals(startFlyItem())){
+			return true;
+		}
+		if (i.equals(navigateLobbyItem())){
+			return true;
+		}
+		if (i.equals(showPlayerItem())){
+			return true;
+		}
+		if (i.equals(hidePlayerItem())){
+			return true;
+		}
+		if (i.equals(infoBookItem())){
+			return true;
+		}
+		return false;
 	}
 
 }

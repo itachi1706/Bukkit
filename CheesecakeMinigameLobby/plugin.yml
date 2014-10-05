@@ -1,6 +1,6 @@
 name: CheesecakeMinigameLobby
 main: io.github.itachi1706.CheesecakeMinigameLobby.Main
-version: 1.8
+version: 1.9
 description: An internal plugin for minigame server
 author: itachi1706
 commands:
