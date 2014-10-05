@@ -1,6 +1,6 @@
 name: CheesecakeMinigameLobby
 main: io.github.itachi1706.CheesecakeMinigameLobby.Main
-version: 1.9
+version: 1.9.2
 description: An internal plugin for minigame server
 author: itachi1706
 commands:
@@ -115,6 +115,9 @@ permissions:
     default: op
   cheesecakeminigamelobby.staff:
     description: Staff command
+    default: op
+  cheesecakeminigamelobby.admin:
+    description: Toggles Admin Mode
     default: op
   cheesecakeminigamelobby.exempt:
     description: Prevents being hidden

@@ -28,6 +28,8 @@ import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class HubActions implements Listener{
 	
+	ArrayList<Player> playersInAdminMode = new ArrayList<Player>();
+	
 	@EventHandler
 	private void checkObjects(PlayerJoinEvent e){
 		Player p = e.getPlayer();
@@ -38,6 +40,13 @@ public class HubActions implements Listener{
 		if (p.getWorld().equals(w)){
 			p.getInventory().clear();
 			p.getInventory().setHeldItemSlot(0);
+			if (p.hasPermission("cheesecakeminigamelobby.admin")){
+				if (playersInAdminMode.contains(p)){
+					resetAdminMode(p);
+				} else {
+					giveAdminMode(p);
+				}
+			}
 			giveCompass(p);
 			giveHidePlayerItem(p);
 			giveBook(p);
@@ -102,6 +111,22 @@ public class HubActions implements Listener{
 			Bukkit.getServer().dispatchCommand(p, "fly");
 			giveFlying(p);
 			e.setCancelled(true);
+		} else if (e.getItem().equals(toggleAdminModeItem())){
+			//Enters Admin Mode
+			if (playersInAdminMode.contains(p)){
+				p.sendMessage(ChatColor.RED + "You are already in Administrative Mode");
+			} else {
+				playersInAdminMode.add(p);
+				resetAdminMode(p);
+				p.sendMessage(ChatColor.GREEN + "Entered Administrative Mode. You can now moves items around in your inventory!");
+				e.setCancelled(true);
+			}
+		} else if (e.getItem().equals(resetInventoryItem())){
+			//Exits Admin Mode
+			playersInAdminMode.remove(p);
+			giveAdminMode(p);
+			p.sendMessage(ChatColor.GREEN + "Exited Administrative Mode. Your inventory has now been reset back to lobby default.");
+			e.setCancelled(true);
 		}
 		} catch (NullPointerException ex) {
 			Bukkit.getServer().getLogger().warning(p.getName() + " does not have a lobby action item!");
@@ -123,17 +148,11 @@ public class HubActions implements Listener{
 		World w = Bukkit.getServer().getWorld("world");
 		if (e.getWhoClicked().getWorld().equals(w)){
 			if (checkIfItemIsLobbyItem(e.getCurrentItem())){
-				e.setCancelled(true);
+				if (playersInAdminMode.contains(e.getWhoClicked())){
+				} else {
+					e.setCancelled(true);
+				}
 			}
-			/*
-			int clicked = e.getSlot();
-			if (clicked == 1 || clicked == 0 || clicked == 8 || clicked == 2){
-				e.setCancelled(true);
-			}
-			int click = e.getHotbarButton();
-			if (click == 1 || click == 0 || click == 8 || clicked == 2){
-				e.setCancelled(true);
-			}*/
 		}
 	}
 	
@@ -247,6 +266,16 @@ public class HubActions implements Listener{
 		p.getInventory().setItem(3, startFlyItem());
 	}
 	
+	private void giveAdminMode(Player p){
+		p.getInventory().clear();
+		p.getInventory().setItem(7, toggleAdminModeItem());
+	}
+	
+	private void resetAdminMode(Player p){
+		p.getInventory().clear(7);
+		p.getInventory().setItem(7, resetInventoryItem());
+	}
+	
 	private ItemStack infoBookItem(){
 		ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
 		BookMeta bm = (BookMeta) book.getItemMeta();
@@ -338,6 +367,35 @@ public class HubActions implements Listener{
 		return item;
 	}
 	
+	private ItemStack toggleAdminModeItem(){
+		ItemStack item = new ItemStack(Material.BEDROCK);
+		ItemMeta im = item.getItemMeta();
+		String lore1 = ChatColor.DARK_GREEN + "" + ChatColor.ITALIC + "Right-click to enter admin mode!";
+		String lore2 = ChatColor.DARK_GREEN + "" + ChatColor.ITALIC + "This allows you to move lobby items around";
+		ArrayList<String> lore = new ArrayList<String>();
+		lore.add(lore1);
+		lore.add(lore2);
+		im.setDisplayName(ChatColor.GOLD + "Admin Mode: " + ChatColor.RED + "Disabled");
+		im.setLore(lore);
+		item.setItemMeta(im);
+		return item;
+	}
+	
+	private ItemStack resetInventoryItem(){
+		ItemStack item = new ItemStack(Material.BEDROCK);
+		ItemMeta im = item.getItemMeta();
+		String lore1 = ChatColor.DARK_RED + "" + ChatColor.ITALIC + "Right-click to exit admin mode!";
+		String lore2 = ChatColor.DARK_RED + "" + ChatColor.ITALIC + "This resets your inventory back to lobby default";
+		ArrayList<String> lore = new ArrayList<String>();
+		lore.add(lore1);
+		lore.add(lore2);
+		im.setDisplayName(ChatColor.GOLD + "Admin Mode: " + ChatColor.GREEN + "Enabled");
+		im.setLore(lore);
+		im.addEnchant(Enchantment.SILK_TOUCH, 255, true);
+		item.setItemMeta(im);
+		return item;
+	}
+	
 	private boolean checkIfItemIsLobbyItem(ItemStack i){
 		if (i.equals(navigateServerItem())){
 			return true;
@@ -358,6 +416,9 @@ public class HubActions implements Listener{
 			return true;
 		}
 		if (i.equals(infoBookItem())){
+			return true;
+		}
+		if (i.equals(toggleAdminModeItem())){
 			return true;
 		}
 		return false;
