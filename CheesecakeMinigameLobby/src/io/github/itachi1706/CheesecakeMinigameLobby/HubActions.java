@@ -40,28 +40,32 @@ public class HubActions implements Listener{
 		if (p.getWorld().equals(w)){
 			p.getInventory().clear();
 			p.getInventory().setHeldItemSlot(0);
-			if (p.hasPermission("cheesecakeminigamelobby.admin")){
-				if (playersInAdminMode.contains(p)){
-					resetAdminMode(p);
-				} else {
-					giveAdminMode(p);
-				}
-			}
-			giveCompass(p);
-			giveHidePlayerItem(p);
-			giveBook(p);
-			giveClock(p);
-			if (p.hasPermission("cheesecakeminigamelobby.abilities.fly")){
-				if (p.getAllowFlight()){
-					giveStopFlying(p);
-				} else {
-					giveFlying(p);
-				}
-			}
+			giveItems(p);
 		}
 		welcomeMessage(p);
 		showPlayersJoin(p);
 		hidePlayersJoin(p);
+	}
+	
+	private void giveItems(Player p){
+		if (p.hasPermission("cheesecakeminigamelobby.admin")){
+			if (playersInAdminMode.contains(p)){
+				resetAdminMode(p);
+			} else {
+				giveAdminMode(p);
+			}
+		}
+		giveCompass(p);
+		giveHidePlayerItem(p);
+		giveBook(p);
+		giveClock(p);
+		if (p.hasPermission("cheesecakeminigamelobby.abilities.fly")){
+			if (p.getAllowFlight()){
+				giveStopFlying(p);
+			} else {
+				giveFlying(p);
+			}
+		}
 	}
 	
 	@EventHandler
@@ -268,7 +272,7 @@ public class HubActions implements Listener{
 	
 	private void giveAdminMode(Player p){
 		p.getInventory().clear();
-		p.getInventory().setItem(7, toggleAdminModeItem());
+		giveItems(p);
 	}
 	
 	private void resetAdminMode(Player p){
@@ -368,7 +372,7 @@ public class HubActions implements Listener{
 	}
 	
 	private ItemStack toggleAdminModeItem(){
-		ItemStack item = new ItemStack(Material.BEDROCK);
+		ItemStack item = new ItemStack(Material.FIRE);
 		ItemMeta im = item.getItemMeta();
 		String lore1 = ChatColor.DARK_GREEN + "" + ChatColor.ITALIC + "Right-click to enter admin mode!";
 		String lore2 = ChatColor.DARK_GREEN + "" + ChatColor.ITALIC + "This allows you to move lobby items around";
@@ -382,7 +386,7 @@ public class HubActions implements Listener{
 	}
 	
 	private ItemStack resetInventoryItem(){
-		ItemStack item = new ItemStack(Material.BEDROCK);
+		ItemStack item = new ItemStack(Material.FIRE);
 		ItemMeta im = item.getItemMeta();
 		String lore1 = ChatColor.DARK_RED + "" + ChatColor.ITALIC + "Right-click to exit admin mode!";
 		String lore2 = ChatColor.DARK_RED + "" + ChatColor.ITALIC + "This resets your inventory back to lobby default";
