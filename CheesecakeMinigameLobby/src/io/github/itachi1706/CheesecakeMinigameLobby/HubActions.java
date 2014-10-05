@@ -94,50 +94,51 @@ public class HubActions implements Listener{
 	@EventHandler
 	private void togglePlayerActions(PlayerInteractEvent e){
 		Player p = e.getPlayer();
-		if (playersInAdminMode.contains(p)){
-		} else {
-			try {
-			if (e.getItem().equals(hidePlayerItem())){
-				//Hide Players
-				hidePlayers(p);
-				giveUnhidePlayerItem(p);
-				e.setCancelled(true);
-			} else if (e.getItem().equals(showPlayerItem())){
-				//Show Players
-				showPlayers(p);
-				giveHidePlayerItem(p);
-				e.setCancelled(true);
-			}  else if (e.getItem().equals(startFlyItem())){
-				//Start Flying
-				Bukkit.getServer().dispatchCommand(p, "fly");
-				giveStopFlying(p);
-				e.setCancelled(true);
-			}  else if (e.getItem().equals(stopFlyItem())){
-				//Stop Flying
-				Bukkit.getServer().dispatchCommand(p, "fly");
-				giveFlying(p);
-				e.setCancelled(true);
-			} else if (e.getItem().equals(toggleAdminModeItem())){
-				//Enters Admin Mode
-				if (playersInAdminMode.contains(p)){
-					p.sendMessage(ChatColor.RED + "You are already in Administrative Mode");
-				} else {
-					playersInAdminMode.add(p);
-					resetAdminMode(p);
-					p.sendMessage(ChatColor.GREEN + "Entered Administrative Mode. You can now moves items around in your inventory!");
-					p.sendMessage(ChatColor.GOLD + "Note that while you are in Administrative Mode, some lobby items are disabled");
+		try {
+			if (playersInAdminMode.contains(p)){
+				if (e.getItem().equals(resetInventoryItem())){
+					//Exits Admin Mode
+					playersInAdminMode.remove(p);
+					p.sendMessage(ChatColor.GREEN + "Exited Administrative Mode. Your inventory has now been reset back to lobby default.");
+					giveItems(p);
 					e.setCancelled(true);
 				}
-			} else if (e.getItem().equals(resetInventoryItem())){
-				//Exits Admin Mode
-				playersInAdminMode.remove(p);
-				p.sendMessage(ChatColor.GREEN + "Exited Administrative Mode. Your inventory has now been reset back to lobby default.");
-				giveItems(p);
-				e.setCancelled(true);
-			}
-			} catch (NullPointerException ex) {
-				Bukkit.getServer().getLogger().warning(p.getName() + " does not have a lobby action item!");
-			}
+			} else {
+				if (e.getItem().equals(hidePlayerItem())){
+					//Hide Players
+					hidePlayers(p);
+					giveUnhidePlayerItem(p);
+					e.setCancelled(true);
+				} else if (e.getItem().equals(showPlayerItem())){
+					//Show Players
+					showPlayers(p);
+					giveHidePlayerItem(p);
+					e.setCancelled(true);
+				}  else if (e.getItem().equals(startFlyItem())){
+					//Start Flying
+					Bukkit.getServer().dispatchCommand(p, "fly");
+					giveStopFlying(p);
+					e.setCancelled(true);
+				}  else if (e.getItem().equals(stopFlyItem())){
+					//Stop Flying
+					Bukkit.getServer().dispatchCommand(p, "fly");
+					giveFlying(p);
+					e.setCancelled(true);
+				} else if (e.getItem().equals(toggleAdminModeItem())){
+					//Enters Admin Mode
+					if (playersInAdminMode.contains(p)){
+						p.sendMessage(ChatColor.RED + "You are already in Administrative Mode");
+					} else {
+						playersInAdminMode.add(p);
+						resetAdminMode(p);
+						p.sendMessage(ChatColor.GREEN + "Entered Administrative Mode. You can now moves items around in your inventory!");
+						p.sendMessage(ChatColor.GOLD + "Note that while you are in Administrative Mode, some lobby items are disabled");
+						e.setCancelled(true);
+					}
+				}
+			} 
+		}catch (NullPointerException ex) {
+			Bukkit.getServer().getLogger().warning(p.getName() + " does not have a lobby action item!");
 		}
 	}
 	
