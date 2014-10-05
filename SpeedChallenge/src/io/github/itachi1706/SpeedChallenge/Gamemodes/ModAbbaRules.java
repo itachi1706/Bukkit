@@ -152,6 +152,7 @@ public class ModAbbaRules extends AbstractGamemode {
 	
 	//List all objectives for a player (for future command)
 	public static void listObjectives(Player p){
+		p.sendMessage(ChatColor.GOLD + "==================================================");
 		p.sendMessage(ChatColor.GOLD + "OBJECTIVES CHECK");
 		int tmpAmount = 0;
 		tmpAmount = amountInInventory(p.getInventory(), new ItemStack(Material.COAL_ORE));
@@ -177,7 +178,7 @@ public class ModAbbaRules extends AbstractGamemode {
 		int tmpAmount3 = amountInInventory(p.getInventory(), new ItemStack(Material.DIAMOND_BARDING));
 		tmpAmount = tmpAmount1 + tmpAmount2 + tmpAmount3;
 		p.sendMessage(ChatColor.translateAlternateColorCodes('&', "Horse Armor - &a(10 points)&r: &b" + tmpAmount));
-		
+		p.sendMessage(ChatColor.GOLD + "==================================================");
 	}
 
 }

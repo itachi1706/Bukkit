@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.itachi1706.SpeedChallenge.Main;
@@ -66,25 +67,26 @@ public class EthoSpeedChallenge3 extends AbstractGamemode {
 	public static int checkObjective(Player p){
 		//Basic Score
 		int score = 0;
+		Inventory i = p.getInventory();
 		//Check if user has Cooked Porkchop
-		if (p.getInventory().containsAtLeast(new ItemStack(Material.GRILLED_PORK), 1)){
+		if (checkPorkchop(i)){
 			//Adds a Score
 			score += 1;
 		}
 		//Check if user has Cooked Fish
-		if (p.getInventory().containsAtLeast(new ItemStack(Material.COOKED_FISH), 1)){
+		if (checkFish(i)){
 			score += 1;
 		}
 		//Check if user has Cake
-		if (p.getInventory().containsAtLeast(new ItemStack(Material.CAKE), 1)){
+		if (checkCake(i)){
 			score += 1;
 		}
 		//Check if user has Bread
-		if (p.getInventory().containsAtLeast(new ItemStack(Material.BREAD), 1)){
+		if (checkBread(i)){
 			score += 1;
 		}
 		//Check if user has Mushroom Stew
-		if (p.getInventory().containsAtLeast(new ItemStack(Material.MUSHROOM_SOUP), 1)){
+		if (checkMushroomStew(i)){
 			score += 1;
 		}
 		//End of it add score to player
@@ -94,38 +96,86 @@ public class EthoSpeedChallenge3 extends AbstractGamemode {
 	
 	//List all objectives for a player (for future command)
 	public static void listObjectives(Player p){
-		p.sendMessage(ChatColor.GOLD + "OBJECTIVES CHECK");
+		Inventory inv = p.getInventory();
+		ArrayList<String> check = new ArrayList<String>();
+		check.add(ChatColor.GOLD + "Objectives Check");
+		check.add("Legend: Green = " + ChatColor.GREEN + "Obtained" + ChatColor.RESET + ", Red = " + ChatColor.RED + "Unobtained");
+		check.add("");
 		//Check if user has Cooked Porkchop
-		if (p.getInventory().containsAtLeast(new ItemStack(Material.GRILLED_PORK), 1)){
+		if (checkPorkchop(inv)){
 			//Adds a Score
-			p.sendMessage("Cooked Porkchop - " + ChatColor.GREEN + "Obtained");
+			check.add(ChatColor.GREEN + "Cooked Porkchop");
 		} else {
-			p.sendMessage("Cooked Porkchop - " + ChatColor.RED + "Unobtained");
+			check.add(ChatColor.RED + "Cooked Porkchop");
 		}
 		//Check if user has Cooked Fish
-		if (p.getInventory().containsAtLeast(new ItemStack(Material.COOKED_FISH), 1)){
-			p.sendMessage("Cooked Fish - " + ChatColor.GREEN + "Obtained");
+		if (checkFish(inv)){
+			check.add(ChatColor.GREEN + "Cooked Fish");
 		} else {
-			p.sendMessage("Cooked Fish - " + ChatColor.RED + "Unobtained");
+			check.add(ChatColor.RED + "Cooked Fish");
 		}
 		//Check if user has Cake
-		if (p.getInventory().containsAtLeast(new ItemStack(Material.CAKE), 1)){
-			p.sendMessage("Cake - " + ChatColor.GREEN + "Obtained");
+		if (checkCake(inv)){
+			check.add(ChatColor.GREEN + "Cake");
 		} else {
-			p.sendMessage("Cake - " + ChatColor.RED + "Unobtained");
+			check.add(ChatColor.RED + "Cake");
 		}
 		//Check if user has Bread
-		if (p.getInventory().containsAtLeast(new ItemStack(Material.BREAD), 1)){
-			p.sendMessage("Bread - " + ChatColor.GREEN + "Obtained");
+		if (checkBread(inv)){
+			check.add(ChatColor.GREEN + "Bread");
 		} else {
-			p.sendMessage("Bread - " + ChatColor.RED + "Unobtained");
+			check.add(ChatColor.RED + "Bread");
 		}
 		//Check if user has Mushroom Stew
-		if (p.getInventory().containsAtLeast(new ItemStack(Material.MUSHROOM_SOUP), 1)){
-			p.sendMessage("Mushroom Stew - " + ChatColor.GREEN + "Obtained");
+		if (checkMushroomStew(inv)){
+			check.add(ChatColor.GREEN + "Mushroom Stew");
 		} else {
-			p.sendMessage("Mushroom Stew - " + ChatColor.RED + "Unobtained");
+			check.add(ChatColor.RED + "Mushroom Stew");
 		}
+		
+		p.sendMessage(ChatColor.GOLD + "==================================================");
+		p.sendMessage(check.get(0));
+		p.sendMessage(check.get(1));
+		p.sendMessage(check.get(2));
+		for (int i = 3; i < check.size(); i++) {
+			p.sendMessage(check.get(i));
+		}
+		p.sendMessage(ChatColor.GOLD + "==================================================");
+	}
+	
+	private static boolean checkCake(Inventory inv){
+		if (inv.containsAtLeast(new ItemStack(Material.CAKE), 1)){
+			return true;
+		}
+		return false;
+	}
+	
+	private static boolean checkPorkchop(Inventory inv){
+		if (inv.containsAtLeast(new ItemStack(Material.GRILLED_PORK), 1)){
+			return true;
+		}
+		return false;
+	}
+	
+	private static boolean checkFish(Inventory inv){
+		if (inv.containsAtLeast(new ItemStack(Material.COOKED_FISH), 1)){
+			return true;
+		}
+		return false;
+	}
+	
+	private static boolean checkBread(Inventory inv){
+		if (inv.containsAtLeast(new ItemStack(Material.BREAD), 1)){
+			return true;
+		}
+		return false;
+	}
+	
+	private static boolean checkMushroomStew(Inventory inv){
+		if (inv.containsAtLeast(new ItemStack(Material.MUSHROOM_SOUP), 1)){
+			return true;
+		}
+		return false;
 	}
 
 }

@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.itachi1706.SpeedChallenge.Main;
@@ -66,16 +67,14 @@ public class Sample extends AbstractGamemode {
 	public static int checkObjective(Player p){
 		//Basic Score
 		int score = 0;
-		//If item has durability, do this
-		ItemStack i = new ItemStack(Material.WOOL);
-		i.setDurability((short) 1);
+		Inventory i = p.getInventory();
 		//Check if user has orange wool (ID: Material.WOOL:1 / 35:1)
-		if (p.getInventory().containsAtLeast(i, 1)){
+		if (checkOrangeWool(i)){
 			//Adds a Score
 			score += 1;
 		}
 		//Check if user has dirt (ID: Material.DIRT / 3)
-		if (p.getInventory().containsAtLeast(new ItemStack(Material.DIRT), 1)){
+		if (checkDirt(i)){
 			score += 1;
 		}
 		//End of it add score to player
@@ -85,22 +84,47 @@ public class Sample extends AbstractGamemode {
 	
 	//List all objectives for a player (for future command)
 	public static void listObjectives(Player p){
-		p.sendMessage(ChatColor.GOLD + "OBJECTIVES CHECK");
-		//If item has durability, do this
-			ItemStack i = new ItemStack(Material.WOOL);
-			i.setDurability((short) 1);
-		//Check if user has orange wool (ID: Material.WOOL:1 / 35:1)
-		if (p.getInventory().containsAtLeast(i,1)){
+		Inventory inv = p.getInventory();
+		ArrayList<String> check = new ArrayList<String>();
+		check.add(ChatColor.GOLD + "Objectives Check");
+		check.add("Legend: Green = " + ChatColor.GREEN + "Obtained" + ChatColor.RESET + ", Red = " + ChatColor.RED + "Unobtained");
+		check.add("");
+		if (checkOrangeWool(inv)){
 			//Adds a Score
-			p.sendMessage("Orange Wool - " + ChatColor.GREEN + "Obtained");
+			check.add(ChatColor.GREEN + "Orange Wool");
 		} else {
-			p.sendMessage("Orange Wool - " + ChatColor.RED + "Unobtained");
+			check.add(ChatColor.RED + "Orange Wool");
 		}
-		//Check if user has dirt (ID: Material.DIRT / 3)
-		if (p.getInventory().containsAtLeast(new ItemStack(Material.DIRT),1)){
-			p.sendMessage("Dirt - " + ChatColor.GREEN + "Obtained");
+		if (checkDirt(inv)){
+			check.add(ChatColor.GREEN + "Dirt");
 		} else {
-			p.sendMessage("Dirt - " + ChatColor.RED + "Unobtained");
+			check.add(ChatColor.RED + "Dirt");
 		}
+		p.sendMessage(ChatColor.GOLD + "==================================================");
+		p.sendMessage(check.get(0));
+		p.sendMessage(check.get(1));
+		p.sendMessage(check.get(2));
+		for (int i = 3; i < check.size(); i++) {
+			p.sendMessage(check.get(i));
+		}
+		p.sendMessage(ChatColor.GOLD + "==================================================");
+	}
+	
+	private static boolean checkOrangeWool(Inventory inv){
+		//If item has durability, do this
+		ItemStack i = new ItemStack(Material.WOOL);
+		i.setDurability((short) 1);
+		//Check if user has orange wool (ID: Material.WOOL:1 / 35:1)
+		if (inv.containsAtLeast(i,1)){
+			return true;
+		} 
+		return false;
+	}
+	
+	private static boolean checkDirt(Inventory inv){
+		if (inv.containsAtLeast(new ItemStack(Material.DIRT), 1)){
+			return true;
+		}
+		return false;
 	}
 }
