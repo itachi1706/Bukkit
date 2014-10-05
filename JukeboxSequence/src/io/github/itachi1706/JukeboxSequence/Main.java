@@ -117,7 +117,7 @@ public class Main extends JavaPlugin implements Listener {
 					return true;
 				}
 				this.getConfig().set("enabled", true);
-				Main.lastTime = Calendar.getInstance().getTimeInMillis();
+				lastTime = Calendar.getInstance().getTimeInMillis();
 				sender.sendMessage(ChatColor.GREEN + "Songs started");
 				return true;
 			} else if (args[0].equalsIgnoreCase("debug")){
