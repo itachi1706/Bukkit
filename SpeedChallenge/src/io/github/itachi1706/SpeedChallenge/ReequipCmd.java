@@ -40,11 +40,11 @@ public class ReequipCmd implements CommandExecutor{
 	
 	public static void reequip(Player p){
 		switch (Main.gamemode){
-		case 3: ModAbbaRules.checkWeapon(p);
+		case 4: ModAbbaRules.checkWeapon(p);
 				break;
-		case 4: AbbaRules.checkWeapon(p);
+		case 5: AbbaRules.checkWeapon(p);
 				break;
-		case 5: AbbaRulesRetardStyle.checkWeapon(p);
+		case 6: AbbaRulesRetardStyle.checkWeapon(p);
 				break;
 		default: p.sendMessage(ChatColor.RED + "Your current challenge does not require any equipments!");
 				break;
