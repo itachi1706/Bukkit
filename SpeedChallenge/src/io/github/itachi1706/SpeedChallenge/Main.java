@@ -35,12 +35,11 @@ public class Main extends JavaPlugin implements Listener{
 	 * Modify PreGameRunnable's 4 switch case modules and the variable in the main class when
 	 * adding new gamemodes.
 	 * Modify ReequipCmd if needed and listGamemode method in ConfigCmd
-	 * Edit ConfigTabCompleter to add in the extra challenge numbers
 	 * Edit InventoriesPreGame too to include the stuff
 	 */
 	
 	//User editable variables
-	public static int numberOfChallenges = 6;
+	public static int numberOfChallenges = 7;
 	
 	public static Plugin plugin;
 	

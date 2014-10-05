@@ -3,6 +3,7 @@ package io.github.itachi1706.SpeedChallenge;
 import io.github.itachi1706.SpeedChallenge.Gamemodes.AbbaRules;
 import io.github.itachi1706.SpeedChallenge.Gamemodes.AbbaRulesRetardStyle;
 import io.github.itachi1706.SpeedChallenge.Gamemodes.EthoSpeedChallenge3;
+import io.github.itachi1706.SpeedChallenge.Gamemodes.EthoSpeedChallenge4;
 import io.github.itachi1706.SpeedChallenge.Gamemodes.GetAsManyAchievements;
 import io.github.itachi1706.SpeedChallenge.Gamemodes.ModAbbaRules;
 import io.github.itachi1706.SpeedChallenge.Gamemodes.Sample;
@@ -146,10 +147,11 @@ public class ConfigCmd implements CommandExecutor {
 		String[] msg = {ChatColor.GOLD + "==================================================" ,
 				ChatColor.RED + "1) " + ChatColor.BOLD + Sample.getGMTitle(),
 				ChatColor.RED + "2) " + ChatColor.BOLD + EthoSpeedChallenge3.getGMTitle(),
-				ChatColor.RED + "3) " + ChatColor.BOLD + ModAbbaRules.getGMTitle(),
-				ChatColor.RED + "4) " + ChatColor.BOLD + AbbaRules.getGMTitle(),
-				ChatColor.RED + "5) " + ChatColor.BOLD + AbbaRulesRetardStyle.getGMTitle(),
-				ChatColor.RED + "6) " + ChatColor.BOLD + GetAsManyAchievements.getGMTitle(),
+				ChatColor.RED + "3) " + ChatColor.BOLD + EthoSpeedChallenge4.getGMTitle(),
+				ChatColor.RED + "4) " + ChatColor.BOLD + ModAbbaRules.getGMTitle(),
+				ChatColor.RED + "5) " + ChatColor.BOLD + AbbaRules.getGMTitle(),
+				ChatColor.RED + "6) " + ChatColor.BOLD + AbbaRulesRetardStyle.getGMTitle(),
+				ChatColor.RED + "7) " + ChatColor.BOLD + GetAsManyAchievements.getGMTitle(),
 				ChatColor.GOLD + "=================================================="};
 		p.sendMessage(msg);
 	}

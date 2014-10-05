@@ -2,6 +2,7 @@ package io.github.itachi1706.SpeedChallenge;
 
 import io.github.itachi1706.SpeedChallenge.Gamemodes.AbbaRules;
 import io.github.itachi1706.SpeedChallenge.Gamemodes.AbbaRulesRetardStyle;
+import io.github.itachi1706.SpeedChallenge.Gamemodes.EthoSpeedChallenge4;
 import io.github.itachi1706.SpeedChallenge.Gamemodes.GetAsManyAchievements;
 import io.github.itachi1706.SpeedChallenge.Gamemodes.ModAbbaRules;
 import io.github.itachi1706.SpeedChallenge.Gamemodes.EthoSpeedChallenge3;
@@ -97,13 +98,15 @@ public class PreGameRunnable implements Runnable{
 				break;
 		case 2: EthoSpeedChallenge3.checkInventory();
 				break;
-		case 3: ModAbbaRules.checkInventory();
+		case 3: EthoSpeedChallenge4.checkInventory();
 				break;
-		case 4: AbbaRules.checkInventory();
+		case 4: ModAbbaRules.checkInventory();
 				break;
-		case 5: AbbaRulesRetardStyle.checkInventory();
+		case 5: AbbaRules.checkInventory();
 				break;
-		case 6: GetAsManyAchievements.checkInventory();
+		case 6: AbbaRulesRetardStyle.checkInventory();
+				break;
+		case 7: GetAsManyAchievements.checkInventory();
 				break;
 		default: Bukkit.getServer().broadcastMessage("Error occured");
 				break;
@@ -113,11 +116,11 @@ public class PreGameRunnable implements Runnable{
 	public static void initPlayerWithWeapon(){
 		//Activates the specific class files for checks
 		switch(Main.gamemode){
-		case 3: ModAbbaRules.initWeapon();
+		case 4: ModAbbaRules.initWeapon();
 				break;
-		case 4: AbbaRules.initWeapon();
+		case 5: AbbaRules.initWeapon();
 				break;
-		case 5: AbbaRulesRetardStyle.initWeapon();
+		case 6: AbbaRulesRetardStyle.initWeapon();
 				break;
 		default: Bukkit.getLogger().info("No Initialization Needed");
 				break;
@@ -132,13 +135,15 @@ public class PreGameRunnable implements Runnable{
 				break;
 		case 2: EthoSpeedChallenge3.listObjectives(p);
 				break;
-		case 3: ModAbbaRules.listObjectives(p);
+		case 3: EthoSpeedChallenge4.listObjectives(p);
 				break;
-		case 4: AbbaRules.listObjectives(p);
+		case 4: ModAbbaRules.listObjectives(p);
 				break;
-		case 5: AbbaRulesRetardStyle.listObjectives(p);
+		case 5: AbbaRules.listObjectives(p);
 				break;
-		case 6: GetAsManyAchievements.listObjectives(p);
+		case 6: AbbaRulesRetardStyle.listObjectives(p);
+				break;
+		case 7: GetAsManyAchievements.listObjectives(p);
 				break;
 		default: p.sendMessage("Invalid Gamemode!");
 				break;
@@ -152,13 +157,15 @@ public class PreGameRunnable implements Runnable{
 				break;
 		case 2: EthoSpeedChallenge3.gmInfo();
 				break;
-		case 3: ModAbbaRules.gmInfo();
+		case 3: EthoSpeedChallenge4.gmInfo();
 				break;
-		case 4: AbbaRules.gmInfo();
+		case 4: ModAbbaRules.gmInfo();
 				break;
-		case 5: AbbaRulesRetardStyle.gmInfo();
+		case 5: AbbaRules.gmInfo();
 				break;
-		case 6: GetAsManyAchievements.gmInfo();
+		case 6: AbbaRulesRetardStyle.gmInfo();
+				break;
+		case 7: GetAsManyAchievements.gmInfo();
 				break;
 		default: Bukkit.getServer().broadcastMessage("Error occured");
 				break;
@@ -170,10 +177,11 @@ public class PreGameRunnable implements Runnable{
 		switch(Main.gamemode){
 		case 1:	return Sample.getGMTitle();
 		case 2: return EthoSpeedChallenge3.getGMTitle();
-		case 3: return ModAbbaRules.getGMTitle();
-		case 4: return AbbaRules.getGMTitle();
-		case 5: return AbbaRulesRetardStyle.getGMTitle();
-		case 6: return GetAsManyAchievements.getGMTitle();
+		case 3: return EthoSpeedChallenge4.getGMTitle();
+		case 4: return ModAbbaRules.getGMTitle();
+		case 5: return AbbaRules.getGMTitle();
+		case 6: return AbbaRulesRetardStyle.getGMTitle();
+		case 7: return GetAsManyAchievements.getGMTitle();
 		default: Bukkit.getServer().broadcastMessage("Error occured");
 		return "";
 		}

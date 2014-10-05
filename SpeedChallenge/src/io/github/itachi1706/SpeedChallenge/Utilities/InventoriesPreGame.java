@@ -54,10 +54,11 @@ public class InventoriesPreGame {
 		//Gamemode Options
 		gamemodeInventory.setItem(0, makeItem(Material.DIRT, ChatColor.GOLD + "Sample Game", gmLore));
 		gamemodeInventory.setItem(1, makeItem(Material.CAKE, ChatColor.GOLD + "5-Course Meal", gmLore));
-		gamemodeInventory.setItem(2, makeItem(Material.IRON_PICKAXE, ChatColor.GOLD + "Modded ABBA Rules", gmLore));
-		gamemodeInventory.setItem(3, makeItem(Material.DIAMOND_PICKAXE, ChatColor.GOLD + "ABBA Rules", gmLore));
-		gamemodeInventory.setItem(4, makeItem(Material.GOLD_PICKAXE, ChatColor.GOLD + "Abba Rules (GOD EDITION)", gmLore));
-		gamemodeInventory.setItem(5, makeItem(Material.BEDROCK, ChatColor.GOLD + "[Test] Achievements", gmLore));
+		gamemodeInventory.setItem(2, makeItem(Material.WOOL, ChatColor.GOLD + "The Colour Wheel", gmLore));
+		gamemodeInventory.setItem(3, makeItem(Material.IRON_PICKAXE, ChatColor.GOLD + "Modded ABBA Rules", gmLore));
+		gamemodeInventory.setItem(4, makeItem(Material.DIAMOND_PICKAXE, ChatColor.GOLD + "ABBA Rules", gmLore));
+		gamemodeInventory.setItem(5, makeItem(Material.GOLD_PICKAXE, ChatColor.GOLD + "Abba Rules (GOD EDITION)", gmLore));
+		gamemodeInventory.setItem(6, makeItem(Material.BEDROCK, ChatColor.GOLD + "[Test] Achievements", gmLore));
 		gamemodeInventory.setItem(8, makeItem(Material.DEAD_BUSH, ChatColor.GOLD + "Randomize Challenges", gmLore));
 		//The first parameter, is the slot that is assigned to. Starts counting at 0
 		
@@ -134,7 +135,9 @@ public class InventoriesPreGame {
 						break;
 			case 4: 	Main.gamemode = 5;
 						break;
-			case 5:		Main.gamemode = 6;
+			case 5: 	Main.gamemode = 6;
+						break;
+			case 6:		Main.gamemode = 7;
 						break;
 			case 8: 	Main.gamemode = 0;
 						p.sendMessage("Selected randomize option! Challenges will be randomized!");

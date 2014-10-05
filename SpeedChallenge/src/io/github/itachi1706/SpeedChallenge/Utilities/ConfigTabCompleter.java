@@ -1,5 +1,7 @@
 package io.github.itachi1706.SpeedChallenge.Utilities;
 
+import io.github.itachi1706.SpeedChallenge.Main;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -53,12 +55,9 @@ public class ConfigTabCompleter implements TabCompleter{
                     Collections.sort(list);
                     return list;
                 } else if (args.length == 2 && args[0].equalsIgnoreCase("gamemode")){
-                	list.add("1");
-                	list.add("2");
-                	list.add("3");
-                	list.add("4");
-                	list.add("5");
-                	list.add("6");
+                	for (int i = 1; i <= Main.numberOfChallenges; i++){
+                		list.add(i + "");
+                	}
                 	for (int i = 0; i < list.size(); i++){
                     	String s = list.get(i);
                         // Since the player has already typed something in,
