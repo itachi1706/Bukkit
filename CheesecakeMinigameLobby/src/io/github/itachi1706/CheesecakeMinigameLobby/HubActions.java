@@ -196,47 +196,41 @@ public class HubActions implements Listener{
 			welMsg = welMsg.replaceAll("%playername%", p.getDisplayName());
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', welMsg));
 		}
-		}
+	}
+	
 	private void giveUnhidePlayerItem(Player p){
-		
 		p.getInventory().clear(1);
-		p.getInventory().setItem(1, item);
+		p.getInventory().setItem(1, showPlayerItem());
 	}
 	
 	private void giveBook(Player p){
-		
 		p.getInventory().clear(8);
-		p.getInventory().setItem(8, book);
+		p.getInventory().setItem(8, infoBookItem());
 	}
 	
 	private void giveCompass(Player p){
-		
 		p.getInventory().clear(0);
-		p.getInventory().setItem(0, item);
+		p.getInventory().setItem(0, navigateServerItem());
 	}
 	
 	private void giveClock(Player p){
-		
 		p.getInventory().clear(2);
-		p.getInventory().setItem(2, item);
+		p.getInventory().setItem(2, navigateLobbyItem());
 	}
 	
 	private void giveHidePlayerItem(Player p){
-		
 		p.getInventory().clear(1);
-		p.getInventory().setItem(1, item);
+		p.getInventory().setItem(1, hidePlayerItem());
 	}
 	
 	private void giveStopFlying(Player p){
-		
 		p.getInventory().clear(3);
-		p.getInventory().setItem(3, item);
+		p.getInventory().setItem(3, stopFlyItem());
 	}
 	
 	private void giveFlying(Player p){
-		
 		p.getInventory().clear(3);
-		p.getInventory().setItem(3, item);
+		p.getInventory().setItem(3, startFlyItem());
 	}
 	
 	private ItemStack infoBookItem(){
