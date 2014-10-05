@@ -128,7 +128,6 @@ public class HubActions implements Listener{
 		} else if (e.getItem().equals(resetInventoryItem())){
 			//Exits Admin Mode
 			playersInAdminMode.remove(p);
-			giveAdminMode(p);
 			p.sendMessage(ChatColor.GREEN + "Exited Administrative Mode. Your inventory has now been reset back to lobby default.");
 			giveItems(p);
 			e.setCancelled(true);
