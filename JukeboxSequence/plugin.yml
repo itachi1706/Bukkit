@@ -1,6 +1,6 @@
 name: JukeboxSequence
 main: io.github.itachi1706.JukeboxSequence.Main
-version: 1.7
+version: 1.8
 description: An loop for jukeboxes
 author: itachi1706
 commands:
