@@ -50,6 +50,7 @@ public class PreGameRunnable implements Runnable{
 			Main.initGame = true;
 			String finalCountDown3 = "&b[SpeedChallenge] &6&lGame Starts NOW!";
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', finalCountDown3));
+			Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "time set day");
 			for (Player online : Bukkit.getOnlinePlayers()){
 				online.setLevel(0);
 				online.setExp(0);
