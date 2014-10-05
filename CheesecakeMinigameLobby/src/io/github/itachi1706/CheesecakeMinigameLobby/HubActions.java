@@ -430,6 +430,9 @@ public class HubActions implements Listener{
 		if (i.equals(toggleAdminModeItem())){
 			return true;
 		}
+		if (i.equals(resetInventoryItem())){
+			return true;
+		}
 		return false;
 	}
 
