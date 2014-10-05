@@ -87,17 +87,17 @@ public class HubActions implements Listener{
 			hidePlayers(p);
 			giveUnhidePlayerItem(p);
 			e.setCancelled(true);
-		} else if (e.getItem().getType().equals(showPlayerItem())){
+		} else if (e.getItem().equals(showPlayerItem())){
 			//Show Players
 			showPlayers(p);
 			giveHidePlayerItem(p);
 			e.setCancelled(true);
-		}  else if (e.getItem().getType().equals(startFlyItem())){
+		}  else if (e.getItem().equals(startFlyItem())){
 			//Start Flying
 			Bukkit.getServer().dispatchCommand(p, "fly");
 			giveStopFlying(p);
 			e.setCancelled(true);
-		}  else if (e.getItem().getType().equals(stopFlyItem())){
+		}  else if (e.getItem().equals(stopFlyItem())){
 			//Stop Flying
 			Bukkit.getServer().dispatchCommand(p, "fly");
 			giveFlying(p);
