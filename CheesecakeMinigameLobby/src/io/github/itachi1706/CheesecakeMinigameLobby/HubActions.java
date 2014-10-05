@@ -117,12 +117,20 @@ public class HubActions implements Listener{
 				}  else if (e.getItem().equals(startFlyItem())){
 					//Start Flying
 					Bukkit.getServer().dispatchCommand(p, "fly");
-					giveStopFlying(p);
+					if (p.getAllowFlight()){
+						giveFlying(p);
+					} else {
+						giveStopFlying(p);
+					}
 					e.setCancelled(true);
 				}  else if (e.getItem().equals(stopFlyItem())){
 					//Stop Flying
 					Bukkit.getServer().dispatchCommand(p, "fly");
-					giveFlying(p);
+					if (p.getAllowFlight()){
+						giveFlying(p);
+					} else {
+						giveStopFlying(p);
+					}
 					e.setCancelled(true);
 				} else if (e.getItem().equals(toggleAdminModeItem())){
 					//Enters Admin Mode
