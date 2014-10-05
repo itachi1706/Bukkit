@@ -130,6 +130,7 @@ public class HubActions implements Listener{
 			playersInAdminMode.remove(p);
 			giveAdminMode(p);
 			p.sendMessage(ChatColor.GREEN + "Exited Administrative Mode. Your inventory has now been reset back to lobby default.");
+			giveItems(p);
 			e.setCancelled(true);
 		}
 		} catch (NullPointerException ex) {
@@ -272,7 +273,7 @@ public class HubActions implements Listener{
 	
 	private void giveAdminMode(Player p){
 		p.getInventory().clear();
-		giveItems(p);
+		p.getInventory().setItem(7, toggleAdminModeItem());
 	}
 	
 	private void resetAdminMode(Player p){
