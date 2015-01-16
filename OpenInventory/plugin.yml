@@ -1,0 +1,22 @@
+name: OpenInventory
+main: io.github.itachi1706.OpenInventory.Main
+version: 0-dev 3
+description: A chest viewing plugin
+author: itachi1706
+commands:
+  oi:
+    description: Main Plugin Command
+    usage: /oi <help/reload>
+    permission: oi.debug
+    permission-message: You do not have permission to do this command
+    aliases: [openinventory]
+  silentchest:
+    description: Toggles Silent Chest Opening
+    usage: /silentchest [player/check/force] [player]
+    permission: oi.debug
+    permission-message: You do not have permission to do this command
+    aliases: [togglesilentchest]
+permissions:
+  oi.debug:
+    description: Debug Perm
+    default: true
