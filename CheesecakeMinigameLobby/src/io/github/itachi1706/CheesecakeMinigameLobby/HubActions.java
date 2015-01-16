@@ -385,7 +385,7 @@ public class HubActions implements Listener{
 	}
 	
 	private ItemStack toggleAdminModeItem(){
-		ItemStack item = new ItemStack(Material.FIRE);
+		ItemStack item = new ItemStack(Material.BEDROCK);
 		ItemMeta im = item.getItemMeta();
 		String lore1 = ChatColor.DARK_GREEN + "" + ChatColor.ITALIC + "Right-click to enter admin mode!";
 		String lore2 = ChatColor.DARK_GREEN + "" + ChatColor.ITALIC + "This allows you to move lobby items around";
@@ -399,7 +399,7 @@ public class HubActions implements Listener{
 	}
 	
 	private ItemStack resetInventoryItem(){
-		ItemStack item = new ItemStack(Material.FIRE);
+		ItemStack item = new ItemStack(Material.BEDROCK);
 		ItemMeta im = item.getItemMeta();
 		String lore1 = ChatColor.DARK_RED + "" + ChatColor.ITALIC + "Right-click to exit admin mode!";
 		String lore2 = ChatColor.DARK_RED + "" + ChatColor.ITALIC + "This resets your inventory back to lobby default";
@@ -414,6 +414,9 @@ public class HubActions implements Listener{
 	}
 	
 	private boolean checkIfItemIsLobbyItem(ItemStack i){
+		if (i == null){
+			return false;
+		}
 		if (i.equals(navigateServerItem())){
 			return true;
 		}
