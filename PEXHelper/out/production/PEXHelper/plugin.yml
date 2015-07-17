@@ -1,0 +1,55 @@
+name: PEXHelper
+main: com.itachi1706.Bukkit.PEXHelper.Main
+version: 1.1
+description: A helper plugin for PermissionsEx
+author: itachi1706
+commands:
+  pexhelper:
+    description: Main Plugin Command
+    usage: /pexhelper
+    permission: pexhelper.staff
+    permission-message: You do not have permission to do this command
+  grank:
+    description: Main Global Server Rank
+    usage: /grank set/add/remove <player> <rank>
+    permission: pexhelper.rank
+    permission-message: You do not have permission to do this command
+  rank:
+    description: Modify Server Rank
+    usage: /rank set/add/remove <player> <rank>
+    permission: pexhelper.rank
+    permission-message: You do not have permission to do this command
+  gperm:
+    description: Main Global Permissions
+    usage: /gperm add/remove <permission> [user]
+    permission: pexhelper.perms
+    permission-message: You do not have permission to do this command
+  perm:
+    description: Modyfing Server/User Permissions
+    usage: /perm add/remove <permission> [user]
+    permission: pexhelper.perms
+    permission-message: You do not have permission to do this command
+  acknowledge:
+    description: Acknowledging a player and auto whitelist (survival) and promotion to member rank
+    usage: /acknowledge <player>
+    permission: pexhelper.default
+    permission-message: You do not have permission to do this command
+permissions:
+  pexhelper.default:
+    description: Default command
+    default: true
+  pexhelper.staff:
+    description: Allows overriding of stuff
+    default: op
+  pexhelper.rank:
+    description: Allows modification of ranks
+    default: op
+  pexhelper.immune:
+    description: Denys modification of ranks for this user
+    default: op
+  pexhelper.immune.override:
+    description: Overrides pexhelper.immune perm
+    default: op
+  pexhelper.perms:
+    description: Allows adding of perms
+    default: op
