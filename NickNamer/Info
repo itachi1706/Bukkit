@@ -1,7 +1,0 @@
-/nick <name>	-	Nick into another player
-/nick <player> <name>	- Nick another player to another player
-/nickreset - Reset your nick
-/nickreset <player> - Reset another player's nick
-/realname <nick> - See the real name of a nicked player
-/togglenick [player] - Toggles nick disguise (Whether to let users know that you are currently nicked or not)
-/nn reload - Reload configs and refreshes player nick

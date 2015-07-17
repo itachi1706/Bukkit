@@ -1,2 +1,0 @@
-Player -> Roll Dice -> Determine Dice Roll -> Check doubles -> Prevent Dice roll and tell player dice roll -> Player moves there
--> Does actions -> If doubles roll dice again and cycle repeats -> Ends turn -> Switches to new player

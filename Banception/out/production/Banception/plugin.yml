@@ -1,0 +1,150 @@
+name: Banception
+main: com.itachi1706.Bukkit.Banception.Main
+version: 1.3
+description: A ban/mute/kick/log plugin
+author: itachi1706
+depend: [SQLibrary]
+commands:
+  ban:
+    description: Permenantly bans a player
+    usage: /ban <player> [reason]
+    permission: banception.ban.perm
+    permission-message: You do not have permission to do this command.
+  unban:
+    description: Unbans a player
+    usage: /unban <player> [reason]
+    permission: banception.ban.unban
+    permission-message: You do not have permission to do this command.
+  mute:
+    description: Permenantly mutes a player
+    usage: /mute <player> [reason]
+    permission: banception.mute.perm
+    permission-message: You do not have permission to do this command.
+  unmute:
+    description: Unmutes a player
+    usage: /unmute <player> [reason]
+    permission: banception.mute.unmute
+    permission-message: You do not have permission to do this command.
+  tempban:
+    description: Temporarily bans a player
+    usage: /tempban <player> [time(s/m/h/d)] [reason] (Defaults to 15 minutes) (Must provide time for ban reason)
+    permission: banception.ban.tempban
+    permission-message: You do not have permission to do this command.
+  tempmute:
+    description: Temporarily mutes a player
+    usage: /tempmute <player> [time(s/m/h/d)] [reason] (Defaults to 15 minutes) (Must provide time for ban reason)
+    permission: banception.mute.tempmute
+    permission-message: You do not have permission to do this command.
+  bc:
+    description: Main Banception Command
+    usage: /bc
+    permission: banception.reload
+    permission-message: You do not have permission to do this command.
+  bans:
+    description: List player bans
+    usage: /bans <player>
+    permission: banception.ban.list
+    permission-message: You do not have permission to do this command.
+  mutes:
+    description: List player mutes
+    usage: /mutes <player>
+    permission: banception.mute.list
+    permission-message: You do not have permission to do this command.
+  kick:
+    description: Kicks a player
+    usage: /kick <player> [reason]
+    permission: banception.kick
+    permission-message: You do not have permission to do this command.
+  kicks:
+    description: List player kicks
+    usage: /kicks <player>
+    permission: banception.kick.list
+    permission-message: You do not have permission to do this command.
+  shutup:
+    description: Disables/Enables Server Chat
+    usage: /shutup [time(s/m/h/d)]
+    permission: banception.gm.mute
+    permission-message: You do not have permission to do this command.
+  bc reload:
+    description: Reloads the plugin
+    usage: /bc reload
+    permission: banception.reload
+    permission-message: You do not have permission to do this command.
+  checkban:
+    description: Checks if player is banned or muted (Soon to be implemented)
+    usage: /checkban <player>
+    permission: banception.ban.check
+    permission-message: You do not have permission to do this command.
+permissions:
+  banception.ban.*:
+    description: Gives access to all ban commands
+    children:
+      banception.ban.perm: true
+      banception.ban.unban: true
+      banception.ban.tempban: true
+      banception.ban.list: true
+      banception.ban.check: true
+  banception.ban.perm:
+    description: Allows you to permemnantly ban a player
+    default: op
+  banception.ban.list:
+    description: List player bans
+    default: op
+  banception.ban.unban:
+    description: Allows you to unban a player
+    default: op
+  banception.ban.tempban:
+    description: Allows you to temporarily ban a player
+    default: op
+  banception.mute.*:
+    description: Give access to all mute commands
+    children:
+      banception.mute.perm: true
+      banception.mute.unmute: true
+      banception.mute.tempmute: true
+      banception.mute.list: true
+  banception.mute.list:
+    description: List player mutes
+    default: op
+  banception.mute.perm:
+    description: Allows you to permenantly mute a player
+    default: op
+  banception.mute.unmute:
+    description: Allows you to unmute a player
+    default: op
+  banception.mute.tempmute:
+    description: Allows you to temporarily mute a player
+    default: op
+  banception.reload:
+    description: Reloads the plugin
+    default: op
+  banception.gm.*:
+    description: Give ability for Global Mute commands
+    children:
+      banception.gm.mute: true
+      banception.gm.unmute: true
+      banception.gm.bypass: true
+  banception.gm.mute:
+    description: Global Mute
+    default: op
+  banception.gm.unmute:
+    description: Global Unmute
+    default: op
+  banception.gm.bypass:
+    description: Bypassing Global Mutes
+    default: op
+  banception.ban.check:
+    descripton: Check If Banned
+    default: op
+  banception.kick:
+    description: Allows Kicks
+    default: op
+  banception.kick.list:
+    description: Allows List Kicks
+    default: op
+  banception.kick.*:
+    description: Give access to all kick commands
+    children:
+      banception.kick.list: true
+      banception.kick: true
+  

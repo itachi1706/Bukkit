@@ -3,6 +3,8 @@
 *.pydevproject
 .metadata
 .gradle
+.idea
+.idea/
 bin/
 tmp/
 *.tmp
