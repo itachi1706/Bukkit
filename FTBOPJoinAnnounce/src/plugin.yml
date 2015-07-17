@@ -1,0 +1,36 @@
+name: FTBOpJoinAnnounce
+main: com.itachi1706.Bukkit.FTBOpJoinAnnounce.Main
+version: 1.4.4
+description: An internal plugin for announcing ops and devs join
+author: itachi1706
+commands:
+  opjoin:
+    description: Main Plugin Command
+    usage: /opjoin
+    permission: opjoinannounce.default
+    permission-message: You do not have permission to do this command
+  joinannounce:
+    description: Sub Plugin Command
+    usage: /joinannounce [dev/status/op]
+    permission: opjoinannounce.default
+    permission-message: You do not have permission to do this command
+  mojang:
+    description: Mojang Servers
+    usage: /mojang status
+    permission: opjoinannounce.default
+    permission-message: You do not have permission to do this command
+  duty:
+    description: Enable Duties
+    usage: /duty [-a]
+    permission: opjoinannounce.duty
+    permission-message: You do not have permission to do this command
+permissions:
+  opjoinannounce.edit:
+    description: Allows you to edit OP Perms
+    default: op
+  opjoinannounce.duty:
+    description: Allows you to enter/exit duty mode
+    default: op
+  opjoinannounce.default:
+    description: Default command
+    default: true
