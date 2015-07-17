@@ -1,0 +1,64 @@
+name: StaffMember
+main: com.itachi1706.Bukkit.StaffMember.Main
+version: 1.5.1
+description: A plugin for listing staff members and staff tools
+author: itachi1706
+commands:
+  staffonline:
+    description: List all staff online
+    usage: /staffonline
+    permission: staffmember.default
+    permission-message: You do not have permission to do this command
+  staffmember:
+    description:  Main StaffMember commands
+    usage: /staffmember help/reload/commands
+    permission: staffmember.admin
+    permission-message: You do not have permission to do this command.
+  stafflist:
+    description:  List all the staff members
+    usage: /stafflist
+    permission: staffmember.default
+    permission-message: You do not have permission to do this command.
+  mojang:
+    description: Mojang Servers
+    usage: /mojang status
+    permission: staffmember.default
+    permission-message: You do not have permission to do this command
+  serverproperties:
+    description: List the current server properties
+    usage: /serverproperties
+    permission: staffmember.default
+    permission-message: You do not have permission to do this command
+  getuuid:
+    description: Gets the UUID of a player
+    usage: /getuuid [player]
+    permission: staffmember.getuuid
+    permission-message: You do not have permission to do this command
+permissions:
+  staffmember.isstaff:
+    description: If user is a staff member
+    default: op
+  staffmember.getuuid:
+    description: Get UUID
+    default: op
+  staffmember.isop:
+    description: If user is an OP
+    default: op
+  staffmember.isadmin:
+    description: If user is an Admin
+    default: op
+  staffmember.ismod:
+    description: If user is a Mod
+    default: op
+  staffmember.isyt:
+    description: If user is a YouTuber
+    default: op
+  staffmember.default:
+    description: Given to all
+    default: true
+  staffmember.admin:
+    description: Administrative command
+    default: op
+  staffmember.isowner:
+    description: If user is Owner
+    default: false

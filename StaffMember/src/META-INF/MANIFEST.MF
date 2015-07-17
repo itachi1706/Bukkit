@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: bukkit-1.7.10-R0.1-20140808.005150-4.jar PermissionsEx.jar
+Main-Class: 
+
