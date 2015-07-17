@@ -1,0 +1,124 @@
+name: CheesecakeMinigameLobby
+main: com.itachi1706.Bukkit.CheesecakeMinigameLobby.Main
+version: 1.9.11
+description: An internal plugin for minigame server
+author: itachi1706
+commands:
+  cml:
+    description: Main Plugin Command
+    usage: /cml version/reload/stats/module
+    permission: cheesecakeminigamelobby.staff
+    permission-message: You do not have permission to do this command
+    aliases: [cheesecakeminigamelobby]
+  cmla:
+    description: Main Plugin Administration Command
+    usage: /cmla <module>
+    permission: cheesecakeminigamelobby.staff
+    permission-message: You do not have permission to do this command
+    aliases: [cheesecakeminigamelobbyadmin]
+  fly:
+    description: Fly
+    usage: /fly [player]
+    permission: cheesecakeminigamelobby.abilities.fly
+    permission-message: You do not have permission to do this command
+  speed:
+    description: Adjusts Player Speed
+    usage: /speed fly/walk reset/check/<speed> [player]
+    permission: cheesecakeminigamelobby.abilities.speed
+    permission-message: You do not have permission to do this command
+  zeus:
+    description: Zeus Wrath a player
+    usage: /zeus [player]
+    permission: cheesecakeminigamelobby.abilities.zeus
+    permission-message: You do not have permission to do this command
+  smite:
+    description: Smites player
+    usage: /smite [player]
+    permission: cheesecakeminigamelobby.abilities.smite
+    permission-message: You do not have permission to do this command
+  fling:
+    description: Flings player into the air
+    usage: /fling [player]
+    permission: cheesecakeminigamelobby.abilities.fling
+    permission-message: You do not have permission to do this command
+  burn:
+    description: Burns a player
+    usage: /burn [player]
+    permission: cheesecakeminigamelobby.abilities.burn
+    permission-message: You do not have permission to do this command
+  gmc:
+    description: Sets a player to Creative Mode
+    usage: /gmc [player]
+    permission: cheesecakeminigamelobby.gamemode.creative
+    permission-message: You do not have permission to do this command
+    aliases: [doge]
+  gma:
+    description: Set a player to Adventure Mode
+    usage: /gma [player]
+    permission: cheesecakeminigamelobby.gamemode.adventure
+    permission-message: You do not have permission to do this command
+    aliases: [doge]
+  gms:
+    description: Set a player to Survival Mode
+    usage: /gms [player]
+    permission: cheesecakeminigamelobby.gamemode.survival
+    permission-message: You do not have permission to do this command
+    aliases: [doge]
+  gm:
+    description: Changes Gamemode of a player
+    usage: /gm <gamemode> [player]
+    permission: cheesecakeminigamelobby.gamemode.all
+    permission-message: You do not have permission to do this command
+    aliases: [doge]
+  wow:
+    description: Doges a player
+    usage: /wow [player]
+    permission: cheesecakeminigamelobby.abilities.wow
+    permission-message: You do not have permission to do this command
+    aliases: [doge]
+permissions:
+  cheesecakeminigamelobby.default:
+    description: Default command
+    default: true
+  cheesecakeminigamelobby.gamemode.creative:
+    description: Changes gamemode
+    default: op
+  cheesecakeminigamelobby.gamemode.survival:
+    description: Changes gamemode
+    default: op
+  cheesecakeminigamelobby.gamemode.adventure:
+    description: Changes gamemode
+    default: op
+  cheesecakeminigamelobby.gamemode.all:
+    description: Changes gamemode
+    default: op
+  cheesecakeminigamelobby.abilities.fly:
+    description: Fly Command
+    default: op
+  cheesecakeminigamelobby.abilities.speed:
+    description: Speed Command
+    default: op
+  cheesecakeminigamelobby.abilities.fling:
+    description: Fling Command
+    default: op
+  cheesecakeminigamelobby.abilities.zeus:
+    description: Zeus Command
+    default: op
+  cheesecakeminigamelobby.abilities.smite:
+    description: Smite Command
+    default: op
+  cheesecakeminigamelobby.abilities.burn:
+    description: Burn Command
+    default: op
+  cheesecakeminigamelobby.abilities.wow:
+    description: Wow Command
+    default: op
+  cheesecakeminigamelobby.staff:
+    description: Staff command
+    default: op
+  cheesecakeminigamelobby.admin:
+    description: Toggles Admin Mode
+    default: op
+  cheesecakeminigamelobby.exempt:
+    description: Prevents being hidden
+    default: op
