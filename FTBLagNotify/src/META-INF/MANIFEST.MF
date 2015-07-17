@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: bukkit-1.5.2-R1.1-20130701.165003-5.jar
+Main-Class: 
+

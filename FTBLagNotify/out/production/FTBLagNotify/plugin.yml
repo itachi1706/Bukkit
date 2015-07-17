@@ -1,0 +1,28 @@
+name: FTBLagNotify
+main: com.itachi1706.Bukkit.FTBLagNotify.Main
+version: 1.2
+description: An internal plugin for checking and informing members about lag
+author: itachi1706
+commands:
+  lagnotify:
+    description: Main Plugin Command
+    usage: /lagnotify
+    permission: lagnotify.warn
+    permission-message: You do not have permission to do this command
+  warnlag:
+    description: Activate/Deactivate Lag warnings (defaults to msg 1)
+    usage: /warnlag [1/2/reload/list/status/hourly/lowtpsmsg]
+    permission: lagnotify.warn
+    permission-message: You do not have permission to do this command
+  gettps:
+    description: Get current server tps
+    usage: /gettps
+    permission: lagnotify.default
+    permission-message: You do not have permission to do this command
+permissions:
+  lagnotify.warn:
+    description: Allows you to use LagNotify warning
+    default: op
+  lagnotify.default:
+    description: Default command
+    default: true
