@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: WorldEdit.jar sqlite-jdbc-3.7.2.jar SQLibrary-7.1.jar bukk
+ it-1.7.5-R0.1-20140408.014432-7.jar
+Main-Class: 
+
